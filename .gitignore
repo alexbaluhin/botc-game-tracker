@@ -1,26 +1,42 @@
-/bootstrap/data
-/bootstrap/tmp
-/classes/
-/dist/
-/exploded-archives/
-/test-build/
-/test-output/
-/test-report/
-/target/
-temp-testng-customsuite.xml
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# based on http://stackoverflow.com/a/8865858/422476 I am removing inline comments
+# Compiled output
+/dist
+/tmp
+/out-tsc
+/bazel-out
 
-#/classes/  		              all class files
-#/dist/                       contains generated war files for deployment
-#/exploded-archives/		      war content generation during deploy (or explode)
-#/test-build/                 test compilation (ant target for Seam)
-#/test-output/                test results
-#/test-report/                test report generation for, e.g., Hudson
-#/target/                     maven output folder
-#temp-testng-customsuite.xml	generated when running test cases under Eclipse
+# Node
+/node_modules
+npm-debug.log
+yarn-error.log
 
-# Thanks to @VonC and @kraftan for their helpful answers on a related question
-# on StackOverflow.com:
-# http://stackoverflow.com/questions/4176687
-# /what-is-the-recommended-source-control-ignore-pattern-for-seam-projects
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Miscellaneous
+/.angular/cache
+.sass-cache/
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+
+# System files
+.DS_Store
+Thumbs.db
