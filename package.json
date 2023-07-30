@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "prettier": "npx prettier --write .",
     "test": "ng test",
-    "scrap-roles": "ts-node src/roles-scraper/index.ts"
+    "scrap-characters": "ts-node src/scharacters-scraper/index.ts"
   },
   "private": true,
   "dependencies": {
