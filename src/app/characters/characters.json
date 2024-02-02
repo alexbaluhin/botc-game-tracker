@@ -370,6 +370,7 @@
   {
     "id": "bureaucrat",
     "name": "Bureaucrat",
+    "type": "TRAVELLER",
     "abilityDesc": "Each night, choose a player (not yourself): their vote counts as 3 votes tomorrow.",
     "edition": "TROUBLE_BREWING",
     "reminderTokens": [
@@ -385,6 +386,7 @@
   {
     "id": "thief",
     "name": "Thief",
+    "type": "TRAVELLER",
     "abilityDesc": "Each night, choose a player (not yourself): their vote counts negatively tomorrow.",
     "edition": "TROUBLE_BREWING",
     "reminderTokens": [
@@ -400,6 +402,7 @@
   {
     "id": "gunslinger",
     "name": "Gunslinger",
+    "type": "TRAVELLER",
     "abilityDesc": "Each day, after the 1st vote has been tallied, you may choose a player that voted: they die.",
     "edition": "TROUBLE_BREWING",
     "reminderTokens": [],
@@ -413,6 +416,7 @@
   {
     "id": "scapegoat",
     "name": "Scapegoat",
+    "type": "TRAVELLER",
     "abilityDesc": "If a player of your alignment is executed, you might be executed instead.",
     "edition": "TROUBLE_BREWING",
     "reminderTokens": [],
@@ -426,6 +430,7 @@
   {
     "id": "beggar",
     "name": "Beggar",
+    "type": "TRAVELLER",
     "abilityDesc": "You must use a vote token to vote. If a dead player gives you theirs, you learn their alignment. You are sober & healthy.",
     "edition": "TROUBLE_BREWING",
     "reminderTokens": [],
@@ -860,6 +865,7 @@
   {
     "id": "apprentice",
     "name": "Apprentice",
+    "type": "TRAVELLER",
     "abilityDesc": "On your 1st night, you gain a Townsfolk ability (if good), or a Minion ability (if evil).",
     "edition": "BAD_MOON_RISING",
     "reminderTokens": [
@@ -875,6 +881,7 @@
   {
     "id": "matron",
     "name": "Matron",
+    "type": "TRAVELLER",
     "abilityDesc": "Each day, you may choose up to 3 sets of 2 players to swap seats. Players may not leave their seats to talk in private.",
     "edition": "BAD_MOON_RISING",
     "reminderTokens": [],
@@ -888,6 +895,7 @@
   {
     "id": "judge",
     "name": "Judge",
+    "type": "TRAVELLER",
     "abilityDesc": "Once per game, if another player nominated, you may choose to force the current execution to pass or fail.",
     "edition": "BAD_MOON_RISING",
     "reminderTokens": [
@@ -903,6 +911,7 @@
   {
     "id": "bishop",
     "name": "Bishop",
+    "type": "TRAVELLER",
     "abilityDesc": "Only the Storyteller can nominate. At least 1 opposite player must be nominated each day.",
     "edition": "BAD_MOON_RISING",
     "reminderTokens": [
@@ -919,6 +928,7 @@
   {
     "id": "voudon",
     "name": "Voudon",
+    "type": "TRAVELLER",
     "abilityDesc": "Only you and the dead can vote. They don't need a vote token to do so. A 50% majority is not required.",
     "edition": "BAD_MOON_RISING",
     "reminderTokens": [],
@@ -1346,6 +1356,7 @@
   {
     "id": "barista",
     "name": "Barista",
+    "type": "TRAVELLER",
     "abilityDesc": "Each night, until dusk, 1) a player becomes sober, healthy and gets true info, or 2) their ability works twice. They learn which.",
     "edition": "SECTS_AND_VIOLETS",
     "reminderTokens": [
@@ -1363,6 +1374,7 @@
   {
     "id": "harlot",
     "name": "Harlot",
+    "type": "TRAVELLER",
     "abilityDesc": "Each night*, choose a living player: if they agree, you learn their character, but you both might die.",
     "edition": "SECTS_AND_VIOLETS",
     "reminderTokens": [
@@ -1378,6 +1390,7 @@
   {
     "id": "butcher",
     "name": "Butcher",
+    "type": "TRAVELLER",
     "abilityDesc": "Each day, after the 1st execution, you may nominate again.",
     "edition": "SECTS_AND_VIOLETS",
     "reminderTokens": [],
@@ -1391,6 +1404,7 @@
   {
     "id": "bonecollector",
     "name": "Bone Collector",
+    "type": "TRAVELLER",
     "abilityDesc": "Once per game, at night, choose a dead player: they regain their ability until dusk.",
     "edition": "SECTS_AND_VIOLETS",
     "reminderTokens": [
@@ -1407,6 +1421,7 @@
   {
     "id": "deviant",
     "name": "Deviant",
+    "type": "TRAVELLER",
     "abilityDesc": "If you were funny today, you cannot die by exile.",
     "edition": "SECTS_AND_VIOLETS",
     "reminderTokens": [],
@@ -2306,6 +2321,7 @@
   {
     "id": "gangster",
     "name": "Gangster",
+    "type": "TRAVELLER",
     "abilityDesc": "Once per day, you may choose to kill an alive neighbor, if your other alive neighbor agrees.",
     "edition": "EXPERIMENTAL",
     "reminderTokens": [],
@@ -2352,6 +2368,7 @@
   {
     "id": "doomsayer",
     "name": "Doomsayer",
+    "type": "FABLED",
     "abilityDesc": "If 4 or more players live, each living player may publicly choose (once per game) that a player of their own alignment dies.",
     "edition": "FABLED",
     "reminderTokens": [],
@@ -2365,6 +2382,7 @@
   {
     "id": "angel",
     "name": "Angel",
+    "type": "FABLED",
     "abilityDesc": "Something bad might happen to whoever is most responsible for the death of a new player.",
     "edition": "FABLED",
     "reminderTokens": [
@@ -2381,6 +2399,7 @@
   {
     "id": "buddhist",
     "name": "Buddhist",
+    "type": "FABLED",
     "abilityDesc": "For the first 2 minutes of each day, veteran players may not talk.",
     "edition": "FABLED",
     "reminderTokens": [],
@@ -2394,6 +2413,7 @@
   {
     "id": "hellslibrarian",
     "name": "Hell's Librarian",
+    "type": "FABLED",
     "abilityDesc": "Something bad might happen to whoever talks when the Storyteller has asked for silence.",
     "edition": "FABLED",
     "reminderTokens": [
@@ -2409,6 +2429,7 @@
   {
     "id": "revolutionary",
     "name": "Revolutionary",
+    "type": "FABLED",
     "abilityDesc": "2 neighboring players are known to be the same alignment. Once per game, 1 of them registers falsely.",
     "edition": "FABLED",
     "reminderTokens": [
@@ -2425,6 +2446,7 @@
   {
     "id": "fiddler",
     "name": "Fiddler",
+    "type": "FABLED",
     "abilityDesc": "Once per game, the Demon secretly chooses an opposing player: all players choose which of these 2 players win.",
     "edition": "FABLED",
     "reminderTokens": [],
@@ -2438,6 +2460,7 @@
   {
     "id": "toymaker",
     "name": "Toymaker",
+    "type": "FABLED",
     "abilityDesc": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
     "edition": "FABLED",
     "reminderTokens": [
@@ -2453,6 +2476,7 @@
   {
     "id": "fibbin",
     "name": "Fibbin",
+    "type": "FABLED",
     "abilityDesc": "Once per game, 1 good player might get incorrect information.",
     "edition": "FABLED",
     "reminderTokens": [
@@ -2468,6 +2492,7 @@
   {
     "id": "duchess",
     "name": "Duchess",
+    "type": "FABLED",
     "abilityDesc": "Each day, 3 players may choose to visit you. At night*, each visitor learns how many visitors are evil, but 1 gets false info.",
     "edition": "FABLED",
     "reminderTokens": [
@@ -2484,6 +2509,7 @@
   {
     "id": "sentinel",
     "name": "Sentinel",
+    "type": "FABLED",
     "abilityDesc": "There might be 1 extra or 1 fewer Outsider in play.",
     "edition": "FABLED",
     "reminderTokens": [],
@@ -2497,6 +2523,7 @@
   {
     "id": "spiritofivory",
     "name": "Spirit of Ivory",
+    "type": "FABLED",
     "abilityDesc": "There can't be more than 1 extra evil player.",
     "edition": "FABLED",
     "reminderTokens": [
@@ -2512,6 +2539,7 @@
   {
     "id": "djinn",
     "name": "Djinn",
+    "type": "FABLED",
     "abilityDesc": "Use the Djinn's special rule. All players know what it is.",
     "edition": "FABLED",
     "reminderTokens": [],
@@ -2525,6 +2553,7 @@
   {
     "id": "stormcatcher",
     "name": "Storm Catcher",
+    "type": "FABLED",
     "abilityDesc": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is.",
     "edition": "FABLED",
     "reminderTokens": [
@@ -2540,6 +2569,7 @@
   {
     "id": "gardener",
     "name": "Gardener",
+    "type": "FABLED",
     "abilityDesc": "The Storyteller assigns 1 or more players' characters.",
     "edition": "FABLED",
     "reminderTokens": [],
@@ -2553,6 +2583,7 @@
   {
     "id": "bootlegger",
     "name": "Bootlegger",
+    "type": "FABLED",
     "abilityDesc": "This script has homebrew characters or rules.",
     "edition": "FABLED",
     "reminderTokens": [],
@@ -2566,6 +2597,7 @@
   {
     "id": "homebrewymchomebrewface",
     "name": "Homebrewy McHomebrewface",
+    "type": "FABLED",
     "abilityDesc": "This script has homebrew characters or rules.",
     "edition": "FABLED",
     "reminderTokens": [],
@@ -2665,6 +2697,20 @@
     "name": "Ferryman",
     "type": "TOWNSFOLK",
     "abilityDesc": "On the final day, all dead players regain their vote token.",
+    "edition": "EXPERIMENTAL",
+    "reminderTokens": [],
+    "firstNightOrder": null,
+    "firstNightAbilityDesc": null,
+    "otherNightsOrder": null,
+    "otherNightsAbilityDesc": null,
+    "jinxes": [],
+    "specialSetupChanges": false
+  },
+  {
+    "id": "plaguedoctor",
+    "name": "Plague Doctor",
+    "type": "TOWNSFOLK",
+    "abilityDesc": "If you die, the Storyteller gains a not-in-play Minion ability",
     "edition": "EXPERIMENTAL",
     "reminderTokens": [],
     "firstNightOrder": null,

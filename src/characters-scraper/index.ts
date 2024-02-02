@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { chromium, Page, Response as PlaywrightResponse } from 'playwright';
-import { CharacterType, Edition } from '../app/constants';
+import { CharacterType, CharacterEdition } from '../app/constants';
 import { Character } from '../app/typings';
 
 interface WikiRoleSpecial {
@@ -33,13 +33,13 @@ interface WikiCharacter {
   jinxes?: WikiCharacterJinx[];
 }
 
-const wikiEditionToEdition: { [key: string]: Edition } = {
-  tb: Edition.TROUBLE_BREWING,
-  snv: Edition.SECTS_AND_VIOLETS,
-  bmr: Edition.BAD_MOON_RISING,
-  '': Edition.EXPERIMENTAL,
-  fabled: Edition.FABLED,
-  traveler: Edition.TRAVELLERS,
+const wikiEditionToEdition: { [key: string]: CharacterEdition } = {
+  tb: CharacterEdition.TROUBLE_BREWING,
+  snv: CharacterEdition.SECTS_AND_VIOLETS,
+  bmr: CharacterEdition.BAD_MOON_RISING,
+  '': CharacterEdition.EXPERIMENTAL,
+  fabled: CharacterEdition.FABLED,
+  traveler: CharacterEdition.TRAVELLERS,
 };
 
 const wikiCharacterTypeToType: { [key: string]: CharacterType } = {
@@ -47,10 +47,17 @@ const wikiCharacterTypeToType: { [key: string]: CharacterType } = {
   outsider: CharacterType.OUTSIDER,
   minion: CharacterType.MINION,
   demon: CharacterType.DEMON,
+  traveler: CharacterType.TRAVELLER,
+  fabled: CharacterType.FABLED,
 };
 
 const baseUrl = 'https://wiki.bloodontheclocktower.com';
-const assetsIconsDir = path.resolve(process.cwd(), 'src', 'assets', 'icons');
+const assetsIconsDir = path.resolve(
+  process.cwd(),
+  'src',
+  'assets',
+  'characters-icons'
+);
 const appDir = path.resolve(process.cwd(), 'src', 'app');
 
 const waitForResponse = (
@@ -131,7 +138,7 @@ const mapWikiCharacterToCharacter = (
     preparedCharacters.push(mapWikiCharacterToCharacter(characters[i]));
   }
   await fs.writeFileSync(
-    `${appDir}/characters.json`,
+    `${appDir}/characters/characters.json`,
     JSON.stringify(preparedCharacters)
   );
   await context.close();
