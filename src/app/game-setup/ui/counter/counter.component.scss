@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.action {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  &.hidden {
+    visibility: hidden;
+  }
+}
+
+.number {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 10px;
+}
