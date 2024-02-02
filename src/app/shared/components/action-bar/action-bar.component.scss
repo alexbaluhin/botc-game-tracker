@@ -1,0 +1,14 @@
+:host {
+  position: sticky;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 68px;
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  .container {
+    padding: 16px;
+    &::ng-deep > * {
+      width: 100%;
+    }
+  }
+}
