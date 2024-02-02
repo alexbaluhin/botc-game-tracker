@@ -1,0 +1,19 @@
+<div class="token">
+  <ng-container *ngIf="characterForToken">
+    <img
+      [ngSrc]="characterForToken.iconUrl"
+      width="52"
+      height="52"
+      [alt]="characterForToken.name" />
+
+    <svg viewBox="0 0 150 150">
+      <path
+        id="curve"
+        d="M 13 75 C 13 160, 138 160, 138 75"
+        fill="transparent" />
+      <text text-anchor="middle" x="66.6%">
+        <textPath xlink:href="#curve">{{ characterForToken.name }}</textPath>
+      </text>
+    </svg>
+  </ng-container>
+</div>
