@@ -81,10 +81,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "botc-game-tracker:build:production"
+              "buildTarget": "botc-game-tracker:build:production"
             },
             "development": {
-              "browserTarget": "botc-game-tracker:build:development"
+              "buildTarget": "botc-game-tracker:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -92,7 +92,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "botc-game-tracker:build"
+            "buildTarget": "botc-game-tracker:build"
           }
         },
         "test": {
