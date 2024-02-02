@@ -1,0 +1,20 @@
+<app-game-setup-header>
+  <span header>How many players?</span>
+</app-game-setup-header>
+<main>
+  <div class="grimoire" [style]="'--total: ' + playersCount">
+    <app-counter
+      class="counter"
+      [ngModel]="playersCount"
+      (ngModelChange)="onPlayersCountChange($event)"></app-counter>
+    <div
+      class="player-token"
+      [style]="'--index: ' + i"
+      *ngFor="let player of players; let i = index"></div>
+  </div>
+</main>
+<app-action-bar>
+  <button mat-raised-button color="primary" (click)="acceptPlayersCount()">
+    Proceed
+  </button>
+</app-action-bar>
