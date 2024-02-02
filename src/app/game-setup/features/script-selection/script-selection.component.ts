@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Script } from '../../../constants';
@@ -8,7 +8,7 @@ import { GameSetupInfoService } from '../../data-access/game-setup-info.service'
 @Component({
   selector: 'app-script-selection',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, RouterLink],
+  imports: [NgOptimizedImage, RouterLink],
   templateUrl: './script-selection.component.html',
   styleUrls: ['./script-selection.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

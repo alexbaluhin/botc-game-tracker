@@ -1,11 +1,10 @@
 <div class="token">
-  <ng-container *ngIf="characterForToken">
+  @if (characterForToken) {
     <img
       [ngSrc]="characterForToken.iconUrl"
       width="52"
       height="52"
       [alt]="characterForToken.name" />
-
     <svg viewBox="0 0 150 150">
       <path
         id="curve"
@@ -15,5 +14,5 @@
         <textPath xlink:href="#curve">{{ characterForToken.name }}</textPath>
       </text>
     </svg>
-  </ng-container>
+  }
 </div>

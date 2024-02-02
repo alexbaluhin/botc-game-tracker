@@ -8,56 +8,48 @@
   </span>
 </app-game-setup-header>
 <main>
-  <ng-container
-    *ngFor="
-      let charactersCategory of charactersCategories();
-      trackBy: charactersCategoryTrackByFn
-    ">
+  @for (
+    charactersCategory of charactersCategories();
+    track charactersCategory.type
+  ) {
     <h3>
       {{ charactersCategory.name }}
       <span class="numbers">
         {{ charactersCategory.selectedCount }}
-        <ng-container *ngIf="charactersCategory.maxCounts">
+        @if (charactersCategory.maxCounts) {
           /
-          <ng-container
-            *ngIf="
-              charactersCategory.maxCounts[0] ===
-              charactersCategory.maxCounts[1]
-            ">
+          @if (
+            charactersCategory.maxCounts[0] === charactersCategory.maxCounts[1]
+          ) {
             {{ charactersCategory.maxCounts[0] }}
-          </ng-container>
-          <ng-container
-            *ngIf="
-              charactersCategory.maxCounts[0] !==
-              charactersCategory.maxCounts[1]
-            ">
+          }
+          @if (
+            charactersCategory.maxCounts[0] !== charactersCategory.maxCounts[1]
+          ) {
             {{ charactersCategory.maxCounts[0] }} or
             {{ charactersCategory.maxCounts[1] }}
-          </ng-container>
-        </ng-container>
+          }
+        }
       </span>
-
       <hr />
     </h3>
     <section class="tokens">
-      <app-character-token
-        class="token"
-        *ngFor="
-          let character of charactersCategory.characters;
-          trackBy: characterTrackByFn
-        "
-        [character]="character"
-        [class.selected]="character.selected"
-        [class.disabled]="charactersCategory.isFilled && !character.selected"
-        (click)="
-          onCharacterSelection(
-            !character.selected,
-            character,
-            charactersCategory
-          )
-        "></app-character-token>
+      @for (character of charactersCategory.characters; track character.id) {
+        <app-character-token
+          class="token"
+          [character]="character"
+          [class.selected]="character.selected"
+          [class.disabled]="charactersCategory.isFilled && !character.selected"
+          (click)="
+            onCharacterSelection(
+              !character.selected,
+              character,
+              charactersCategory
+            )
+          "></app-character-token>
+      }
     </section>
-  </ng-container>
+  }
 </main>
 <app-action-bar>
   <button mat-raised-button color="primary">Proceed</button>

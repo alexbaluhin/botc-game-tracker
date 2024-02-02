@@ -1,4 +1,4 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Character } from '../../../typings';
 
@@ -9,7 +9,7 @@ interface CharacterForToken extends Character {
 @Component({
   selector: 'app-character-token',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [NgOptimizedImage],
   templateUrl: './character-token.component.html',
   styleUrls: ['./character-token.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

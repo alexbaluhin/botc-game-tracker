@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
@@ -17,7 +16,6 @@ interface Player {
   selector: 'app-players-count-selection',
   standalone: true,
   imports: [
-    CommonModule,
     CharacterTokenComponent,
     GameSetupHeaderComponent,
     ActionBarComponent,

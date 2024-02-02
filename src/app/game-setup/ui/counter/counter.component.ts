@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, Self } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-counter',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -30,7 +29,6 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
   selector: 'app-characters-selection',
   standalone: true,
   imports: [
-    CommonModule,
     ActionBarComponent,
     GameSetupHeaderComponent,
     MatButtonModule,
@@ -51,16 +49,6 @@ export class CharactersSelectionComponent implements OnInit {
   baseCharactersCategories: CharactersCategory[] = [];
   charactersCategories: WritableSignal<CharactersCategory[]> = signal([]);
   selectedCharactersToChangeSetup: Set<string> = new Set();
-
-  charactersCategoryTrackByFn = (
-    index: number,
-    charactersCategory: CharactersCategory
-  ) => charactersCategory.type;
-
-  characterTrackByFn = (
-    index: number,
-    characterForSelection: CharacterForSelection
-  ) => characterForSelection.id;
 
   ngOnInit() {
     this.baseCharactersCategories =
