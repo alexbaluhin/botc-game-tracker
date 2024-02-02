@@ -1,0 +1,20 @@
+main {
+  text-align: center;
+}
+
+img {
+  margin-bottom: 40px;
+}
+
+nav {
+  a, p {
+    display: block;
+    margin-bottom: 23px;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    &.not-available {
+      opacity: 0.4;
+    }
+  }
+}
