@@ -56,7 +56,7 @@ export class GameSetupInfoService {
         };
       }
       return JSON.parse(gameSetupState);
-    } catch (e) {
+    } catch {
       return {
         playersCount: 5,
         characters: [],

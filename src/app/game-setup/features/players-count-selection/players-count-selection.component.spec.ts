@@ -8,7 +8,7 @@ describe('PlayersCountSelectionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [PlayersCountSelectionComponent]
+      imports: [PlayersCountSelectionComponent],
     });
     fixture = TestBed.createComponent(PlayersCountSelectionComponent);
     component = fixture.componentInstance;

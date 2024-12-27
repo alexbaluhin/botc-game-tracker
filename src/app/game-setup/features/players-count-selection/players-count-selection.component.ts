@@ -13,18 +13,18 @@ interface Player {
 }
 
 @Component({
-    selector: 'app-players-count-selection',
-    imports: [
-        CharacterTokenComponent,
-        GameSetupHeaderComponent,
-        ActionBarComponent,
-        MatButtonModule,
-        CounterComponent,
-        FormsModule,
-    ],
-    templateUrl: './players-count-selection.component.html',
-    styleUrls: ['./players-count-selection.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-players-count-selection',
+  imports: [
+    CharacterTokenComponent,
+    GameSetupHeaderComponent,
+    ActionBarComponent,
+    MatButtonModule,
+    CounterComponent,
+    FormsModule,
+  ],
+  templateUrl: './players-count-selection.component.html',
+  styleUrls: ['./players-count-selection.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayersCountSelectionComponent {
   router = inject(Router);
