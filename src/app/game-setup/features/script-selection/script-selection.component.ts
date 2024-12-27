@@ -7,7 +7,6 @@ import { GameSetupInfoService } from '../../data-access/game-setup-info.service'
 
 @Component({
   selector: 'app-script-selection',
-  standalone: true,
   imports: [NgOptimizedImage, RouterLink],
   templateUrl: './script-selection.component.html',
   styleUrls: ['./script-selection.component.scss'],
@@ -54,7 +53,7 @@ export class ScriptSelectionComponent {
           customScriptCharacters
         );
         this.router.navigate(['players-count-selection']);
-      } catch (e) {
+      } catch {
         console.error('Cannot parse custom script');
       }
     };

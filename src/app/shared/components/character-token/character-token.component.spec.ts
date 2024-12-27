@@ -8,7 +8,7 @@ describe('CharacterTokenComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CharacterTokenComponent]
+      imports: [CharacterTokenComponent],
     });
     fixture = TestBed.createComponent(CharacterTokenComponent);
     component = fixture.componentInstance;

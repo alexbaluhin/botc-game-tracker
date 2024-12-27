@@ -4,7 +4,6 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-game-setup-header',
-  standalone: true,
   imports: [NgOptimizedImage, RouterLink],
   templateUrl: './game-setup-header.component.html',
   styleUrls: ['./game-setup-header.component.scss'],

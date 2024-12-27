@@ -4,7 +4,6 @@ import { Character } from '../../../typings';
 
 @Component({
   selector: 'app-character-token',
-  standalone: true,
   imports: [NgOptimizedImage],
   templateUrl: './character-token.component.html',
   styleUrls: ['./character-token.component.scss'],

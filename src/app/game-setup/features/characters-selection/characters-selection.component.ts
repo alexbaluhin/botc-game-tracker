@@ -27,7 +27,6 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
 
 @Component({
   selector: 'app-characters-selection',
-  standalone: true,
   imports: [
     ActionBarComponent,
     GameSetupHeaderComponent,

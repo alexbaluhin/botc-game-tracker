@@ -8,7 +8,7 @@ describe('CharactersSelectionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [CharactersSelectionComponent]
+      imports: [CharactersSelectionComponent],
     });
     fixture = TestBed.createComponent(CharactersSelectionComponent);
     component = fixture.componentInstance;
