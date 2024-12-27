@@ -26,17 +26,16 @@ import {
 import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-header.component';
 
 @Component({
-  selector: 'app-characters-selection',
-  standalone: true,
-  imports: [
-    ActionBarComponent,
-    GameSetupHeaderComponent,
-    MatButtonModule,
-    CharacterTokenComponent,
-  ],
-  templateUrl: './characters-selection.component.html',
-  styleUrls: ['./characters-selection.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-characters-selection',
+    imports: [
+        ActionBarComponent,
+        GameSetupHeaderComponent,
+        MatButtonModule,
+        CharacterTokenComponent,
+    ],
+    templateUrl: './characters-selection.component.html',
+    styleUrls: ['./characters-selection.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CharactersSelectionComponent implements OnInit {
   router = inject(Router);

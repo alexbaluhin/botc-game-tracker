@@ -6,12 +6,11 @@ import { CustomScriptJson, CustomScriptJsonMetaItem } from '../../../typings';
 import { GameSetupInfoService } from '../../data-access/game-setup-info.service';
 
 @Component({
-  selector: 'app-script-selection',
-  standalone: true,
-  imports: [NgOptimizedImage, RouterLink],
-  templateUrl: './script-selection.component.html',
-  styleUrls: ['./script-selection.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-script-selection',
+    imports: [NgOptimizedImage, RouterLink],
+    templateUrl: './script-selection.component.html',
+    styleUrls: ['./script-selection.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScriptSelectionComponent {
   router = inject(Router);
