@@ -1,28 +1,35 @@
 <main>
-  <img
-    [ngSrc]="'/assets/common/logo.png'"
-    width="200"
-    height="130"
-    alt="Blood on The Clocktower logo" />
+  <app-game-logo />
 
   <nav>
     <a
-      routerLink="players-count-selection"
-      (click)="onScriptChoose(scripts.TROUBLE_BREWING)"
-      >Trouble Brewing</a
-    >
+      routerLink="/players-count-selection"
+      (click)="onScriptChoose(scripts.TROUBLE_BREWING)">
+      <img
+        [ngSrc]="'/assets/common/trouble-brewing.png'"
+        width="100"
+        height="100"
+        alt="Trouble Brewing logo" />
+    </a>
     <a
-      routerLink="players-count-selection"
-      (click)="onScriptChoose(scripts.SECTS_AND_VIOLETS)"
-      >Sects and Violets</a
-    >
+      routerLink="/players-count-selection"
+      (click)="onScriptChoose(scripts.SECTS_AND_VIOLETS)">
+      <img
+        [ngSrc]="'/assets/common/sects-and-violets.png'"
+        width="100"
+        height="100"
+        alt="Sects and Violets logo" />
+    </a>
     <a
-      routerLink="players-count-selection"
-      (click)="onScriptChoose(scripts.BAD_MOON_RISING)"
-      >Bad Moon Rising</a
-    >
+      routerLink="/players-count-selection"
+      (click)="onScriptChoose(scripts.BAD_MOON_RISING)">
+      <img
+        [ngSrc]="'/assets/common/bad-moon-rising.png'"
+        width="100"
+        height="100"
+        alt="Bad Moon Rising logo" />
+    </a>
     <p (click)="fileInput.click()">Upload json</p>
-    <p class="not-available">Create Custom: browse</p>
   </nav>
 </main>
 

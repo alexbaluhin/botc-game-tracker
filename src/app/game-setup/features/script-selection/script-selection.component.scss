@@ -2,19 +2,17 @@ main {
   text-align: center;
 }
 
-img {
-  margin-bottom: 40px;
-}
-
 nav {
   a, p {
     display: block;
-    margin-bottom: 23px;
-    text-decoration: none;
-    color: #fff;
+    margin: 0 auto 23px;
     cursor: pointer;
-    &.not-available {
-      opacity: 0.4;
-    }
+  }
+  a {
+    width: 209px;
+    height: 100px;
+    background: #E4DCFA6B;
+    border: 1px solid #FFFFFF;
+    text-decoration: none;
   }
 }

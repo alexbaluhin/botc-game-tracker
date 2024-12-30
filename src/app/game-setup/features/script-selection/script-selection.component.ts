@@ -4,10 +4,11 @@ import { Router, RouterLink } from '@angular/router';
 import { Script } from '../../../constants';
 import { CustomScriptJson, CustomScriptJsonMetaItem } from '../../../typings';
 import { GameSetupInfoService } from '../../data-access/game-setup-info.service';
+import { GameLogoComponent } from '../../ui/game-logo/game-logo.component';
 
 @Component({
   selector: 'app-script-selection',
-  imports: [NgOptimizedImage, RouterLink],
+  imports: [NgOptimizedImage, RouterLink, GameLogoComponent],
   templateUrl: './script-selection.component.html',
   styleUrls: ['./script-selection.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
