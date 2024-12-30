@@ -1,0 +1,15 @@
+main {
+  text-align: center;
+}
+
+nav a {
+  display: block;
+  margin-bottom: 23px;
+  text-decoration: none;
+  color: #fff;
+  &[disabled] {
+    pointer-events: none;
+    cursor: default;
+    opacity: .4;
+  }
+}
