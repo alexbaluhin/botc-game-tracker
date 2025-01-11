@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "prettier": "npx prettier --write .",
     "test": "ng test",
-    "release": "ng build --output-path docs --base-href /botc-game-tracker/",
+    "release": "ng build --output-path docs --base-href /botc-game-tracker/browser/",
     "scrap-characters": "ts-node src/characters-scraper/index.ts"
   },
   "private": true,
