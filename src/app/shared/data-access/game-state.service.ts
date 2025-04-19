@@ -13,9 +13,19 @@ interface GameInformation {
   players: Player[];
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class GameStateService {
   public info: GameInformation = this.loadFromLocalStorage();
+
+  get gameWasSetUp(): boolean {
+    return (
+      this.info.name !== undefined &&
+      this.info.characters.length > 0 &&
+      this.info.players.length > 0
+    );
+  }
 
   setScript(
     script: Script,

@@ -42,6 +42,6 @@ export class PlayersCountSelectionComponent {
 
   acceptPlayersCount() {
     this.gameStateService.setPlayersCount(this.players().length);
-    this.router.navigate(['characters-selection']);
+    this.router.navigate(['/game']);
   }
 }
