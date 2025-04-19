@@ -6,7 +6,6 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import {
   charactersCountBasedOnPlayersCount,
@@ -30,7 +29,6 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
   imports: [
     ActionBarComponent,
     GameSetupHeaderComponent,
-    MatButtonModule,
     CharacterTokenComponent,
   ],
   templateUrl: './characters-selection.component.html',
