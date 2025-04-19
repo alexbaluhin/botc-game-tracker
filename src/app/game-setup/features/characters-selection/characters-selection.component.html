@@ -1,9 +1,9 @@
 <app-game-setup-header backLink="/players-count-selection">
   <span header>Select characters</span>
   <span subHeader>
-    <span>{{ gameSetupInfoService.info.name }}</span>
+    <span>{{ gameStateService.info.name }}</span>
     <span class="players-count"
-      >{{ gameSetupInfoService.info.playersCount }} players</span
+      >{{ gameStateService.info.players.length }} players</span
     >
   </span>
 </app-game-setup-header>

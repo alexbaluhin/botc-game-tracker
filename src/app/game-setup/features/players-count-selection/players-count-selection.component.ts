@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
 import { Player } from '../../../typings';
-import { GameSetupInfoService } from '../../data-access/game-setup-info.service';
+import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { CounterComponent } from '../../ui/counter/counter.component';
 import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-header.component';
 
@@ -28,7 +28,7 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
 })
 export class PlayersCountSelectionComponent {
   router = inject(Router);
-  gameSetupInfoService = inject(GameSetupInfoService);
+  gameStateService = inject(GameStateService);
 
   players = signal<Player[]>(new Array(12).fill({}));
 
@@ -41,7 +41,7 @@ export class PlayersCountSelectionComponent {
   }
 
   acceptPlayersCount() {
-    this.gameSetupInfoService.setPlayersCount(this.players().length);
+    this.gameStateService.setPlayersCount(this.players().length);
     this.router.navigate(['characters-selection']);
   }
 }

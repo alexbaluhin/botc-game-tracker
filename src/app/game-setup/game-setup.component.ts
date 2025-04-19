@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { GameSetupInfoService } from './data-access/game-setup-info.service';
+import { GameStateService } from '../shared/data-access/game-state.service';
 
 @Component({
   selector: 'app-game-setup',
   imports: [RouterOutlet],
-  providers: [GameSetupInfoService],
+  providers: [GameStateService],
   templateUrl: './game-setup.component.html',
   styleUrls: ['./game-setup.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

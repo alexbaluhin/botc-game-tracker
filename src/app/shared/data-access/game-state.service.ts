@@ -4,17 +4,17 @@ import {
   getCharactersFromBaseScript,
 } from '../../characters/utils/characters';
 import { Script, scriptName } from '../../constants';
-import { Character } from '../../typings';
+import { Character, Player } from '../../typings';
 
 interface GameInformation {
   name?: string;
   script?: Script;
   characters: Character[];
-  playersCount: number;
+  players: Player[];
 }
 
 @Injectable()
-export class GameSetupInfoService {
+export class GameStateService {
   public info: GameInformation = this.loadFromLocalStorage();
 
   setScript(
@@ -42,7 +42,7 @@ export class GameSetupInfoService {
   }
 
   setPlayersCount(count: number) {
-    this.info.playersCount = count;
+    this.info.players = new Array(count).fill({});
     this.saveToLocalStorage();
   }
 
@@ -51,14 +51,14 @@ export class GameSetupInfoService {
       const gameSetupState = window.localStorage.getItem('game-setup');
       if (!gameSetupState) {
         return {
-          playersCount: 5,
+          players: [],
           characters: [],
         };
       }
       return JSON.parse(gameSetupState);
     } catch {
       return {
-        playersCount: 5,
+        players: [],
         characters: [],
       };
     }
