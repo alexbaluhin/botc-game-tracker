@@ -1,9 +1,11 @@
+@use "variables" as var;
+
 .token {
   position: relative;
   display: block;
   font-family: Dumbledor, 'sans-serif';
-  width: 62px;
-  height: 62px;
+  width: var.$token-size;
+  height: var.$token-size;
   border-radius: 50%;
   background: #FBEAD0 50% / cover no-repeat;
   img {

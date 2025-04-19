@@ -1,0 +1,11 @@
+@if (player().character) {
+  <app-character-token
+    class="seat"
+    [character]="player().character!"></app-character-token>
+} @else {
+  <div class="seat empty"></div>
+}
+
+@if (player().name) {
+  <span class="name">{{ player().name }}</span>
+}
