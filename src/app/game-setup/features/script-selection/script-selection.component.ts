@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Script } from '../../../constants';
 import { CustomScriptJson, CustomScriptJsonMetaItem } from '../../../typings';
-import { GameSetupInfoService } from '../../data-access/game-setup-info.service';
+import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { GameLogoComponent } from '../../ui/game-logo/game-logo.component';
 
 @Component({
@@ -15,12 +15,12 @@ import { GameLogoComponent } from '../../ui/game-logo/game-logo.component';
 })
 export class ScriptSelectionComponent {
   router = inject(Router);
-  gameSetupInfoService = inject(GameSetupInfoService);
+  gameStateService = inject(GameStateService);
 
   scripts = Script;
 
   onScriptChoose(script: Script) {
-    this.gameSetupInfoService.setScript(script);
+    this.gameStateService.setScript(script);
   }
 
   onCustomScriptLoad(event: Event) {
@@ -48,7 +48,7 @@ export class ScriptSelectionComponent {
             id: character.id.replace(/[_-]/g, ''),
           }));
 
-        this.gameSetupInfoService.setScript(
+        this.gameStateService.setScript(
           Script.CUSTOM,
           customScriptMetaInfo?.name,
           customScriptCharacters

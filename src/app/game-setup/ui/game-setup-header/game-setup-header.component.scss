@@ -1,13 +1,17 @@
-img {
-  margin: 16px;
+.actions-row {
+  display: grid;
+  height: 56px;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.go-back-button {
+  padding: 16px;
 }
 
 h1,
 h2 {
-  font-family: Inter, sans-serif;
-  font-style: normal;
   text-align: center;
-  line-height: normal;
 }
 
 h1 {

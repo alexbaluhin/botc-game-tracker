@@ -6,7 +6,6 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import {
   charactersCountBasedOnPlayersCount,
@@ -15,7 +14,7 @@ import {
 } from '../../../constants';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { CharacterTokenComponent } from '../../../shared/components/character-token/character-token.component';
-import { GameSetupInfoService } from '../../data-access/game-setup-info.service';
+import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { charactersSetupChanges } from '../../setup-changes';
 import {
   CharacterForSelection,
@@ -30,7 +29,6 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
   imports: [
     ActionBarComponent,
     GameSetupHeaderComponent,
-    MatButtonModule,
     CharacterTokenComponent,
   ],
   templateUrl: './characters-selection.component.html',
@@ -39,11 +37,11 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
 })
 export class CharactersSelectionComponent implements OnInit {
   router = inject(Router);
-  gameSetupInfoService = inject(GameSetupInfoService);
+  gameStateService = inject(GameStateService);
 
   baseMaxCharactersCounts =
     charactersCountBasedOnPlayersCount[
-      this.gameSetupInfoService.info.playersCount
+      this.gameStateService.info.players.length
     ];
   baseCharactersCategories: CharactersCategory[] = [];
   charactersCategories: WritableSignal<CharactersCategory[]> = signal([]);
@@ -51,7 +49,7 @@ export class CharactersSelectionComponent implements OnInit {
 
   ngOnInit() {
     this.baseCharactersCategories =
-      this.gameSetupInfoService.info.characters.reduce((acc, character) => {
+      this.gameStateService.info.characters.reduce((acc, character) => {
         const characterType = character.type;
         const charactersForSelection = acc.find(
           charactersForSelection =>

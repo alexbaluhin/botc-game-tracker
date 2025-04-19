@@ -1,24 +1,26 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
-import { GameSetupInfoService } from '../../data-access/game-setup-info.service';
+import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
+import { Player } from '../../../typings';
+import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { CounterComponent } from '../../ui/counter/counter.component';
 import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-header.component';
-
-interface Player {
-  name?: string;
-}
 
 @Component({
   selector: 'app-players-count-selection',
   imports: [
     GameSetupHeaderComponent,
     ActionBarComponent,
-    MatButtonModule,
     CounterComponent,
     FormsModule,
+    GrimoireComponent,
   ],
   templateUrl: './players-count-selection.component.html',
   styleUrls: ['./players-count-selection.component.scss'],
@@ -26,21 +28,20 @@ interface Player {
 })
 export class PlayersCountSelectionComponent {
   router = inject(Router);
-  gameSetupInfoService = inject(GameSetupInfoService);
-  playersCount = 12;
-  players: Player[] = new Array(this.playersCount).fill({});
+  gameStateService = inject(GameStateService);
+
+  players = signal<Player[]>(new Array(12).fill({}));
 
   onPlayersCountChange(newCount: number) {
-    this.playersCount = newCount;
-    if (this.players.length < this.playersCount) {
-      this.players.push({});
+    if (this.players().length < newCount) {
+      this.players.update(players => [...players, {}]);
     } else {
-      this.players.pop();
+      this.players.update(players => players.slice(0, -1));
     }
   }
 
   acceptPlayersCount() {
-    this.gameSetupInfoService.setPlayersCount(this.playersCount);
-    this.router.navigate(['characters-selection']);
+    this.gameStateService.setPlayersCount(this.players().length);
+    this.router.navigate(['/game']);
   }
 }

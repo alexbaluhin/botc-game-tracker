@@ -7,7 +7,7 @@ import { GameSetupComponent } from './game-setup.component';
 
 export const gameSetupRoutes: Routes = [
   {
-    path: '',
+    path: 'game-setup',
     component: GameSetupComponent,
     children: [
       {

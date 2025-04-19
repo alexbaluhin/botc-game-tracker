@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -9,4 +9,6 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./game-setup-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GameSetupHeaderComponent {}
+export class GameSetupHeaderComponent {
+  backLink = input.required<string>();
+}
