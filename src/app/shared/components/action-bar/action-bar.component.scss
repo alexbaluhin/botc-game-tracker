@@ -7,8 +7,5 @@
   border-top: 1px solid rgba(255, 255, 255, 0.55);
   .container {
     padding: 16px;
-    &::ng-deep > * {
-      width: 100%;
-    }
   }
 }

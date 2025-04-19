@@ -1,5 +1,10 @@
 import { CharacterType, CharacterEdition } from './constants';
 
+export type Player = {
+  name?: string;
+  character?: Character;
+};
+
 export interface CharacterJinx {
   id: string;
   desc: string;
