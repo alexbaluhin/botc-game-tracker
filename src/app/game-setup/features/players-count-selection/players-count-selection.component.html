@@ -2,6 +2,8 @@
   <ng-container header>How many players?</ng-container>
 </app-game-setup-header>
 <main>
+  <app-characters-count-per-type-hint
+    [players]="players()"></app-characters-count-per-type-hint>
   <app-grimoire [players]="players()">
     <app-counter
       in-grimoire-center

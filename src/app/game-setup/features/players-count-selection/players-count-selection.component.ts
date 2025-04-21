@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { CharactersCountPerTypeHintComponent } from '../../../shared/components/characters-count-per-type-hint/characters-count-per-type-hint.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
 import { Player } from '../../../typings';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
@@ -23,6 +24,7 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
     FormsModule,
     GrimoireComponent,
     ButtonComponent,
+    CharactersCountPerTypeHintComponent,
   ],
   templateUrl: './players-count-selection.component.html',
   styleUrls: ['./players-count-selection.component.scss'],
