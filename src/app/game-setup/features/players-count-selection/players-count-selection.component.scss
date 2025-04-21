@@ -5,33 +5,18 @@
   height: 100%;
 }
 
-main {
-  display: flex;
-  flex-flow: row wrap;
-  flex-grow: 1;
+app-game-setup-header {
+  margin-top: 68px;
+  text-align: center;
 }
 
-.grimoire {
-  width: 100%;
-  height: 100%;
-  border: 2px solid #fff;
+main {
+  flex-grow: 1;
+  text-align: center;
+}
 
-  .counter,
-  .player-token {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .player-token {
-    width: 62px;
-    height: 62px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    transform:
-      translate(-50%, -50%)
-      rotate(calc(360deg / var(--total) * var(--index)))
-      translateY(calc(15 * -1ch));
+app-action-bar {
+  app-button {
+    display: block;
   }
 }

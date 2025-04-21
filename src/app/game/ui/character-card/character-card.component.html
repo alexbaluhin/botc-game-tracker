@@ -1,0 +1,9 @@
+<img
+  [ngSrc]="'./assets/characters-icons/' + character().id + '.png'"
+  width="72"
+  height="72"
+  [alt]="character().name + ' icon'" />
+<div class="info">
+  <span class="title">{{ character().name }}</span>
+  <p class="description">{{ character().abilityDesc }}</p>
+</div>

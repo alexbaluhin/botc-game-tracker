@@ -1,23 +1,34 @@
-img {
-  margin: 16px;
+@use "colors.scss" as color;
+
+header {
+  position: relative;
+}
+
+.go-back-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 16px;
+  color: color.$text-color;
 }
 
 h1,
 h2 {
-  font-family: Inter, sans-serif;
-  font-style: normal;
   text-align: center;
-  line-height: normal;
 }
 
 h1 {
+  display: inline-block;
   font-size: 20px;
   font-weight: 700;
-  margin: 0 0 8px;
+  line-height: 100%;
+  margin: 16px 0 0;
 }
 
 h2 {
   font-size: 16px;
   font-weight: 400;
-  opacity: 0.5;
+  line-height: 100%;
+  margin: 8px 0 16px;
+  color: rgba(255, 255, 255, 0.55);
 }

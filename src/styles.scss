@@ -1,6 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use "./styles/reset.scss";
 @use "./assets/fonts/fonts";
+@use "./styles/colors.scss" as color;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Frank Ruhl Libre", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: color.$text-color;
+}

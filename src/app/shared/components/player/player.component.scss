@@ -1,0 +1,25 @@
+@use "variables" as var;
+
+:host {
+  width: 90px;
+  height: 84px;
+  text-align: center;
+}
+
+.seat {
+  margin: 0 auto 4px;
+  &.empty {
+    width: var.$token-size;
+    height: var.$token-size;
+    border-radius: 50%;
+    background: transparent;
+    backdrop-filter: brightness(150%);
+    -webkit-backdrop-filter: brightness(150%);
+    box-shadow: 0px 4px 25px 0px rgba(19, 3, 43, 1);
+    border: 2px solid rgba(195, 172, 135, 0.95);
+  }
+}
+
+.name {
+  font-size: 14px;
+}

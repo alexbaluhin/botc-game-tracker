@@ -3,12 +3,10 @@ import { CharactersSelectionComponent } from './features/characters-selection/ch
 import { ModeSelectionComponent } from './features/mode-selection/mode-selection.component';
 import { PlayersCountSelectionComponent } from './features/players-count-selection/players-count-selection.component';
 import { ScriptSelectionComponent } from './features/script-selection/script-selection.component';
-import { GameSetupComponent } from './game-setup.component';
 
 export const gameSetupRoutes: Routes = [
   {
-    path: '',
-    component: GameSetupComponent,
+    path: 'game-setup',
     children: [
       {
         path: '',
