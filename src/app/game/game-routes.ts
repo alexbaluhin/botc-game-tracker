@@ -9,10 +9,6 @@ export const gameRoutes: Routes = [
         path: '',
         component: PlayersViewComponent,
       },
-      {
-        path: 'players',
-        component: PlayersViewComponent,
-      },
     ],
   },
 ];
