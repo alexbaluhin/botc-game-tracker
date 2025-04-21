@@ -2,11 +2,14 @@
   <span
     class="action"
     (click)="decreaseCount()"
-    [class.hidden]="count === 1 || isDisabled"
+    [class.hidden]="count === 1 || isDisabled || (min() && min()! >= count)"
     >-</span
   >
   <span class="number">{{ count }}</span>
-  <span class="action" (click)="increaseCount()" [class.hidden]="isDisabled"
+  <span
+    class="action"
+    (click)="increaseCount()"
+    [class.hidden]="isDisabled || (max() && max()! <= count)"
     >+</span
   >
 </div>

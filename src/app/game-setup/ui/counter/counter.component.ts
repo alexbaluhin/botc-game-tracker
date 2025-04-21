@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Self } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
@@ -13,6 +13,9 @@ export class CounterComponent implements ControlValueAccessor {
   onChange!: (value: number) => void;
   onTouched!: () => void;
   isDisabled = false;
+
+  min = input<number>();
+  max = input<number>();
 
   constructor(@Self() private ngControl: NgControl) {
     this.ngControl.valueAccessor = this;

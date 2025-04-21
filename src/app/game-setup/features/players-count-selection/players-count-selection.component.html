@@ -8,6 +8,8 @@
     <app-counter
       in-grimoire-center
       class="counter"
+      [min]="minCount"
+      [max]="maxCount"
       [ngModel]="players().length"
       (ngModelChange)="onPlayersCountChange($event)"></app-counter>
   </app-grimoire>
