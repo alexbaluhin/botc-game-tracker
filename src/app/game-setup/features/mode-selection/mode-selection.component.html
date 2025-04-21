@@ -1,8 +1,12 @@
 <main>
-  <app-game-logo />
+  <app-game-logo class="logo" />
 
   <nav>
-    <a routerLink="script-selection">Player Mode</a>
-    <a routerLink="script-selection" disabled>Storyteller Mode</a>
+    <app-transparent-button link="script-selection"
+      >Player</app-transparent-button
+    >
+    <app-transparent-button link="script-selection" [disabled]="true"
+      >Storyteller</app-transparent-button
+    >
   </nav>
 </main>
