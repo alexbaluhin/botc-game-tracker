@@ -1,36 +1,39 @@
 <main>
-  <app-game-logo />
-
-  <nav>
-    <a
-      routerLink="/players-count-selection"
-      (click)="onScriptChoose(scripts.TROUBLE_BREWING)">
-      <img
-        [ngSrc]="'./assets/common/trouble-brewing.png'"
-        width="100"
-        height="100"
-        alt="Trouble Brewing logo" />
-    </a>
-    <a
-      routerLink="/players-count-selection"
-      (click)="onScriptChoose(scripts.SECTS_AND_VIOLETS)">
-      <img
-        [ngSrc]="'./assets/common/sects-and-violets.png'"
-        width="100"
-        height="100"
-        alt="Sects and Violets logo" />
-    </a>
-    <a
-      routerLink="/players-count-selection"
-      (click)="onScriptChoose(scripts.BAD_MOON_RISING)">
-      <img
-        [ngSrc]="'./assets/common/bad-moon-rising.png'"
-        width="100"
-        height="100"
-        alt="Bad Moon Rising logo" />
-    </a>
-    <p (click)="fileInput.click()">Upload json</p>
-  </nav>
+  <div class="scripts-container">
+    <h1>Choose the script</h1>
+    <nav>
+      <app-transparent-button
+        link="/players-count-selection"
+        (click)="onScriptChoose(scripts.TROUBLE_BREWING)">
+        <img
+          [ngSrc]="'./assets/common/trouble-brewing.png'"
+          width="100"
+          height="100"
+          alt="Trouble Brewing logo" />
+      </app-transparent-button>
+      <app-transparent-button
+        link="/players-count-selection"
+        (click)="onScriptChoose(scripts.BAD_MOON_RISING)">
+        <img
+          [ngSrc]="'./assets/common/bad-moon-rising.png'"
+          width="100"
+          height="100"
+          alt="Bad Moon Rising logo" />
+      </app-transparent-button>
+      <app-transparent-button
+        link="/players-count-selection"
+        (click)="onScriptChoose(scripts.SECTS_AND_VIOLETS)">
+        <img
+          [ngSrc]="'./assets/common/sects-and-violets.png'"
+          width="100"
+          height="100"
+          alt="Sects and Violets logo" />
+      </app-transparent-button>
+      <app-transparent-button (buttonClicked)="fileInput.click()"
+        >Upload json</app-transparent-button
+      >
+    </nav>
+  </div>
 </main>
 
 <input
