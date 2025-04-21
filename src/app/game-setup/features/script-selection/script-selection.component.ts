@@ -21,6 +21,7 @@ export class ScriptSelectionComponent {
 
   onScriptChoose(script: Script) {
     this.gameStateService.setScript(script);
+    this.router.navigate(['game-setup/players-count-selection']);
   }
 
   onCustomScriptLoad(event: Event) {
@@ -53,7 +54,7 @@ export class ScriptSelectionComponent {
           customScriptMetaInfo?.name,
           customScriptCharacters
         );
-        this.router.navigate(['players-count-selection']);
+        this.router.navigate(['game-setup/players-count-selection']);
       } catch {
         console.error('Cannot parse custom script');
       }
