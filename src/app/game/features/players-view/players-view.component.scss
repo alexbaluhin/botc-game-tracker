@@ -6,9 +6,12 @@
 }
 
 main {
-  display: flex;
-  flex-flow: row wrap;
   flex-grow: 1;
+}
+
+app-characters-count-per-type-hint {
+  display: block;
+  margin-top: 16px;
 }
 
 app-action-bar {

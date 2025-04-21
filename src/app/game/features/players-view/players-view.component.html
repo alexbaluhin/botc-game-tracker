@@ -1,4 +1,8 @@
 <main>
+  <app-characters-count-per-type-hint
+    [players]="
+      gameStateService.info.players
+    "></app-characters-count-per-type-hint>
   <app-grimoire [players]="gameStateService.info.players"></app-grimoire>
 </main>
 <app-action-bar>
