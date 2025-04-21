@@ -7,6 +7,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
 import { Player } from '../../../typings';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
@@ -21,6 +22,7 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
     CounterComponent,
     FormsModule,
     GrimoireComponent,
+    ButtonComponent,
   ],
   templateUrl: './players-count-selection.component.html',
   styleUrls: ['./players-count-selection.component.scss'],
