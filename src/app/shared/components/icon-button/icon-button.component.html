@@ -1,5 +1,8 @@
 @if (link() && !disabled()) {
-  <a [routerLink]="link()" routerLinkActive="active">
+  <a
+    [routerLink]="link()"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
     <ng-container [ngTemplateOutlet]="content" />
   </a>
 } @else {

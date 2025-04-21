@@ -1,4 +1,4 @@
-<app-icon-button link=".">
+<app-icon-button link="/game">
   <ng-container icon>
     <img
       [ngSrc]="'./assets/common/players-icon.svg'"
@@ -8,7 +8,7 @@
   </ng-container>
   <ng-container label>Players</ng-container>
 </app-icon-button>
-<app-icon-button link="gossip" [disabled]="true">
+<app-icon-button link="/game/gossip" [disabled]="true">
   <ng-container icon>
     <img
       [ngSrc]="'./assets/common/gossip-icon.svg'"
@@ -18,7 +18,7 @@
   </ng-container>
   <ng-container label>Gossip</ng-container>
 </app-icon-button>
-<app-icon-button link="bluffs" [disabled]="true">
+<app-icon-button link="/game/bluffs" [disabled]="true">
   <ng-container icon>
     <img
       [ngSrc]="'./assets/common/bluffs-icon.svg'"
@@ -28,7 +28,7 @@
   </ng-container>
   <ng-container label>Bluffs</ng-container>
 </app-icon-button>
-<app-icon-button link="script">
+<app-icon-button link="/game/script">
   <ng-container icon>
     <img
       [ngSrc]="'./assets/common/script-icon.svg'"
