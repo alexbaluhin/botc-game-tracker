@@ -7,10 +7,9 @@
 
 main {
   flex-grow: 1;
-}
-
-app-characters-count-per-type-hint {
-  display: block;
-  margin-top: 16px;
-  text-align: center;
+  overflow-y: auto;
+  margin: 16px auto 0;
+  > * {
+    margin-bottom: 12px;
+  }
 }

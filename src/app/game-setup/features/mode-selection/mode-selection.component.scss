@@ -1,15 +1,16 @@
 main {
+  padding: 40px;
   text-align: center;
+  .logo {
+    margin-bottom: 32px;
+  }
 }
 
-nav a {
-  display: block;
-  margin-bottom: 23px;
-  text-decoration: none;
-  color: #fff;
-  &[disabled] {
-    pointer-events: none;
-    cursor: default;
-    opacity: .4;
+nav {
+  max-width: 313px;
+  margin: 0 auto;
+  > * {
+    display: block;
+    margin-bottom: 32px;
   }
 }

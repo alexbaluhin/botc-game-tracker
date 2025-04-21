@@ -1,14 +1,14 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { Script } from '../../../constants';
+import { TransparentButtonComponent } from '../../../shared/components/transparent-button/transparent-button.component';
 import { CustomScriptJson, CustomScriptJsonMetaItem } from '../../../typings';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
-import { GameLogoComponent } from '../../ui/game-logo/game-logo.component';
 
 @Component({
   selector: 'app-script-selection',
-  imports: [NgOptimizedImage, RouterLink, GameLogoComponent],
+  imports: [NgOptimizedImage, TransparentButtonComponent],
   templateUrl: './script-selection.component.html',
   styleUrls: ['./script-selection.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,6 +21,7 @@ export class ScriptSelectionComponent {
 
   onScriptChoose(script: Script) {
     this.gameStateService.setScript(script);
+    this.router.navigate(['game-setup/players-count-selection']);
   }
 
   onCustomScriptLoad(event: Event) {
@@ -53,7 +54,7 @@ export class ScriptSelectionComponent {
           customScriptMetaInfo?.name,
           customScriptCharacters
         );
-        this.router.navigate(['players-count-selection']);
+        this.router.navigate(['game-setup/players-count-selection']);
       } catch {
         console.error('Cannot parse custom script');
       }

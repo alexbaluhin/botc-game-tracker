@@ -1,15 +1,19 @@
 <app-game-setup-header backLink="/script-selection">
-  <span header>How many players?</span>
+  <ng-container header>How many players?</ng-container>
 </app-game-setup-header>
 <main>
+  <app-characters-count-per-type-hint
+    [players]="players()"></app-characters-count-per-type-hint>
   <app-grimoire [players]="players()">
     <app-counter
       in-grimoire-center
       class="counter"
+      [min]="minCount"
+      [max]="maxCount"
       [ngModel]="players().length"
       (ngModelChange)="onPlayersCountChange($event)"></app-counter>
   </app-grimoire>
 </main>
 <app-action-bar>
-  <button (click)="acceptPlayersCount()">Proceed</button>
+  <app-button (buttonClicked)="acceptPlayersCount()">Proceed</app-button>
 </app-action-bar>

@@ -1,8 +1,10 @@
 <main>
+  <app-characters-count-per-type-hint
+    [players]="
+      gameStateService.info.players
+    "></app-characters-count-per-type-hint>
   <app-grimoire [players]="gameStateService.info.players"></app-grimoire>
 </main>
 <app-action-bar>
-  <nav>
-    <a routerLink="players">Players</a>
-  </nav>
+  <app-game-nav></app-game-nav>
 </app-action-bar>

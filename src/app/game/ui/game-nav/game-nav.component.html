@@ -1,0 +1,40 @@
+<app-icon-button link="/game">
+  <ng-container icon>
+    <img
+      [ngSrc]="'./assets/common/players-icon.svg'"
+      width="24"
+      height="24"
+      alt="Players tab" />
+  </ng-container>
+  <ng-container label>Players</ng-container>
+</app-icon-button>
+<app-icon-button link="/game/gossip" [disabled]="true">
+  <ng-container icon>
+    <img
+      [ngSrc]="'./assets/common/gossip-icon.svg'"
+      width="24"
+      height="24"
+      alt="Gossip tab" />
+  </ng-container>
+  <ng-container label>Gossip</ng-container>
+</app-icon-button>
+<app-icon-button link="/game/bluffs" [disabled]="true">
+  <ng-container icon>
+    <img
+      [ngSrc]="'./assets/common/bluffs-icon.svg'"
+      width="24"
+      height="24"
+      alt="Bluffs tab" />
+  </ng-container>
+  <ng-container label>Bluffs</ng-container>
+</app-icon-button>
+<app-icon-button link="/game/script">
+  <ng-container icon>
+    <img
+      [ngSrc]="'./assets/common/script-icon.svg'"
+      width="24"
+      height="24"
+      alt="Script tab" />
+  </ng-container>
+  <ng-container label>Script</ng-container>
+</app-icon-button>
