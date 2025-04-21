@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  width: 100%;
+  max-width: 329px;
+  border: 2px solid rgba(187, 164, 133, 1);
+  border-radius: 16px;
+  padding: 8px 8px 8px 0;
+  background: rgba(255, 245, 235, 0.9);
+}
+
+.title,
+.description {
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: rgba(61, 29, 13, 1);
+}
+.description {
+  font-weight: 400;
+  margin: 0;
+}
