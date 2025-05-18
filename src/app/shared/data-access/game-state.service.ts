@@ -93,6 +93,11 @@ export class GameStateService {
     this.saveToLocalStorage();
   }
 
+  resetGameState() {
+    window.localStorage.removeItem('game-setup');
+    this.info.set(this.loadFromLocalStorage());
+  }
+
   private loadFromLocalStorage(): GameInformation {
     try {
       const gameSetupState = window.localStorage.getItem('game-setup');

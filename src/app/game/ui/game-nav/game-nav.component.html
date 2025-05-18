@@ -38,3 +38,13 @@
   </ng-container>
   <ng-container label>Script</ng-container>
 </app-icon-button>
+<app-icon-button link="/" (click)="resetGame()">
+  <ng-container icon>
+    <img
+      [ngSrc]="'./assets/common/close.svg'"
+      width="24"
+      height="24"
+      alt="Reset Game" />
+  </ng-container>
+  <ng-container label>Reset</ng-container>
+</app-icon-button>
