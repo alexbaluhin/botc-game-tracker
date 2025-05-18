@@ -1,9 +1,11 @@
 <main>
   <app-characters-count-per-type-hint
     [players]="
-      gameStateService.info.players
+      gameStateService.info().players
     "></app-characters-count-per-type-hint>
-  <app-grimoire [players]="gameStateService.info.players"></app-grimoire>
+  <app-grimoire
+    [players]="gameStateService.info().players"
+    (playerClicked)="editPlayer($event)"></app-grimoire>
 </main>
 <app-action-bar>
   <app-game-nav></app-game-nav>

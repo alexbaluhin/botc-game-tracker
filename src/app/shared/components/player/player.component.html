@@ -1,4 +1,12 @@
-@if (player().character) {
+@if (player().isCurrentViewer) {
+  <div class="seat current-viewer">
+    <img
+      [ngSrc]="'./assets/common/big-chair.svg'"
+      width="40"
+      height="40"
+      alt="Big chair icon" />
+  </div>
+} @else if (player().character) {
   <app-character-token
     class="seat"
     [character]="player().character!"></app-character-token>

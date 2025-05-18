@@ -17,6 +17,7 @@ button {
   text-decoration: none;
   font-weight: 700;
   color: color.$text-color-bright;
+  cursor: pointer;
   &:before {
     content: '';
     position: absolute;
@@ -32,6 +33,13 @@ button {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     z-index: -1;
+  }
+  &.secondary {
+    background: none;
+    padding: 0;
+    &:before {
+      background: none;
+    }
   }
 }
 

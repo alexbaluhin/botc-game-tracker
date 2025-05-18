@@ -11,4 +11,6 @@ import { Character } from '../../../typings';
 })
 export class CharacterTokenComponent {
   character = input.required<Character>();
+  active = input<boolean>();
+  selectable = input<boolean>();
 }

@@ -3,6 +3,10 @@
     <ng-content select="[in-grimoire-center]"></ng-content>
   </div>
   @for (player of players(); track player; let i = $index) {
-    <app-player class="player" [player]="player" #playerElement></app-player>
+    <app-player
+      class="player"
+      [player]="player"
+      (click)="playerClicked.emit(i)"
+      #playerElement></app-player>
   }
 </div>

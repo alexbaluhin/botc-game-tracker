@@ -41,15 +41,16 @@ export class CharactersSelectionComponent implements OnInit {
 
   baseMaxCharactersCounts =
     charactersCountBasedOnPlayersCount[
-      this.gameStateService.info.players.length
+      this.gameStateService.info().players.length
     ];
   baseCharactersCategories: CharactersCategory[] = [];
   charactersCategories: WritableSignal<CharactersCategory[]> = signal([]);
   selectedCharactersToChangeSetup: Set<string> = new Set();
 
   ngOnInit() {
-    this.baseCharactersCategories =
-      this.gameStateService.info.characters.reduce((acc, character) => {
+    this.baseCharactersCategories = this.gameStateService
+      .info()
+      .characters.reduce((acc, character) => {
         const characterType = character.type;
         const charactersForSelection = acc.find(
           charactersForSelection =>

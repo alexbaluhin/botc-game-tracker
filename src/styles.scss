@@ -3,6 +3,7 @@
 @use "./styles/reset.scss";
 @use "./assets/fonts/fonts";
 @use "./styles/colors.scss" as color;
+@import '@angular/cdk/overlay-prebuilt.css';
 
 html, body {
   height: 100%;
