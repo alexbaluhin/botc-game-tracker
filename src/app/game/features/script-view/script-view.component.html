@@ -1,5 +1,5 @@
 <main>
-  @for (character of gameStateService.info.characters; track character.id) {
+  @for (character of gameStateService.info().characters; track character.id) {
     <app-character-card [character]="character"></app-character-card>
   }
 </main>

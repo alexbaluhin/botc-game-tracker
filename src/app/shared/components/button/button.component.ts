@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+type ButtonType = 'primary' | 'secondary';
+
 @Component({
   selector: 'app-button',
   imports: [RouterLink, NgTemplateOutlet],
@@ -15,6 +17,7 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
+  type = input<ButtonType>();
   link = input<string>();
   disabled = input<boolean>();
   buttonClicked = output();

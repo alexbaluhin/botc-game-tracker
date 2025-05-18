@@ -3,6 +3,7 @@ import { CharacterType, CharacterEdition } from './constants';
 export type Player = {
   name?: string;
   character?: Character;
+  isCurrentViewer?: boolean;
 };
 
 export interface CharacterJinx {

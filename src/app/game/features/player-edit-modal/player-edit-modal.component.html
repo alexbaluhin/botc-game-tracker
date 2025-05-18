@@ -1,0 +1,48 @@
+<header>
+  <a class="close-button" (click)="dialog.close()">
+    <img
+      [ngSrc]="'./assets/common/close.svg'"
+      width="24"
+      height="24"
+      alt="Close modal window" />
+  </a>
+</header>
+
+<main>
+  <div class="container">
+    <input class="player-name-input" [(ngModel)]="playerName" />
+    <button
+      class="my-seat-button"
+      [class.selected]="isMySeat"
+      (click)="toggleMySeat()">
+      <img
+        [ngSrc]="
+          isMySeat
+            ? './assets/common/small-seat.svg'
+            : './assets/common/small-seat-colorful.svg'
+        "
+        width="24"
+        height="24"
+        alt="Small seat icon" />
+      <span>my seat</span>
+    </button>
+
+    <section class="character-selection">
+      @for (
+        character of gameStateService.info().characters;
+        track character.id
+      ) {
+        <app-character-token
+          [selectable]="true"
+          [character]="character"
+          [active]="selectedCharacter?.id === character.id"
+          (click)="selectCharacter(character)"></app-character-token>
+      }
+    </section>
+  </div>
+</main>
+
+<app-action-bar>
+  <app-button (buttonClicked)="savePlayerInfo()">Confirm</app-button>
+  <app-button type="secondary" (buttonClicked)="clearAll()">Clear</app-button>
+</app-action-bar>
