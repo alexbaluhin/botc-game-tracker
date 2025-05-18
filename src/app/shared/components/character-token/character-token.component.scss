@@ -7,7 +7,14 @@
   width: var.$token-size;
   height: var.$token-size;
   border-radius: 50%;
-  background: #FBEAD0 50% / cover no-repeat;
+  background: rgba(233, 222, 218, 1);
+  &.selectable {
+    cursor: pointer;
+  }
+  &.active {
+    background: rgba(255, 244, 240, 1);
+    box-shadow: 0 0 0 8px rgba(107, 56, 210, 0.55);
+  }
   img {
     position: absolute;
     top: 50%;

@@ -1,4 +1,7 @@
-<div class="token">
+<div
+  class="token"
+  [class.selectable]="selectable()"
+  [class.active]="selectable() && active()">
   <img
     [ngSrc]="'./assets/characters-icons/' + character().id + '.png'"
     width="52"
