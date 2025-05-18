@@ -4,6 +4,7 @@ import {
   effect,
   ElementRef,
   input,
+  output,
   viewChildren,
 } from '@angular/core';
 import { Player } from 'src/app/typings';
@@ -22,6 +23,8 @@ export class GrimoireComponent {
   playersElements = viewChildren<PlayerComponent, ElementRef>('playerElement', {
     read: ElementRef,
   });
+
+  playerClicked = output<number>();
 
   constructor() {
     effect(() => {

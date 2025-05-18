@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import {
   enrichCharacterInfo,
   getCharactersFromBaseScript,
@@ -17,13 +17,14 @@ interface GameInformation {
   providedIn: 'root',
 })
 export class GameStateService {
-  public info: GameInformation = this.loadFromLocalStorage();
+  public info = signal<GameInformation>(this.loadFromLocalStorage());
 
   get gameWasSetUp(): boolean {
+    const info = this.info();
     return (
-      this.info.name !== undefined &&
-      this.info.characters.length > 0 &&
-      this.info.players.length > 0
+      info.name !== undefined &&
+      info.characters.length > 0 &&
+      info.players.length > 0
     );
   }
 
@@ -32,27 +33,63 @@ export class GameStateService {
     name?: string,
     charactersList?: Pick<Character, 'id'>[]
   ) {
-    this.info.script = script;
-
     if (script === Script.CUSTOM) {
       if (!charactersList) {
         console.error('Please provide characters list for custom script');
         return;
       }
 
-      this.info.name = name;
-      this.info.characters = enrichCharacterInfo(charactersList);
+      this.info.update(info => ({
+        ...info,
+        script,
+        name,
+        characters: enrichCharacterInfo(charactersList),
+      }));
       this.saveToLocalStorage();
       return;
     }
 
-    this.info.name = scriptName[script];
-    this.info.characters = getCharactersFromBaseScript(script);
+    this.info.update(info => ({
+      ...info,
+      script,
+      name: scriptName[script],
+      characters: getCharactersFromBaseScript(script),
+    }));
     this.saveToLocalStorage();
   }
 
   setPlayersCount(count: number) {
-    this.info.players = new Array(count).fill({});
+    this.info.update(info => ({
+      ...info,
+      players: new Array(count).fill({}),
+    }));
+    this.saveToLocalStorage();
+  }
+
+  getPlayerByIndex(index: number) {
+    return this.info().players[index];
+  }
+
+  updatePlayerByIndex(updatedPlayerIndex: number, updatedPlayer: Player) {
+    if (
+      !this.getPlayerByIndex(updatedPlayerIndex).isCurrentViewer &&
+      updatedPlayer.isCurrentViewer
+    ) {
+      this.info.update(info => ({
+        ...info,
+        players: info.players.map(player => ({
+          ...player,
+          isCurrentViewer: false,
+        })),
+      }));
+    }
+
+    this.info.update(info => ({
+      ...info,
+      players: info.players.map((player, i) =>
+        updatedPlayerIndex === i ? updatedPlayer : player
+      ),
+    }));
     this.saveToLocalStorage();
   }
 
@@ -75,6 +112,6 @@ export class GameStateService {
   }
 
   private saveToLocalStorage() {
-    window.localStorage.setItem('game-setup', JSON.stringify(this.info));
+    window.localStorage.setItem('game-setup', JSON.stringify(this.info()));
   }
 }
