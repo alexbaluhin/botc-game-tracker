@@ -4,7 +4,7 @@
 <main>
   <app-characters-count-per-type-hint
     [players]="players()"></app-characters-count-per-type-hint>
-  <app-grimoire [players]="players()">
+  <app-grimoire [setupMode]="true" [players]="players()">
     <app-counter
       in-grimoire-center
       class="counter"
@@ -15,5 +15,5 @@
   </app-grimoire>
 </main>
 <app-action-bar>
-  <app-button (buttonClicked)="acceptPlayersCount()">Proceed</app-button>
+  <app-button (buttonClicked)="acceptPlayersCount()">Confirm</app-button>
 </app-action-bar>

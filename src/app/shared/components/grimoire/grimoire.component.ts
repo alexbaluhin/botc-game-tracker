@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,9 +16,10 @@ import { PlayerComponent } from '../player/player.component';
   templateUrl: './grimoire.component.html',
   styleUrl: './grimoire.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PlayerComponent],
+  imports: [PlayerComponent, NgOptimizedImage],
 })
 export class GrimoireComponent {
+  setupMode = input.required<boolean>();
   players = input.required<Player[]>();
 
   playersElements = viewChildren<PlayerComponent, ElementRef>('playerElement', {

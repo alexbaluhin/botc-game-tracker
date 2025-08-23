@@ -1,11 +1,14 @@
+@use "colors" as color;
+
 :host {
   position: sticky;
   bottom: 0;
   display: block;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin: 0 16px;
+  padding: 0 16px;
   text-align: center;
+  background: color.$primary;
   .container {
+    border-top: 1px solid color.$primary-2;
     padding: 16px 0;
   }
 }
