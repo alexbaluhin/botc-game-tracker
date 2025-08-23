@@ -4,6 +4,7 @@
       gameStateService.info().players
     "></app-characters-count-per-type-hint>
   <app-grimoire
+    [setupMode]="false"
     [players]="gameStateService.info().players"
     (playerClicked)="editPlayer($event)"></app-grimoire>
 </main>

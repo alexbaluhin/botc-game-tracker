@@ -13,9 +13,18 @@
   left: calc(50% - calc(var.$seat-width / 2));
 }
 
-.grimoire-center {
+.grimoire-center,
+.red-circle {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.red-circle {
+  opacity: 1;
+  mix-blend-mode: hard-light;
+  &.setup-mode {
+    opacity: 0.5;
+  }
 }
