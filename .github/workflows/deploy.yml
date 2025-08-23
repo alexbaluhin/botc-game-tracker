@@ -1,0 +1,54 @@
+name: Deploy to stage
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies & build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Add SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        env:
+          TAG: ${{ github.ref_name }} # release tag
+        run: |
+          BASE_DIR="/home/deploys/${{ secrets.DEPLOY_USER }}"
+          RELEASE_DIR="$BASE_DIR/releases/$TAG"
+
+          # Create release directory
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
+            "mkdir -p $RELEASE_DIR"
+
+          # Rsync build to release dir
+          rsync -az --delete -e "ssh -i ~/.ssh/deploy_key" \
+            ./dist/browser/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:$RELEASE_DIR/
+
+          # Update 'current' symlink and clean old releases
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
+            cd $BASE_DIR
+            ln -sfn "$RELEASE_DIR" current
+
+            # Keep only last 5 releases
+            ls -dt releases/* | tail -n +6 | xargs -r rm -rf
+          EOF
