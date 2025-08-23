@@ -44,11 +44,9 @@ jobs:
           rsync -az --delete -e "ssh -i ~/.ssh/deploy_key" \
             ./dist/browser/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:$RELEASE_DIR/
 
-          # Update 'current' symlink and clean old releases
-          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
-            cd $BASE_DIR
-            ln -sfn "$RELEASE_DIR" current
+          # Update 'current' symlink
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
+            "deploy releases/${{ github.ref_name }}"
 
-            # Keep only last 5 releases
-            ls -dt releases/* | tail -n +6 | xargs -r rm -rf
-          EOF
+          # Clean old releases
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} cleanup
