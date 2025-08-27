@@ -1,5 +1,9 @@
 <header>
-  <a class="close-button" (click)="dialog.close()">
+  <a
+    class="close-button"
+    tabindex="0"
+    (click)="dialog.close()"
+    (keydown.space)="dialog.close()">
     <img
       [ngSrc]="'./assets/common/close.svg'"
       width="24"
