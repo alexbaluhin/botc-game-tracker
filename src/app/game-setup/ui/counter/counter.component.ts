@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, input, Self } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  inject,
+} from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
@@ -9,6 +14,8 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CounterComponent implements ControlValueAccessor {
+  private ngControl = inject(NgControl, { self: true });
+
   count = 1;
   onChange!: (value: number) => void;
   onTouched!: () => void;
@@ -17,7 +24,7 @@ export class CounterComponent implements ControlValueAccessor {
   min = input<number>();
   max = input<number>();
 
-  constructor(@Self() private ngControl: NgControl) {
+  constructor() {
     this.ngControl.valueAccessor = this;
   }
 

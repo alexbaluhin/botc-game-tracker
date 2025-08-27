@@ -1,14 +1,18 @@
 <div class="container">
   <span
     class="action"
+    tabindex="0"
     (click)="decreaseCount()"
+    (keydown.space)="decreaseCount()"
     [class.hidden]="count === 1 || isDisabled || (min() && min()! >= count)"
     >-</span
   >
   <span class="number">{{ count }}</span>
   <span
     class="action"
+    tabindex="0"
     (click)="increaseCount()"
+    (keydown.space)="increaseCount()"
     [class.hidden]="isDisabled || (max() && max()! <= count)"
     >+</span
   >
