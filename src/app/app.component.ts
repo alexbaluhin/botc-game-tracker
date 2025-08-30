@@ -62,5 +62,11 @@ export class AppComponent {
           }
         });
     });
+
+    document.addEventListener('contextmenu', e => {
+      if (e.target instanceof HTMLImageElement) {
+        e.preventDefault();
+      }
+    });
   }
 }

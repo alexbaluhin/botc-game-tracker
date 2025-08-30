@@ -35,7 +35,16 @@ export class PlayersViewComponent {
         data: {
           playerPositionInCircle: index,
         },
+        autoFocus: false,
       }
     );
+  }
+
+  togglePlayerShroud(index: number) {
+    const player = this.gameStateService.getPlayerByIndex(index);
+    this.gameStateService.updatePlayerByIndex(index, {
+      ...player,
+      isDead: !player.isDead,
+    });
   }
 }

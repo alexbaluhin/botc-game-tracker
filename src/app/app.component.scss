@@ -6,6 +6,10 @@
   justify-content: center;
   align-items: center;
   background: url("../assets/common/background.png") repeat center center fixed;
+  -webkit-touch-callout: none; /* disables long press menu on iOS Safari */
+  -webkit-user-select: none;   /* prevent selection */
+  -webkit-user-drag: none;     /* prevent drag */
+  user-select: none;           /* standard */
   ::ng-deep > * {
     width: 100%;
   }

@@ -12,6 +12,7 @@ import { CharacterTokenBaseComponent } from '../character-token-base/character-t
 })
 export class CharacterTokenComponent {
   character = input.required<Character>();
+  withShroud = input<boolean>(false);
   active = input<boolean>();
   selectable = input<boolean>();
 }

@@ -1,4 +1,7 @@
-<app-character-token-base [selectable]="selectable()" [active]="active()">
+<app-character-token-base
+  [selectable]="selectable()"
+  [active]="active()"
+  [class.with-shroud]="withShroud()">
   <img
     [ngSrc]="'./assets/characters-icons/' + character().id + '.png'"
     width="52"

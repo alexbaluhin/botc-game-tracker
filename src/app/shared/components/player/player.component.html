@@ -1,5 +1,5 @@
 @if (player().isCurrentViewer) {
-  <div class="seat current-viewer">
+  <div class="seat current-viewer" [class.with-shroud]="player().isDead">
     <img
       [ngSrc]="'./assets/common/big-chair.svg'"
       width="40"
@@ -9,9 +9,10 @@
 } @else if (player().character) {
   <app-character-token
     class="seat"
-    [character]="player().character!"></app-character-token>
+    [character]="player().character!"
+    [withShroud]="player().isDead!"></app-character-token>
 } @else {
-  <div class="seat empty"></div>
+  <div class="seat empty" [class.with-shroud]="player().isDead"></div>
 }
 
 @if (player().name) {

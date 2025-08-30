@@ -3,7 +3,8 @@
   <app-grimoire
     [setupMode]="false"
     [players]="gameStateService.info().players"
-    (playerClicked)="editPlayer($event)"></app-grimoire>
+    (playerClicked)="editPlayer($event)"
+    (playerLongPressed)="togglePlayerShroud($event)"></app-grimoire>
 </main>
 <app-action-bar>
   <app-game-nav></app-game-nav>
