@@ -1,9 +1,9 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
-import { CharactersCountPerTypeHintComponent } from '../../../shared/components/characters-count-per-type-hint/characters-count-per-type-hint.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { GameHeaderComponent } from '../../ui/game-header/game-header.component';
 import { GameNavComponent } from '../../ui/game-nav/game-nav.component';
 import {
   PlayerEditModalComponent,
@@ -15,8 +15,8 @@ import {
   imports: [
     ActionBarComponent,
     GrimoireComponent,
-    CharactersCountPerTypeHintComponent,
     GameNavComponent,
+    GameHeaderComponent,
   ],
   templateUrl: './players-view.component.html',
   styleUrl: './players-view.component.scss',

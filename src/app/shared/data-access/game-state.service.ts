@@ -1,6 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import {
   enrichCharacterInfo,
+  getCharacterById,
   getCharactersFromBaseScript,
 } from '../../characters/utils/characters';
 import { Script, scriptName } from '../../constants';
@@ -18,6 +19,13 @@ interface GameInformation {
 })
 export class GameStateService {
   public info = signal<GameInformation>(this.loadFromLocalStorage());
+
+  constructor() {
+    effect(() => {
+      this.info();
+      this.saveToLocalStorage();
+    });
+  }
 
   get gameWasSetUp(): boolean {
     const info = this.info();
@@ -45,7 +53,6 @@ export class GameStateService {
         name,
         characters: enrichCharacterInfo(charactersList),
       }));
-      this.saveToLocalStorage();
       return;
     }
 
@@ -55,7 +62,6 @@ export class GameStateService {
       name: scriptName[script],
       characters: getCharactersFromBaseScript(script),
     }));
-    this.saveToLocalStorage();
   }
 
   setPlayersCount(count: number) {
@@ -63,7 +69,6 @@ export class GameStateService {
       ...info,
       players: new Array(count).fill({}),
     }));
-    this.saveToLocalStorage();
   }
 
   getPlayerByIndex(index: number) {
@@ -90,12 +95,54 @@ export class GameStateService {
         updatedPlayerIndex === i ? updatedPlayer : player
       ),
     }));
-    this.saveToLocalStorage();
   }
 
   resetGameState() {
-    window.localStorage.removeItem('game-setup');
+    this.clearLocalStorage();
     this.info.set(this.loadFromLocalStorage());
+  }
+
+  createShareLink() {
+    return `${window.location.origin}?share=${btoa(this.mapGameStateToShareString())}`;
+  }
+
+  getGameStateFromShareLink(linkInBase64: string) {
+    return this.mapShareStringToGameState(atob(linkInBase64));
+  }
+
+  private mapGameStateToShareString() {
+    const players = this.info()
+      .players.map(({ name, character }) =>
+        name ? `${name}${character?.id ? `:${character.id}` : ''}` : ''
+      )
+      .join(',');
+    const characters = this.info()
+      .characters.map(({ id }) => id)
+      .join(',');
+    return `${this.info().script};${this.info().name};${characters};${players}`;
+  }
+
+  private mapShareStringToGameState(shareString: string) {
+    const [script, name, charactersString, playersString] =
+      shareString.split(';');
+    const characters = enrichCharacterInfo(
+      charactersString.split(',').map(character => ({ id: character }))
+    );
+    const players = playersString.split(',').map(player => {
+      let name = player || undefined;
+      let character: Character | string | undefined = undefined;
+      if (player.includes(':')) {
+        [name, character] = player.split(':');
+        character = getCharacterById(character);
+      }
+      return { name, character };
+    });
+
+    return { name, script: script as Script, players, characters };
+  }
+
+  private clearLocalStorage() {
+    window.localStorage.removeItem('game-setup');
   }
 
   private loadFromLocalStorage(): GameInformation {

@@ -1,0 +1,17 @@
+@use "colors" as color;
+
+:host {
+  display: block;
+  max-width: 380px;
+  background: color.$primary-1;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+footer {
+  margin-top: 16px;
+}
+
+.button + .button {
+  margin-left: 16px;
+}
