@@ -2,6 +2,8 @@
 @use "colors" as color;
 
 :host {
+  display: flex;
+  flex-direction: column;
   width: 90px;
   height: 84px;
   text-align: center;
