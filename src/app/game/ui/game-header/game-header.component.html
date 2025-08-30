@@ -1,0 +1,25 @@
+<header>
+  <app-characters-count-per-type-hint
+    [players]="
+      gameStateService.info().players
+    "></app-characters-count-per-type-hint>
+
+  <button [cdkMenuTriggerFor]="contextMenu" class="context-button">
+    <img
+      [ngSrc]="'./assets/common/three-dots.svg'"
+      width="24"
+      height="24"
+      alt="Three dots icon" />
+  </button>
+</header>
+
+<ng-template #contextMenu>
+  <div class="context-menu" cdkMenu>
+    <button class="context-menu-item" cdkMenuItem (click)="share()">
+      {{ shareText }}
+    </button>
+    <button class="context-menu-item" cdkMenuItem (click)="resetGame()">
+      Reset
+    </button>
+  </div>
+</ng-template>

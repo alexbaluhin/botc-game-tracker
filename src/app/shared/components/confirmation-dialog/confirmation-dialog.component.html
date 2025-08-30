@@ -1,0 +1,15 @@
+<div>{{ dialogData.message }}</div>
+<footer>
+  <app-button
+    type="secondary"
+    class="button"
+    (buttonClicked)="dialogRef.close(true)"
+    >Yes</app-button
+  >
+  <app-button
+    type="secondary"
+    class="button"
+    (buttonClicked)="dialogRef.close(false)"
+    >No</app-button
+  >
+</footer>

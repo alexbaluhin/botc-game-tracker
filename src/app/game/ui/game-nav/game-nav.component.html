@@ -18,16 +18,6 @@
   </ng-container>
   <ng-container label>Gossip</ng-container>
 </app-icon-button>
-<app-icon-button link="/game/bluffs" [disabled]="true">
-  <ng-container icon>
-    <img
-      [ngSrc]="'./assets/common/bluffs-icon.svg'"
-      width="24"
-      height="24"
-      alt="Bluffs tab" />
-  </ng-container>
-  <ng-container label>Bluffs</ng-container>
-</app-icon-button>
 <app-icon-button link="/game/script">
   <ng-container icon>
     <img
@@ -37,14 +27,4 @@
       alt="Script tab" />
   </ng-container>
   <ng-container label>Script</ng-container>
-</app-icon-button>
-<app-icon-button link="/" (click)="resetGame()">
-  <ng-container icon>
-    <img
-      [ngSrc]="'./assets/common/close.svg'"
-      width="24"
-      height="24"
-      alt="Reset Game" />
-  </ng-container>
-  <ng-container label>Reset</ng-container>
 </app-icon-button>
