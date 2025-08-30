@@ -1,0 +1,18 @@
+@use "variables" as var;
+
+.token {
+  position: relative;
+  display: block;
+  font-family: Dumbledor, 'sans-serif';
+  width: var.$token-size;
+  height: var.$token-size;
+  border-radius: 50%;
+  background: rgba(233, 222, 218, 1);
+  &.selectable {
+    cursor: pointer;
+  }
+  &.active {
+    background: rgba(255, 244, 240, 1);
+    box-shadow: 0 0 0 8px rgba(107, 56, 210, 0.55);
+  }
+}

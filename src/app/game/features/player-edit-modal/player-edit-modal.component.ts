@@ -10,6 +10,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { CharacterTokenBaseComponent } from '../../../shared/components/character-token-base/character-token-base.component';
 import { CharacterTokenComponent } from '../../../shared/components/character-token/character-token.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { Character } from '../../../typings';
@@ -26,6 +27,7 @@ export type PlayerEditModalData = {
     CharacterTokenComponent,
     ActionBarComponent,
     ButtonComponent,
+    CharacterTokenBaseComponent,
   ],
   templateUrl: './player-edit-modal.component.html',
   styleUrl: './player-edit-modal.component.scss',

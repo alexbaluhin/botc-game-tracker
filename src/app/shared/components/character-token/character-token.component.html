@@ -1,7 +1,4 @@
-<div
-  class="token"
-  [class.selectable]="selectable()"
-  [class.active]="selectable() && active()">
+<app-character-token-base [selectable]="selectable()" [active]="active()">
   <img
     [ngSrc]="'./assets/characters-icons/' + character().id + '.png'"
     width="52"
@@ -13,4 +10,4 @@
       <textPath xlink:href="#curve">{{ character().name }}</textPath>
     </text>
   </svg>
-</div>
+</app-character-token-base>
