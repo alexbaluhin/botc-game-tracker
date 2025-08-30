@@ -30,10 +30,7 @@
             alt="Big chair icon" />
         </app-character-token-base>
       </div>
-      @for (
-        character of gameStateService.info().characters;
-        track character.id
-      ) {
+      @for (character of characters(); track character.id) {
         <app-character-token
           [selectable]="true"
           [character]="character"
