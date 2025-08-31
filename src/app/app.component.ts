@@ -53,7 +53,7 @@ export class AppComponent {
         .closed.subscribe(result => {
           if (result) {
             this.gameStateService.info.set(gameStateFromLink);
-            this.router.navigate([], {
+            this.router.navigate(['/game'], {
               queryParams: {
                 share: null,
               },
