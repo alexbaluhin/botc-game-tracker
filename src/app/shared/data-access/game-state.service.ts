@@ -12,6 +12,7 @@ interface GameInformation {
   script?: Script;
   characters: Character[];
   players: Player[];
+  gossip?: string;
 }
 
 @Injectable({
