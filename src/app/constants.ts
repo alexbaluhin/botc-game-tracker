@@ -110,3 +110,8 @@ export const charactersCountBasedOnPlayersCount: {
     [CharacterType.DEMON]: 1,
   },
 };
+
+export const maxNumberOfPlayersInBaseSetup = +Object.keys(
+  charactersCountBasedOnPlayersCount
+).at(-1)!;
+export const maxNumberOfTravellers = 5;
