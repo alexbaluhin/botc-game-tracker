@@ -32,9 +32,12 @@ export class LongPressDirective {
     );
     longPressStarted$
       .pipe(
-        filter(() => !this.disableLongPress()),
         switchMap(event =>
-          of(event).pipe(delay(this.duration()), takeUntil(longPressEnded$))
+          of(event).pipe(
+            delay(this.duration()),
+            filter(() => !this.disableLongPress()),
+            takeUntil(longPressEnded$)
+          )
         ),
         takeUntilDestroyed()
       )
