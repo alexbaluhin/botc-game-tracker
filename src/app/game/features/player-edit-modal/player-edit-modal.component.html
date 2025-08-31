@@ -14,7 +14,11 @@
 
 <main>
   <div class="container">
-    <input class="player-name-input" [(ngModel)]="playerName" />
+    <input
+      class="player-name-input"
+      [(ngModel)]="playerName"
+      (keyup.enter)="input.blur()"
+      #input />
 
     <section class="character-selection">
       <div class="my-seat">
