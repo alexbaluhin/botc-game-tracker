@@ -40,32 +40,21 @@ main {
   text-align: center;
   font-size: 18px;
   line-height: 1.3;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   &:focus-visible {
     outline: none;
   }
 }
 
-.my-seat-button {
-  display: inline-block;
-  background: rgba(101, 41, 174, 1);
-  color: color.$text-color-bright;
-  border-radius: 24px;
-  padding: 4px 8px;
-  border: none;
-  cursor: pointer;
-  &.selected {
-    background: rgba(144, 125, 167, 1);
-    color: rgba(0, 0, 0, 0.95);
-  }
-  img,
-  span {
-    display: inline-block;
-    vertical-align: middle;
-  }
-  span {
+.my-seat {
+  position: relative;
+  .my-seat-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: calc(variable.$token-size / 2 * -1) 0 0 calc(variable.$token-size / 8);
     font-size: 14px;
-    line-height: 100%;
+    color: rgba(255, 255, 255, 0.95);
   }
 }
 

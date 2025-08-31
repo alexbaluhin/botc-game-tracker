@@ -3,13 +3,16 @@ import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   model,
   OnInit,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CharacterType } from '../../../constants';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { CharacterTokenBaseComponent } from '../../../shared/components/character-token-base/character-token-base.component';
 import { CharacterTokenComponent } from '../../../shared/components/character-token/character-token.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { Character } from '../../../typings';
@@ -26,6 +29,7 @@ export type PlayerEditModalData = {
     CharacterTokenComponent,
     ActionBarComponent,
     ButtonComponent,
+    CharacterTokenBaseComponent,
   ],
   templateUrl: './player-edit-modal.component.html',
   styleUrl: './player-edit-modal.component.scss',
@@ -38,6 +42,19 @@ export class PlayerEditModalComponent implements OnInit {
 
   playerName = model<string>();
   isMySeat = false;
+  characters = computed(() =>
+    this.gameStateService
+      .info()
+      .characters.filter(({ type }) =>
+        [
+          CharacterType.TOWNSFOLK,
+          CharacterType.OUTSIDER,
+          CharacterType.MINION,
+          CharacterType.DEMON,
+          CharacterType.TRAVELLER,
+        ].includes(type)
+      )
+  );
   selectedCharacter: Character | null = null;
 
   ngOnInit() {

@@ -14,28 +14,27 @@
 
 <main>
   <div class="container">
-    <input class="player-name-input" [(ngModel)]="playerName" />
-    <button
-      class="my-seat-button"
-      [class.selected]="isMySeat"
-      (click)="toggleMySeat()">
-      <img
-        [ngSrc]="
-          isMySeat
-            ? './assets/common/small-seat.svg'
-            : './assets/common/small-seat-colorful.svg'
-        "
-        width="24"
-        height="24"
-        alt="Small seat icon" />
-      <span>my seat</span>
-    </button>
+    <input
+      class="player-name-input"
+      [(ngModel)]="playerName"
+      (keyup.enter)="input.blur()"
+      #input />
 
     <section class="character-selection">
-      @for (
-        character of gameStateService.info().characters;
-        track character.id
-      ) {
+      <div class="my-seat">
+        <span class="my-seat-label">My seat</span>
+        <app-character-token-base
+          [selectable]="true"
+          [active]="isMySeat"
+          (click)="toggleMySeat()">
+          <img
+            [ngSrc]="'./assets/common/big-chair-player-edit-mode.svg'"
+            width="61"
+            height="61"
+            alt="Big chair icon" />
+        </app-character-token-base>
+      </div>
+      @for (character of characters(); track character.id) {
         <app-character-token
           [selectable]="true"
           [character]="character"

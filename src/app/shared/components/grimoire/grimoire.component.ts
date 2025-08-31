@@ -9,6 +9,7 @@ import {
   viewChildren,
 } from '@angular/core';
 import { Player } from 'src/app/typings';
+import { LongPressDirective } from '../../directives/long-press.directive';
 import { PlayerComponent } from '../player/player.component';
 
 @Component({
@@ -16,7 +17,7 @@ import { PlayerComponent } from '../player/player.component';
   templateUrl: './grimoire.component.html',
   styleUrl: './grimoire.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PlayerComponent, NgOptimizedImage],
+  imports: [PlayerComponent, NgOptimizedImage, LongPressDirective],
 })
 export class GrimoireComponent {
   setupMode = input.required<boolean>();
@@ -27,6 +28,7 @@ export class GrimoireComponent {
   });
 
   playerClicked = output<number>();
+  playerLongPressed = output<number>();
 
   constructor() {
     effect(() => {

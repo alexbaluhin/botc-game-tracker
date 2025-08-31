@@ -53,7 +53,7 @@ export class AppComponent {
         .closed.subscribe(result => {
           if (result) {
             this.gameStateService.info.set(gameStateFromLink);
-            this.router.navigate([], {
+            this.router.navigate(['/game'], {
               queryParams: {
                 share: null,
               },
@@ -61,6 +61,12 @@ export class AppComponent {
             });
           }
         });
+    });
+
+    document.addEventListener('contextmenu', e => {
+      if (e.target instanceof HTMLImageElement) {
+        e.preventDefault();
+      }
     });
   }
 }

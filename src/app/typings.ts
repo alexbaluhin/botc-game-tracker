@@ -4,6 +4,7 @@ export type Player = {
   name?: string;
   character?: Character;
   isCurrentViewer?: boolean;
+  isDead?: boolean;
 };
 
 export interface CharacterJinx {

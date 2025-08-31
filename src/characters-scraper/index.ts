@@ -39,7 +39,7 @@ const wikiEditionToEdition: { [key: string]: CharacterEdition } = {
   bmr: CharacterEdition.BAD_MOON_RISING,
   '': CharacterEdition.EXPERIMENTAL,
   fabled: CharacterEdition.FABLED,
-  traveler: CharacterEdition.TRAVELLERS,
+  traveller: CharacterEdition.TRAVELLERS,
 };
 
 const wikiCharacterTypeToType: { [key: string]: CharacterType } = {
@@ -47,7 +47,7 @@ const wikiCharacterTypeToType: { [key: string]: CharacterType } = {
   outsider: CharacterType.OUTSIDER,
   minion: CharacterType.MINION,
   demon: CharacterType.DEMON,
-  traveler: CharacterType.TRAVELLER,
+  traveller: CharacterType.TRAVELLER,
   fabled: CharacterType.FABLED,
 };
 

@@ -53,6 +53,10 @@ img,
 picture {
   max-width: 100%;
   display: block;
+  -webkit-touch-callout: none; /* disables long press menu on iOS Safari */
+  -webkit-user-select: none;   /* prevent selection */
+  -webkit-user-drag: none;     /* prevent drag */
+  user-select: none;            /* standard */
 }
 
 /* Inherit fonts for inputs and buttons */

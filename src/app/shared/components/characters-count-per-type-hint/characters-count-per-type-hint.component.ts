@@ -9,6 +9,7 @@ import { Player } from 'src/app/typings';
 import {
   charactersCountBasedOnPlayersCount,
   CharacterType,
+  maxNumberOfPlayersInBaseSetup,
 } from '../../../constants';
 
 @Component({
@@ -20,8 +21,13 @@ import {
 })
 export class CharactersCountPerTypeHintComponent {
   players = input.required<Player[]>();
-  charactersCounts = computed(
-    () => charactersCountBasedOnPlayersCount[this.players().length]
-  );
+  charactersCounts = computed(() => {
+    const numberOfPlayers = this.players().length;
+    if (numberOfPlayers > maxNumberOfPlayersInBaseSetup) {
+      return charactersCountBasedOnPlayersCount[maxNumberOfPlayersInBaseSetup];
+    } else {
+      return charactersCountBasedOnPlayersCount[this.players().length];
+    }
+  });
   characterTypes = CharacterType;
 }

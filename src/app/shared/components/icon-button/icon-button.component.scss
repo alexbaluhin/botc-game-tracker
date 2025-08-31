@@ -11,12 +11,11 @@ button {
   padding: 9px 8px;
   width: 100%;
   border: none;
-  border-radius: 8px;
+  border-radius: 16px;
   text-decoration: none;
   font-weight: 700;
   &.active {
-    backdrop-filter: brightness(200%) blur(1px);
-    -webkit-backdrop-filter: brightness(180%) blur(1px);
+    background: color.$primary-1;
   }
 }
 
