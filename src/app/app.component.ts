@@ -4,6 +4,7 @@ import {
   Component,
   effect,
   inject,
+  OnInit,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -21,7 +22,7 @@ import { GameStateService } from './shared/data-access/game-state.service';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   shareLink = toSignal(
     inject(ActivatedRoute).queryParamMap.pipe(
       map(paramMap => paramMap.get('share')),
@@ -68,5 +69,31 @@ export class AppComponent {
         e.preventDefault();
       }
     });
+  }
+
+  ngOnInit() {
+    this.checkGameStateVersion();
+  }
+
+  private checkGameStateVersion() {
+    if (
+      (this.gameStateService.info().version ?? 0) <
+      this.gameStateService.version
+    ) {
+      this.dialog
+        .open<boolean, ConfirmationDialogData>(ConfirmationDialogComponent, {
+          data: {
+            message:
+              'Your saved game is not compatible with the latest changes. Please click on the "Reset" button, or continue on your own risk.',
+            agreeButtonText: 'Reset',
+            disagreeButtonText: 'Continue',
+          },
+        })
+        .closed.pipe(filter(reset => reset === true))
+        .subscribe(() => {
+          this.gameStateService.resetGameState();
+          this.router.navigate(['/']);
+        });
+    }
   }
 }

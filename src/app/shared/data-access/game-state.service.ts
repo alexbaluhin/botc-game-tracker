@@ -13,12 +13,16 @@ interface GameInformation {
   characters: Character[];
   players: Player[];
   gossip?: string;
+  version: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameStateService {
+  /* Increase the version number if old game state is incompatible with the new one */
+  version = 1;
+
   public info = signal<GameInformation>(this.loadFromLocalStorage());
 
   constructor() {
@@ -123,7 +127,7 @@ export class GameStateService {
     return `${this.info().script};${this.info().name};${characters};${players}`;
   }
 
-  private mapShareStringToGameState(shareString: string) {
+  private mapShareStringToGameState(shareString: string): GameInformation {
     const [script, name, charactersString, playersString] =
       shareString.split(';');
     const characters = enrichCharacterInfo(
@@ -139,7 +143,13 @@ export class GameStateService {
       return { name, character };
     });
 
-    return { name, script: script as Script, players, characters };
+    return {
+      name,
+      script: script as Script,
+      players,
+      characters,
+      version: this.version,
+    };
   }
 
   private clearLocalStorage() {
@@ -150,21 +160,23 @@ export class GameStateService {
     try {
       const gameSetupState = window.localStorage.getItem('game-setup');
       if (!gameSetupState) {
-        return {
-          players: [],
-          characters: [],
-        };
+        return this.getDefaultGameState();
       }
       return JSON.parse(gameSetupState);
     } catch {
-      return {
-        players: [],
-        characters: [],
-      };
+      return this.getDefaultGameState();
     }
   }
 
   private saveToLocalStorage() {
     window.localStorage.setItem('game-setup', JSON.stringify(this.info()));
+  }
+
+  private getDefaultGameState(): GameInformation {
+    return {
+      players: [],
+      characters: [],
+      version: this.version,
+    };
   }
 }
