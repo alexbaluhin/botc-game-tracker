@@ -30,8 +30,8 @@ export class PlayersViewComponent {
     this.dialog.open<PlayerEditModalComponent, PlayerEditModalData>(
       PlayerEditModalComponent,
       {
-        minWidth: '100%',
-        height: '100%',
+        width: '74%',
+        maxWidth: '291px',
         data: {
           playerPositionInCircle: index,
         },

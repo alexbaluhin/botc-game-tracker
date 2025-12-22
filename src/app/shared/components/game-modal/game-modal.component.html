@@ -1,0 +1,15 @@
+<header>
+  <a
+    class="close-button"
+    tabindex="0"
+    (click)="dialogRef.close()"
+    (keydown.space)="dialogRef.close()">
+    <img
+      [ngSrc]="'./assets/common/close.svg'"
+      width="24"
+      height="24"
+      alt="Close modal window" />
+  </a>
+</header>
+
+<ng-content></ng-content>
