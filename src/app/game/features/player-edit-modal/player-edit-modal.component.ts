@@ -1,21 +1,19 @@
-import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { NgOptimizedImage } from '@angular/common';
+import { Dialog, DIALOG_DATA } from '@angular/cdk/dialog';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   inject,
   model,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { CharacterType } from '../../../constants';
-import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
-import { ButtonComponent } from '../../../shared/components/button/button.component';
-import { CharacterTokenBaseComponent } from '../../../shared/components/character-token-base/character-token-base.component';
-import { CharacterTokenComponent } from '../../../shared/components/character-token/character-token.component';
+import { debounceTime, Subject, takeUntil } from 'rxjs';
+import { FlatButtonComponent } from '../../../shared/components/flat-button/flat-button.component';
+import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
-import { Character } from '../../../typings';
+import { CharacterEditModalComponent } from '../character-edit-modal/character-edit-modal.component';
 
 export type PlayerEditModalData = {
   playerPositionInCircle: number;
@@ -23,84 +21,49 @@ export type PlayerEditModalData = {
 
 @Component({
   selector: 'app-player-edit-modal',
-  imports: [
-    NgOptimizedImage,
-    FormsModule,
-    CharacterTokenComponent,
-    ActionBarComponent,
-    ButtonComponent,
-    CharacterTokenBaseComponent,
-  ],
+  imports: [FormsModule, GameModalComponent, FlatButtonComponent],
   templateUrl: './player-edit-modal.component.html',
   styleUrl: './player-edit-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayerEditModalComponent implements OnInit {
-  dialog = inject<DialogRef<never, PlayerEditModalComponent>>(DialogRef);
+export class PlayerEditModalComponent implements OnInit, OnDestroy {
+  private dialog = inject(Dialog);
   private dialogData: PlayerEditModalData = inject(DIALOG_DATA);
   gameStateService = inject(GameStateService);
-
-  playerName = model<string>();
-  isMySeat = false;
-  characters = computed(() =>
-    this.gameStateService
-      .info()
-      .characters.filter(({ type }) =>
-        [
-          CharacterType.TOWNSFOLK,
-          CharacterType.OUTSIDER,
-          CharacterType.MINION,
-          CharacterType.DEMON,
-          CharacterType.TRAVELLER,
-        ].includes(type)
-      )
+  private player = this.gameStateService.getPlayerByIndex(
+    this.dialogData.playerPositionInCircle
   );
-  selectedCharacter: Character | null = null;
+  playerName = model<string>(this.player.name ?? '');
+  playerNameUpdates = toObservable(this.playerName).pipe(debounceTime(300));
+
+  private readonly unsubscribe = new Subject<void>();
 
   ngOnInit() {
-    const player = this.gameStateService.getPlayerByIndex(
-      this.dialogData.playerPositionInCircle
-    );
-    if (player.name) {
-      this.playerName.set(player.name);
-    }
-    if (player.character) {
-      this.selectedCharacter = player.character;
-    }
-    this.isMySeat = player.isCurrentViewer ?? false;
+    this.playerNameUpdates.pipe(takeUntil(this.unsubscribe)).subscribe(name => {
+      this.gameStateService.updatePlayerByIndex(
+        this.dialogData.playerPositionInCircle,
+        {
+          ...this.player,
+          name,
+        }
+      );
+    });
   }
 
-  toggleMySeat() {
-    this.isMySeat = !this.isMySeat;
-    this.selectedCharacter = null;
+  ngOnDestroy() {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
-  selectCharacter(character: Character) {
-    if (this.selectedCharacter?.id === character.id) {
-      this.selectedCharacter = null;
-    } else {
-      this.selectedCharacter = character;
-    }
-    this.isMySeat = false;
-  }
-
-  savePlayerInfo() {
-    this.gameStateService.updatePlayerByIndex(
-      this.dialogData.playerPositionInCircle,
+  editCharacter() {
+    this.dialog.open<CharacterEditModalComponent, PlayerEditModalData>(
+      CharacterEditModalComponent,
       {
-        name: this.playerName(),
-        isCurrentViewer: this.isMySeat,
-        ...(this.selectedCharacter
-          ? { character: this.selectedCharacter }
-          : {}),
+        minWidth: '100%',
+        height: '100%',
+        data: this.dialogData,
+        autoFocus: false,
       }
     );
-    this.dialog.close();
-  }
-
-  clearAll() {
-    this.playerName.set('');
-    this.isMySeat = false;
-    this.selectedCharacter = null;
   }
 }

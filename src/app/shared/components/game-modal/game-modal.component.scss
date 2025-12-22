@@ -1,0 +1,21 @@
+@use "colors" as color;
+@use "variables" as variable;
+
+:host {
+  display: block;
+  background: color.$primary-1;
+  padding: 24px;
+  border-radius: 24px;
+}
+
+header {
+  position: relative;
+  height: 40px;
+}
+
+.close-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}

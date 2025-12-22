@@ -1,0 +1,51 @@
+<header>
+  <a
+    class="close-button"
+    tabindex="0"
+    (click)="dialog.close()"
+    (keydown.space)="dialog.close()">
+    <img
+      [ngSrc]="'./assets/common/close.svg'"
+      width="24"
+      height="24"
+      alt="Close modal window" />
+  </a>
+</header>
+
+<main>
+  <div class="container">
+    <input
+      class="player-name-input"
+      [(ngModel)]="playerName"
+      (keyup.enter)="input.blur()"
+      #input />
+
+    <section class="character-selection">
+      <div class="my-seat">
+        <span class="my-seat-label">My seat</span>
+        <app-character-token-base
+          [selectable]="true"
+          [active]="isMySeat"
+          (click)="toggleMySeat()">
+          <img
+            [ngSrc]="'./assets/common/big-chair-player-edit-mode.svg'"
+            width="61"
+            height="61"
+            alt="Big chair icon" />
+        </app-character-token-base>
+      </div>
+      @for (character of characters(); track character.id) {
+        <app-character-token
+          [selectable]="true"
+          [character]="character"
+          [active]="selectedCharacter?.id === character.id"
+          (click)="selectCharacter(character)"></app-character-token>
+      }
+    </section>
+  </div>
+</main>
+
+<app-action-bar>
+  <app-button (buttonClicked)="savePlayerInfo()">Confirm</app-button>
+  <app-button type="secondary" (buttonClicked)="clearAll()">Clear</app-button>
+</app-action-bar>
