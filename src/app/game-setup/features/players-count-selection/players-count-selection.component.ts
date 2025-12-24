@@ -41,11 +41,11 @@ export class PlayersCountSelectionComponent {
   minCount = +Object.keys(charactersCountBasedOnPlayersCount).at(0)!;
   maxCount = maxNumberOfPlayersInBaseSetup + maxNumberOfTravellers;
 
-  players = signal<Player[]>(new Array(12).fill({}));
+  players = signal<Player[]>(new Array(12).fill({ characters: [] }));
 
   onPlayersCountChange(newCount: number) {
     if (this.players().length < newCount) {
-      this.players.update(players => [...players, {}]);
+      this.players.update(players => [...players, { characters: [] }]);
     } else {
       this.players.update(players => players.slice(0, -1));
     }

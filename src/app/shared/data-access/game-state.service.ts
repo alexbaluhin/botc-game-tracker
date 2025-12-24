@@ -21,7 +21,7 @@ interface GameInformation {
 })
 export class GameStateService {
   /* Increase the version number if old game state is incompatible with the new one */
-  version = 1;
+  version = 2;
 
   public info = signal<GameInformation>(this.loadFromLocalStorage());
 
@@ -72,7 +72,7 @@ export class GameStateService {
   setPlayersCount(count: number) {
     this.info.update(info => ({
       ...info,
-      players: new Array(count).fill({}),
+      players: new Array(count).fill({ characters: [] }),
     }));
   }
 
@@ -117,9 +117,13 @@ export class GameStateService {
 
   private mapGameStateToShareString() {
     const players = this.info()
-      .players.map(({ name, character }) =>
-        name ? `${name}${character?.id ? `:${character.id}` : ''}` : ''
-      )
+      .players.map(({ name, characters }) => {
+        const nameString = name ? name : '';
+        const charactersString = characters.length
+          ? characters.map(id => id).join(':')
+          : '';
+        return `${nameString}:${charactersString}`;
+      })
       .join(',');
     const characters = this.info()
       .characters.map(({ id }) => id)
@@ -134,13 +138,11 @@ export class GameStateService {
       charactersString.split(',').map(character => ({ id: character }))
     );
     const players = playersString.split(',').map(player => {
-      let name = player || undefined;
-      let character: Character | string | undefined = undefined;
-      if (player.includes(':')) {
-        [name, character] = player.split(':');
-        character = getCharacterById(character);
-      }
-      return { name, character };
+      const [name, ...charactersIds] = player.split(':');
+      const characters = charactersIds
+        .map(id => getCharacterById(id))
+        .filter(id => id !== undefined);
+      return { name, characters };
     });
 
     return {

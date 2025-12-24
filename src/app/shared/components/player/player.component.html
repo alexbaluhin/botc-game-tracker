@@ -6,10 +6,10 @@
       height="40"
       alt="Big chair icon" />
   </div>
-} @else if (player().character) {
+} @else if (player().characters.length) {
   <app-character-token
     class="seat"
-    [character]="player().character!"
+    [characters]="player().characters"
     [withShroud]="player().isDead!"></app-character-token>
 } @else {
   <div class="seat empty" [class.with-shroud]="player().isDead"></div>

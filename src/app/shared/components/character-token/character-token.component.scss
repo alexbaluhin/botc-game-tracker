@@ -1,13 +1,132 @@
+@use "variables" as var;
+@use "colors" as color;
+
+$shadow-size: 8px;
+$border-size: 1px;
+$token-shadow-size: calc(var.$token-size + ($shadow-size * 2) + ($border-size * 2));
+$token-shadow-offset: calc(-1 * ($shadow-size + 1px));
+
+:host {
+  position: relative;
+  display: inline-block;
+
+  --border: 2px;
+  --offset: 30deg;
+  --size: 62px; // used var.$token-size;
+}
+
+.token {
+  --angle: calc(360deg / var(--segments-count)); /* based on the characters count, angle can be: 120, 180 or 360 */
+  --skew: calc(90deg - (var(--angle) / 2)); /* for better visualization, we need to transform segments by applying skew */
+
+  position: relative;
+  display: block;
+  font-family: Dumbledor, 'sans-serif';
+  width: var.$token-size;
+  height: var.$token-size;
+  border-radius: 50%;
+  background: color.$token-border-color;
+  padding: var(--border);
+  box-sizing: border-box;
+  z-index: 2;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: var(--border);
+    border-radius: 50%;
+    background: color.$token-color;
+  }
+  &.selectable {
+    cursor: pointer;
+  }
+  &.active {
+    background: color.$token-selected-color;
+    box-shadow: 0 0 0 8px rgba(107, 56, 210, 0.55);
+    .character::before {
+      background: color.$token-selected-color;
+    }
+  }
+  .character {
+    position: absolute;
+    inset: var(--border);
+    border-radius: 50%;
+    overflow: hidden;
+    &::before {
+      content:"";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 50%;
+      height: 50%;
+      transform-origin: 0 0;
+      background: color.$token-color;
+
+      --rotation: calc(var(--offset) + (var(--i) * var(--angle))); /* rotation based on index plus fixed offset */
+      transform: rotate(var(--rotation)) skewY(calc(-1 * var(--skew)));
+    }
+    img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+
+      --rotation: calc(var(--offset) + (var(--i) * var(--angle)));
+      --img-additional-rotation: calc(var(--rotation) + (var(--angle) / 4));
+      --img-offset-from-center: calc((var(--size) - 2 * var(--border)) * 0.27);
+
+      transform:
+        translate(-50%, -50%)
+        rotate(var(--img-additional-rotation))
+        translateX(var(--img-offset-from-center))
+        rotate(calc(-1 * var(--img-additional-rotation)));
+    }
+  }
+  &[data-slices="2"] .character:nth-of-type(1) img {
+    left: 65%;
+    top: 35%;
+  }
+  &[data-slices="2"] .character:nth-of-type(2) img {
+    left: 35%;
+    top: 65%;
+  }
+  &[data-slices="1"] .character img {
+    transform: translate(-50%, -50%);
+  }
+  .delimiter-lines {
+    position: absolute;
+    inset: var(--border);
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+    .line {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--border);
+      height: 100%;
+      background: color.$token-border-color;
+      transform-origin: 50% 0;
+
+      --rotation: calc(var(--offset) + (var(--i) * var(--angle))); /* rotation based on index plus fixed offset */
+      transform: translateX(-50%) rotate(var(--rotation));
+    }
+  }
+}
+
+.token-shadow-border {
+  position: absolute;
+  top: $token-shadow-offset;
+  left: $token-shadow-offset;
+  width: $token-shadow-size;
+  height: $token-shadow-size;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid color.$secondary;
+  z-index: 1;
+}
+
 .with-shroud {
   opacity: 0.8;
   img {
     filter: grayscale(100%);
   }
-}
-
-img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
 }

@@ -1,16 +1,44 @@
-<app-character-token-base
-  [selectable]="selectable()"
-  [active]="active()"
-  [class.with-shroud]="withShroud()">
-  <img
-    [ngSrc]="'./assets/characters-icons/' + character().id + '.png'"
-    width="52"
-    height="52"
-    [alt]="character().name" />
-  <svg viewBox="0 0 150 150">
-    <path id="curve" d="M 13 75 C 13 160, 138 160, 138 75" fill="transparent" />
-    <text text-anchor="middle" x="66.6%">
-      <textPath xlink:href="#curve">{{ character().name }}</textPath>
-    </text>
-  </svg>
-</app-character-token-base>
+<div
+  class="token"
+  [class.selectable]="selectable()"
+  [class.active]="selectable() && active()"
+  [class.with-shroud]="withShroud()"
+  [style]="'--segments-count: ' + characters().length"
+  [attr.data-slices]="characters().length">
+  @for (
+    character of characters();
+    track character.id;
+    let index = $index;
+    let count = $count
+  ) {
+    <div class="character" [style]="'--i: ' + index">
+      <img
+        [ngSrc]="'./assets/characters-icons/' + character.id + '.png'"
+        [width]="count === 1 ? 52 : 35"
+        [height]="count === 1 ? 52 : 35"
+        [alt]="character.name" />
+      @if (count === 1) {
+        <svg viewBox="0 0 150 150">
+          <path
+            id="curve"
+            d="M 13 75 C 13 160, 138 160, 138 75"
+            fill="transparent" />
+          <text text-anchor="middle" x="66.6%">
+            <textPath xlink:href="#curve">{{ character.name }}</textPath>
+          </text>
+        </svg>
+      }
+    </div>
+  }
+  @if (characters().length !== 1) {
+    <div class="delimiter-lines">
+      @for (_ of characters(); track index; let index = $index) {
+        <span class="line" [style]="'--i: ' + index"></span>
+      }
+    </div>
+  }
+</div>
+
+@if (selectable() && active()) {
+  <div class="token-shadow-border"></div>
+}
