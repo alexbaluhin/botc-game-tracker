@@ -1,4 +1,4 @@
-import { Dialog, DIALOG_DATA } from '@angular/cdk/dialog';
+import { Dialog, DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -28,6 +28,8 @@ export type PlayerEditModalData = {
 })
 export class PlayerEditModalComponent implements OnInit, OnDestroy {
   private dialog = inject(Dialog);
+  private dialogRef =
+    inject<DialogRef<never, PlayerEditModalComponent>>(DialogRef);
   private dialogData: PlayerEditModalData = inject(DIALOG_DATA);
   gameStateService = inject(GameStateService);
   private player = this.gameStateService.getPlayerByIndex(
@@ -56,14 +58,16 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
   }
 
   editCharacter() {
-    this.dialog.open<CharacterEditModalComponent, PlayerEditModalData>(
-      CharacterEditModalComponent,
-      {
-        minWidth: '100%',
-        height: '100%',
-        data: this.dialogData,
-        autoFocus: false,
-      }
-    );
+    this.dialog
+      .open<CharacterEditModalComponent, PlayerEditModalData>(
+        CharacterEditModalComponent,
+        {
+          minWidth: '100%',
+          height: '100%',
+          data: this.dialogData,
+          autoFocus: false,
+        }
+      )
+      .closed.subscribe(() => this.dialogRef.close());
   }
 }

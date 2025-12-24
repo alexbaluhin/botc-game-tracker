@@ -2,7 +2,7 @@ import { CharacterType, CharacterEdition } from './constants';
 
 export type Player = {
   name?: string;
-  character?: Character;
+  characters: Character[];
   isCurrentViewer?: boolean;
   isDead?: boolean;
 };

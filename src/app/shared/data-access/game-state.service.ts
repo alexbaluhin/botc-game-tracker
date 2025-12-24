@@ -13,12 +13,16 @@ interface GameInformation {
   characters: Character[];
   players: Player[];
   gossip?: string;
+  version: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameStateService {
+  /* Increase the version number if old game state is incompatible with the new one */
+  version = 2;
+
   public info = signal<GameInformation>(this.loadFromLocalStorage());
 
   constructor() {
@@ -68,7 +72,7 @@ export class GameStateService {
   setPlayersCount(count: number) {
     this.info.update(info => ({
       ...info,
-      players: new Array(count).fill({}),
+      players: new Array(count).fill({ characters: [] }),
     }));
   }
 
@@ -113,9 +117,13 @@ export class GameStateService {
 
   private mapGameStateToShareString() {
     const players = this.info()
-      .players.map(({ name, character }) =>
-        name ? `${name}${character?.id ? `:${character.id}` : ''}` : ''
-      )
+      .players.map(({ name, characters }) => {
+        const nameString = name ? name : '';
+        const charactersString = characters.length
+          ? characters.map(id => id).join(':')
+          : '';
+        return `${nameString}:${charactersString}`;
+      })
       .join(',');
     const characters = this.info()
       .characters.map(({ id }) => id)
@@ -123,23 +131,27 @@ export class GameStateService {
     return `${this.info().script};${this.info().name};${characters};${players}`;
   }
 
-  private mapShareStringToGameState(shareString: string) {
+  private mapShareStringToGameState(shareString: string): GameInformation {
     const [script, name, charactersString, playersString] =
       shareString.split(';');
     const characters = enrichCharacterInfo(
       charactersString.split(',').map(character => ({ id: character }))
     );
     const players = playersString.split(',').map(player => {
-      let name = player || undefined;
-      let character: Character | string | undefined = undefined;
-      if (player.includes(':')) {
-        [name, character] = player.split(':');
-        character = getCharacterById(character);
-      }
-      return { name, character };
+      const [name, ...charactersIds] = player.split(':');
+      const characters = charactersIds
+        .map(id => getCharacterById(id))
+        .filter(id => id !== undefined);
+      return { name, characters };
     });
 
-    return { name, script: script as Script, players, characters };
+    return {
+      name,
+      script: script as Script,
+      players,
+      characters,
+      version: this.version,
+    };
   }
 
   private clearLocalStorage() {
@@ -150,21 +162,23 @@ export class GameStateService {
     try {
       const gameSetupState = window.localStorage.getItem('game-setup');
       if (!gameSetupState) {
-        return {
-          players: [],
-          characters: [],
-        };
+        return this.getDefaultGameState();
       }
       return JSON.parse(gameSetupState);
     } catch {
-      return {
-        players: [],
-        characters: [],
-      };
+      return this.getDefaultGameState();
     }
   }
 
   private saveToLocalStorage() {
     window.localStorage.setItem('game-setup', JSON.stringify(this.info()));
+  }
+
+  private getDefaultGameState(): GameInformation {
+    return {
+      players: [],
+      characters: [],
+      version: this.version,
+    };
   }
 }

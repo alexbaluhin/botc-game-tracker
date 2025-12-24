@@ -4,6 +4,8 @@ import { ButtonComponent } from '../button/button.component';
 
 export type ConfirmationDialogData = {
   message: string;
+  agreeButtonText?: string;
+  disagreeButtonText?: string;
 };
 
 @Component({

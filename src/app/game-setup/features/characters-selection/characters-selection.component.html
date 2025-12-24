@@ -37,7 +37,7 @@
       @for (character of charactersCategory.characters; track character.id) {
         <app-character-token
           class="token"
-          [character]="character"
+          [characters]="[character]"
           [class.selected]="character.selected"
           [class.disabled]="charactersCategory.isFilled && !character.selected"
           (click)="

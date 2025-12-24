@@ -22,7 +22,7 @@
     backdrop-filter: brightness(150%);
     -webkit-backdrop-filter: brightness(150%);
     box-shadow: 0px 4px 25px 0px rgba(19, 3, 43, 1);
-    border: 2px solid color.$player-token-border-color;
+    border: 2px solid color.$token-border-color;
     &.with-shroud {
       filter: grayscale(100%);
     }
