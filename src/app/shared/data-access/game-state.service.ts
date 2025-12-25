@@ -14,6 +14,9 @@ interface GameInformation {
   players: Player[];
   gossip?: string;
   version: number;
+  states: {
+    playersPositionsWereCalculated: boolean;
+  };
 }
 
 @Injectable({
@@ -72,7 +75,7 @@ export class GameStateService {
   setPlayersCount(count: number) {
     this.info.update(info => ({
       ...info,
-      players: new Array(count).fill({ characters: [] }),
+      players: new Array(count).fill(this.makePlayer()),
     }));
   }
 
@@ -115,6 +118,13 @@ export class GameStateService {
     return this.mapShareStringToGameState(atob(linkInBase64));
   }
 
+  makePlayer(): Player {
+    return {
+      characters: [],
+      positionInGrimoire: { x: 0, y: 0 },
+    };
+  }
+
   private mapGameStateToShareString() {
     const players = this.info()
       .players.map(({ name, characters }) => {
@@ -142,7 +152,7 @@ export class GameStateService {
       const characters = charactersIds
         .map(id => getCharacterById(id))
         .filter(id => id !== undefined);
-      return { name, characters };
+      return { name, characters, positionInGrimoire: { x: 0, y: 0 } } as Player;
     });
 
     return {
@@ -151,6 +161,9 @@ export class GameStateService {
       players,
       characters,
       version: this.version,
+      states: {
+        playersPositionsWereCalculated: false,
+      },
     };
   }
 
@@ -179,6 +192,9 @@ export class GameStateService {
       players: [],
       characters: [],
       version: this.version,
+      states: {
+        playersPositionsWereCalculated: false,
+      },
     };
   }
 }

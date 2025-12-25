@@ -1,16 +1,14 @@
 @use "variables" as var;
 
-:host,
-.players-container {
+:host {
   position: relative;
+  display: block;
   width: 100%;
   height: 100%;
 }
 
 .player {
   position: absolute;
-  top: calc(50% - calc(var.$seat-height / 2));
-  left: calc(50% - calc(var.$seat-width / 2));
 }
 
 .grimoire-center,

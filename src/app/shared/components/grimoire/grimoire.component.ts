@@ -1,12 +1,12 @@
+import { CdkDrag, CdkDragEnd, Point } from '@angular/cdk/drag-drop';
 import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   ElementRef,
+  inject,
   input,
   output,
-  viewChildren,
 } from '@angular/core';
 import { Player } from 'src/app/typings';
 import { LongPressDirective } from '../../directives/long-press.directive';
@@ -17,42 +17,34 @@ import { PlayerComponent } from '../player/player.component';
   templateUrl: './grimoire.component.html',
   styleUrl: './grimoire.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PlayerComponent, NgOptimizedImage, LongPressDirective],
+  imports: [PlayerComponent, NgOptimizedImage, LongPressDirective, CdkDrag],
 })
 export class GrimoireComponent {
   setupMode = input.required<boolean>();
   players = input.required<Player[]>();
-
-  playersElements = viewChildren<PlayerComponent, ElementRef>('playerElement', {
-    read: ElementRef,
-  });
-
   playerClicked = output<number>();
   playerLongPressed = output<number>();
+  playerTokenMoved = output<{ index: number; position: Point }>();
 
-  constructor() {
-    effect(() => {
-      const playersCount = this.playersElements().length;
-      for (let i = 0; i < playersCount; i++) {
-        const t = ((2 * Math.PI) / playersCount) * (i + playersCount * 0.75);
-        const cosT = Math.cos(t);
-        const sinT = Math.sin(t);
-        const horizontalRadius = 150;
-        const verticalRadius = 200;
-        const superEllipseRadius = 2;
+  grimoireElement = inject<ElementRef<HTMLElement>>(ElementRef);
 
-        const x =
-          horizontalRadius *
-          Math.sign(cosT) *
-          Math.pow(Math.abs(cosT), 2 / superEllipseRadius);
-        const y =
-          verticalRadius *
-          Math.sign(sinT) *
-          Math.pow(Math.abs(sinT), 2 / superEllipseRadius);
+  isDragging: boolean = false;
 
-        const element = this.playersElements()[i].nativeElement;
-        element.style.transform = `translateX(${x}px) translateY(${y}px)`;
-      }
+  playerTokenClicked(index: number) {
+    if (!this.isDragging) {
+      this.playerClicked.emit(index);
+    }
+  }
+
+  draggingEnd(event: CdkDragEnd, index: number, player: Player) {
+    this.playerTokenMoved.emit({
+      index,
+      position: {
+        x: player.positionInGrimoire.x + event.distance.x,
+        y: player.positionInGrimoire.y + event.distance.y,
+      },
     });
+
+    setTimeout(() => (this.isDragging = false));
   }
 }

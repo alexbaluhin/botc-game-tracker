@@ -1,8 +1,18 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Point } from '@angular/cdk/drag-drop';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  viewChild,
+  afterNextRender,
+} from '@angular/core';
+import { tokenSize } from '../../../constants';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { positionPlayersInCircle } from '../../../shared/layout/players-circle';
 import { GameHeaderComponent } from '../../ui/game-header/game-header.component';
 import { GameNavComponent } from '../../ui/game-nav/game-nav.component';
 import {
@@ -26,6 +36,35 @@ export class PlayersViewComponent {
   gameStateService = inject(GameStateService);
   private dialog = inject(Dialog);
 
+  grimoireElement = viewChild.required<GrimoireComponent, ElementRef>(
+    GrimoireComponent,
+    {
+      read: ElementRef,
+    }
+  );
+
+  constructor() {
+    afterNextRender(() => {
+      if (this.gameStateService.info().states.playersPositionsWereCalculated) {
+        return;
+      }
+
+      this.gameStateService.info.update(info => {
+        return {
+          ...info,
+          players: positionPlayersInCircle(
+            info.players,
+            tokenSize,
+            this.grimoireElement().nativeElement.getBoundingClientRect()
+          ),
+          states: {
+            playersPositionsWereCalculated: true,
+          },
+        };
+      });
+    });
+  }
+
   editPlayer(index: number) {
     this.dialog.open<PlayerEditModalComponent, PlayerEditModalData>(
       PlayerEditModalComponent,
@@ -45,6 +84,13 @@ export class PlayersViewComponent {
     this.gameStateService.updatePlayerByIndex(index, {
       ...player,
       isDead: !player.isDead,
+    });
+  }
+
+  updatePlayerTokenPosition(event: { index: number; position: Point }) {
+    this.gameStateService.updatePlayerByIndex(event.index, {
+      ...this.gameStateService.getPlayerByIndex(event.index),
+      positionInGrimoire: event.position,
     });
   }
 }

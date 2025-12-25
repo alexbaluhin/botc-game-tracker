@@ -115,3 +115,5 @@ export const maxNumberOfPlayersInBaseSetup = +Object.keys(
   charactersCountBasedOnPlayersCount
 ).at(-1)!;
 export const maxNumberOfTravellers = 5;
+
+export const tokenSize = 62; // TODO: dynamically calculate based on the device resolution

@@ -1,21 +1,25 @@
-<div class="players-container">
-  <img
-    class="red-circle"
-    [class.setup-mode]="setupMode()"
-    [ngSrc]="'./assets/common/grimoire-red-circle.png'"
-    width="276"
-    height="276"
-    alt="The red ominous circle" />
-  <div class="grimoire-center">
-    <ng-content select="[in-grimoire-center]"></ng-content>
-  </div>
-  @for (player of players(); track player; let i = $index) {
-    <app-player
-      class="player"
-      [player]="player"
-      (click)="playerClicked.emit(i)"
-      appLongPress
-      (longPress)="playerLongPressed.emit(i)"
-      #playerElement></app-player>
-  }
+<img
+  class="red-circle"
+  [class.setup-mode]="setupMode()"
+  [ngSrc]="'./assets/common/grimoire-red-circle.png'"
+  width="276"
+  height="276"
+  alt="The red ominous circle" />
+<div class="grimoire-center">
+  <ng-content select="[in-grimoire-center]"></ng-content>
 </div>
+@for (player of players(); track player; let i = $index) {
+  <app-player
+    class="player"
+    [player]="player"
+    (click)="playerTokenClicked(i)"
+    appLongPress
+    (longPress)="playerLongPressed.emit(i)"
+    [disableLongPress]="true"
+    cdkDrag
+    [cdkDragBoundary]="grimoireElement"
+    [cdkDragFreeDragPosition]="player.positionInGrimoire"
+    [cdkDragDisabled]="setupMode()"
+    (cdkDragStarted)="isDragging = true"
+    (cdkDragEnded)="draggingEnd($event, i, player)"></app-player>
+}

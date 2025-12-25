@@ -1,3 +1,4 @@
+import { Point } from '@angular/cdk/drag-drop';
 import { CharacterType, CharacterEdition } from './constants';
 
 export type Player = {
@@ -5,6 +6,7 @@ export type Player = {
   characters: Character[];
   isCurrentViewer?: boolean;
   isDead?: boolean;
+  positionInGrimoire: Point;
 };
 
 export interface CharacterJinx {
