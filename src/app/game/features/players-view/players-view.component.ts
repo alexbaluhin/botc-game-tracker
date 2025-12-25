@@ -13,6 +13,7 @@ import { ActionBarComponent } from '../../../shared/components/action-bar/action
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { positionPlayersInCircle } from '../../../shared/layout/players-circle';
+import { GrimoireService } from '../../data-access/grimoire.service';
 import { GameHeaderComponent } from '../../ui/game-header/game-header.component';
 import { GameNavComponent } from '../../ui/game-nav/game-nav.component';
 import {
@@ -34,6 +35,7 @@ import {
 })
 export class PlayersViewComponent {
   gameStateService = inject(GameStateService);
+  grimoireService = inject(GrimoireService);
   private dialog = inject(Dialog);
 
   grimoireElement = viewChild.required<GrimoireComponent, ElementRef>(
@@ -45,6 +47,10 @@ export class PlayersViewComponent {
 
   constructor() {
     afterNextRender(() => {
+      this.grimoireService.setGrimoireElement(
+        this.grimoireElement().nativeElement
+      );
+
       if (this.gameStateService.info().states.playersPositionsWereCalculated) {
         return;
       }
