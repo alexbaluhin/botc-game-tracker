@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { Player } from 'src/app/typings';
 import { calculatePlayerTokenSize } from '../../layout/players-circle';
+import { GrimoireStarCenterComponent } from '../grimoire-star-center/grimoire-star-center.component';
 import { PlayerTokenComponent } from '../player-token/player-token.component';
 
 @Component({
@@ -18,7 +19,12 @@ import { PlayerTokenComponent } from '../player-token/player-token.component';
   templateUrl: './grimoire.component.html',
   styleUrl: './grimoire.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PlayerTokenComponent, NgOptimizedImage, CdkDrag],
+  imports: [
+    PlayerTokenComponent,
+    NgOptimizedImage,
+    CdkDrag,
+    GrimoireStarCenterComponent,
+  ],
 })
 export class GrimoireComponent {
   setupMode = input.required<boolean>();
@@ -31,6 +37,8 @@ export class GrimoireComponent {
   tokenSize = computed(() => calculatePlayerTokenSize(this.players().length));
 
   isDragging: boolean = false;
+
+  xmasSpecialGrimoire: boolean = true;
 
   playerTokenClicked(index: number) {
     if (!this.isDragging) {

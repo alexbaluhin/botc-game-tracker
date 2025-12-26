@@ -1,10 +1,15 @@
-<img
-  class="red-circle"
-  [class.setup-mode]="setupMode()"
-  [ngSrc]="'./assets/common/grimoire-red-circle.png'"
-  width="276"
-  height="276"
-  alt="The red ominous circle" />
+@if (xmasSpecialGrimoire) {
+  <app-grimoire-star-center class="xmas-star-center"></app-grimoire-star-center>
+} @else {
+  <img
+    class="red-circle"
+    [class.setup-mode]="setupMode()"
+    [ngSrc]="'./assets/common/grimoire-red-circle.png'"
+    width="276"
+    height="276"
+    alt="The red ominous circle" />
+}
+
 <div class="grimoire-center">
   <ng-content select="[in-grimoire-center]"></ng-content>
 </div>
