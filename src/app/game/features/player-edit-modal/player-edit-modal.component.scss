@@ -30,3 +30,13 @@
     outline: none;
   }
 }
+
+.button-content {
+  & > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  img {
+    margin-right: 4px;
+  }
+}

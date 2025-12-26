@@ -35,6 +35,18 @@
   }
 }
 
-.name {
-  font-size: 14px;
+.player-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  img {
+    margin-right: 2px;
+  }
+  .name {
+    font-size: 14px;
+  }
 }

@@ -83,14 +83,6 @@ export class PlayersViewComponent {
     );
   }
 
-  togglePlayerShroud(index: number) {
-    const player = this.gameStateService.getPlayerByIndex(index);
-    this.gameStateService.updatePlayerByIndex(index, {
-      ...player,
-      isDead: !player.isDead,
-    });
-  }
-
   updatePlayerTokenPosition(event: { index: number; position: Point }) {
     this.gameStateService.updatePlayerByIndex(event.index, {
       ...this.gameStateService.getPlayerByIndex(event.index),

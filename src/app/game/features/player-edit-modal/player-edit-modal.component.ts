@@ -1,7 +1,9 @@
 import { Dialog, DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   model,
   OnDestroy,
@@ -21,7 +23,12 @@ export type PlayerEditModalData = {
 
 @Component({
   selector: 'app-player-edit-modal',
-  imports: [FormsModule, GameModalComponent, FlatButtonComponent],
+  imports: [
+    FormsModule,
+    GameModalComponent,
+    FlatButtonComponent,
+    NgOptimizedImage,
+  ],
   templateUrl: './player-edit-modal.component.html',
   styleUrl: './player-edit-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,10 +39,13 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
     inject<DialogRef<never, PlayerEditModalComponent>>(DialogRef);
   private dialogData: PlayerEditModalData = inject(DIALOG_DATA);
   gameStateService = inject(GameStateService);
-  private player = this.gameStateService.getPlayerByIndex(
-    this.dialogData.playerPositionInCircle
+
+  player = computed(() =>
+    this.gameStateService.getPlayerByIndex(
+      this.dialogData.playerPositionInCircle
+    )
   );
-  playerName = model<string>(this.player.name ?? '');
+  playerName = model<string>(this.player().name ?? '');
   playerNameUpdates = toObservable(this.playerName).pipe(debounceTime(300));
 
   private readonly unsubscribe = new Subject<void>();
@@ -45,7 +55,7 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
       this.gameStateService.updatePlayerByIndex(
         this.dialogData.playerPositionInCircle,
         {
-          ...this.player,
+          ...this.player(),
           name,
         }
       );
@@ -69,5 +79,15 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
         }
       )
       .closed.subscribe(() => this.dialogRef.close());
+  }
+
+  togglePlayerShroud() {
+    this.gameStateService.updatePlayerByIndex(
+      this.dialogData.playerPositionInCircle,
+      {
+        ...this.player(),
+        isDead: !this.player().isDead,
+      }
+    );
   }
 }

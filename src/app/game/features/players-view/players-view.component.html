@@ -4,7 +4,6 @@
     [setupMode]="false"
     [players]="gameStateService.info().players"
     (playerClicked)="editPlayer($event)"
-    (playerLongPressed)="togglePlayerShroud($event)"
     (playerTokenMoved)="updatePlayerTokenPosition($event)"></app-grimoire>
 </main>
 <app-action-bar>
