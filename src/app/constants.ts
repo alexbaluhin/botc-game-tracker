@@ -4,6 +4,7 @@ export enum CharacterEdition {
   BAD_MOON_RISING = 'BAD_MOON_RISING',
   TRAVELLERS = 'TRAVELLERS',
   FABLED = 'FABLED',
+  LORIC = 'LORIC',
   EXPERIMENTAL = 'EXPERIMENTAL',
 }
 
@@ -14,6 +15,7 @@ export enum CharacterType {
   DEMON = 'DEMON',
   TRAVELLER = 'TRAVELLER',
   FABLED = 'FABLED',
+  LORIC = 'LORIC',
 }
 
 export const characterTypeName = {
@@ -23,6 +25,7 @@ export const characterTypeName = {
   [CharacterType.DEMON]: 'Demons',
   [CharacterType.TRAVELLER]: 'Travellers',
   [CharacterType.FABLED]: 'Fabled',
+  [CharacterType.LORIC]: 'Loric',
 };
 
 export enum Script {
@@ -40,7 +43,7 @@ export const scriptName = {
 
 export const charactersCountBasedOnPlayersCount: {
   [count in number]: {
-    [type in Exclude<CharacterType, 'FABLED' | 'TRAVELLER'>]: number;
+    [type in Exclude<CharacterType, 'FABLED' | 'TRAVELLER' | 'LORIC'>]: number;
   };
 } = {
   5: {
