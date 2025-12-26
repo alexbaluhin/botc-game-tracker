@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
              * because we need for PlayersViewComponent to be reinitiated, "reset -> navigate / -> set -> navigate /game" is used
              * TODO: move code from PlayersViewComponent to router provider later
              */
+            this.dialog.closeAll();
             this.gameStateService.resetGameState();
             this.router
               .navigateByUrl('/', { skipLocationChange: true })

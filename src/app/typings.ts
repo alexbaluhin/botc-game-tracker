@@ -6,12 +6,18 @@ export interface GameInformation {
   script?: Script;
   characters: Character[];
   players: Player[];
-  gossip?: string;
+  gossips: Gossip[];
   version: number;
   states: {
     playersPositionsWereCalculated: boolean;
   };
 }
+
+export type Gossip = {
+  day: number;
+  playerName: string;
+  gossip: string;
+};
 
 export type Player = {
   name?: string;

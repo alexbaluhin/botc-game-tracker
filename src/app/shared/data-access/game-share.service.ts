@@ -58,6 +58,7 @@ export class GameShareService {
       script: script as Script,
       players,
       characters,
+      gossips: [],
       version: this.gameStateService.version,
       states: {
         playersPositionsWereCalculated: false,
