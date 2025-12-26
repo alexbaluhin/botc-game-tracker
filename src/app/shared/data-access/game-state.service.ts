@@ -11,7 +11,7 @@ import { Character, GameInformation, Gossip, Player } from '../../typings';
 })
 export class GameStateService {
   /* Increase the version number if old game state is incompatible with the new one */
-  version = 2.1;
+  version = 1;
 
   public info = signal<GameInformation>(this.loadFromLocalStorage());
 
