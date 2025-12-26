@@ -10,7 +10,6 @@ import {
   output,
 } from '@angular/core';
 import { Player } from 'src/app/typings';
-import { LongPressDirective } from '../../directives/long-press.directive';
 import { calculatePlayerTokenSize } from '../../layout/players-circle';
 import { PlayerTokenComponent } from '../player-token/player-token.component';
 
@@ -19,18 +18,12 @@ import { PlayerTokenComponent } from '../player-token/player-token.component';
   templateUrl: './grimoire.component.html',
   styleUrl: './grimoire.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    PlayerTokenComponent,
-    NgOptimizedImage,
-    LongPressDirective,
-    CdkDrag,
-  ],
+  imports: [PlayerTokenComponent, NgOptimizedImage, CdkDrag],
 })
 export class GrimoireComponent {
   setupMode = input.required<boolean>();
   players = input.required<Player[]>();
   playerClicked = output<number>();
-  playerLongPressed = output<number>();
   playerTokenMoved = output<{ index: number; position: Point }>();
 
   grimoireElement = inject<ElementRef<HTMLElement>>(ElementRef);

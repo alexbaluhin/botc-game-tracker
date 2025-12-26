@@ -9,9 +9,22 @@
     <app-flat-button class="button" (buttonClicked)="editCharacter()"
       >Character</app-flat-button
     >
-    <app-flat-button class="button" [disabled]="true"
-      >Add reminder</app-flat-button
-    >
-    <app-flat-button class="button">Died</app-flat-button>
+    <!--    <app-flat-button class="button" [disabled]="true"-->
+    <!--      >Add reminder</app-flat-button-->
+    <!--    >-->
+    <app-flat-button class="button" (buttonClicked)="togglePlayerShroud()">
+      <div class="button-content">
+        @if (player().isDead) {
+          <span>Alive</span>
+        } @else {
+          <img
+            [ngSrc]="'./assets/common/skull.svg'"
+            width="24"
+            height="24"
+            alt="Skull icon" />
+          <span>Died</span>
+        }
+      </div>
+    </app-flat-button>
   </main>
 </app-game-modal>

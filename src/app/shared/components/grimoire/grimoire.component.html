@@ -14,9 +14,6 @@
     [player]="player"
     [size]="tokenSize()"
     (click)="playerTokenClicked(i)"
-    appLongPress
-    (longPress)="playerLongPressed.emit(i)"
-    [disableLongPress]="true"
     cdkDrag
     [cdkDragBoundary]="grimoireElement"
     [cdkDragFreeDragPosition]="player.positionInGrimoire"
