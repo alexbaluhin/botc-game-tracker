@@ -9,6 +9,7 @@
 } @else if (player().characters.length) {
   <app-character-token
     class="seat"
+    [size]="size()"
     [characters]="player().characters"
     [withShroud]="player().isDead!"></app-character-token>
 } @else {
