@@ -9,7 +9,10 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogData,
 } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { GameShareService } from '../../../shared/data-access/game-share.service';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { positionPlayersInCircle } from '../../../shared/layout/players-circle';
+import { GrimoireService } from '../../data-access/grimoire.service';
 
 @Component({
   selector: 'app-game-header',
@@ -26,6 +29,8 @@ import { GameStateService } from '../../../shared/data-access/game-state.service
 })
 export class GameHeaderComponent {
   gameStateService = inject(GameStateService);
+  gameShareService = inject(GameShareService);
+  grimoireService = inject(GrimoireService);
   private dialog = inject(Dialog);
   private router = inject(Router);
   private clipboard = inject(Clipboard);
@@ -52,11 +57,26 @@ export class GameHeaderComponent {
   }
 
   share() {
-    const shareLink = this.gameStateService.createShareLink();
+    const shareLink = this.gameShareService.createShareLink();
     if (this.canUseMobileShare) {
       window.navigator.share({ url: shareLink });
     } else {
       this.clipboard.copy(shareLink);
     }
+  }
+
+  tidyUp() {
+    const grimoireElement = this.grimoireService.getGrimoireElement();
+    if (!grimoireElement) {
+      return;
+    }
+
+    this.gameStateService.info.update(info => ({
+      ...info,
+      players: positionPlayersInCircle(
+        info.players,
+        grimoireElement.getBoundingClientRect()
+      ),
+    }));
   }
 }

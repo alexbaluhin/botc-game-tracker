@@ -1,10 +1,24 @@
-import { CharacterType, CharacterEdition } from './constants';
+import { Point } from '@angular/cdk/drag-drop';
+import { CharacterType, CharacterEdition, Script } from './constants';
+
+export interface GameInformation {
+  name?: string;
+  script?: Script;
+  characters: Character[];
+  players: Player[];
+  gossip?: string;
+  version: number;
+  states: {
+    playersPositionsWereCalculated: boolean;
+  };
+}
 
 export type Player = {
   name?: string;
   characters: Character[];
   isCurrentViewer?: boolean;
   isDead?: boolean;
+  positionInGrimoire: Point;
 };
 
 export interface CharacterJinx {

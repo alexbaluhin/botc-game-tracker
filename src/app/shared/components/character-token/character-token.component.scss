@@ -3,7 +3,6 @@
 
 $shadow-size: 8px;
 $border-size: 1px;
-$token-shadow-size: calc(var.$token-size + ($shadow-size * 2) + ($border-size * 2));
 $token-shadow-offset: calc(-1 * ($shadow-size + 1px));
 
 :host {
@@ -12,7 +11,6 @@ $token-shadow-offset: calc(-1 * ($shadow-size + 1px));
 
   --border: 2px;
   --offset: 30deg;
-  --size: 62px; // used var.$token-size;
 }
 
 .token {
@@ -22,8 +20,8 @@ $token-shadow-offset: calc(-1 * ($shadow-size + 1px));
   position: relative;
   display: block;
   font-family: Dumbledor, 'sans-serif';
-  width: var.$token-size;
-  height: var.$token-size;
+  width: var(--token-size);
+  height: var(--token-size);
   border-radius: 50%;
   background: color.$token-border-color;
   padding: var(--border);
@@ -71,7 +69,7 @@ $token-shadow-offset: calc(-1 * ($shadow-size + 1px));
 
       --rotation: calc(var(--offset) + (var(--i) * var(--angle)));
       --img-additional-rotation: calc(var(--rotation) + (var(--angle) / 4));
-      --img-offset-from-center: calc((var(--size) - 2 * var(--border)) * 0.27);
+      --img-offset-from-center: calc((var(--token-size) - 2 * var(--border)) * 0.27);
 
       transform:
         translate(-50%, -50%)
@@ -116,8 +114,8 @@ $token-shadow-offset: calc(-1 * ($shadow-size + 1px));
   position: absolute;
   top: $token-shadow-offset;
   left: $token-shadow-offset;
-  width: $token-shadow-size;
-  height: $token-shadow-size;
+  width: calc(var(--token-size) + ($shadow-size * 2) + ($border-size * 2));;
+  height: calc(var(--token-size) + ($shadow-size * 2) + ($border-size * 2));;
   border-radius: 50%;
   background: transparent;
   border: 1px solid color.$secondary;
