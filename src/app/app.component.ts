@@ -13,6 +13,7 @@ import {
   ConfirmationDialogComponent,
   ConfirmationDialogData,
 } from './shared/components/confirmation-dialog/confirmation-dialog.component';
+import { GameShareService } from './shared/data-access/game-share.service';
 import { GameStateService } from './shared/data-access/game-state.service';
 
 @Component({
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
   router = inject(Router);
   dialog = inject(Dialog);
   gameStateService = inject(GameStateService);
+  gameShareService = inject(GameShareService);
 
   constructor() {
     effect(() => {
@@ -41,7 +43,7 @@ export class AppComponent implements OnInit {
       }
 
       const gameStateFromLink =
-        this.gameStateService.getGameStateFromShareLink(shareLink);
+        this.gameShareService.getGameStateFromShareLink(shareLink);
       this.dialog
         .open<ConfirmationDialogComponent, ConfirmationDialogData>(
           ConfirmationDialogComponent,
@@ -53,13 +55,22 @@ export class AppComponent implements OnInit {
         )
         .closed.subscribe(result => {
           if (result) {
-            this.gameStateService.info.set(gameStateFromLink);
-            this.router.navigate(['/game'], {
-              queryParams: {
-                share: null,
-              },
-              queryParamsHandling: 'merge',
-            });
+            /**
+             * because we need for PlayersViewComponent to be reinitiated, "reset -> navigate / -> set -> navigate /game" is used
+             * TODO: move code from PlayersViewComponent to router provider later
+             */
+            this.gameStateService.resetGameState();
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.gameStateService.info.set(gameStateFromLink);
+                this.router.navigate(['/game'], {
+                  queryParams: {
+                    share: null,
+                  },
+                  queryParamsHandling: 'merge',
+                });
+              });
           }
         });
     });

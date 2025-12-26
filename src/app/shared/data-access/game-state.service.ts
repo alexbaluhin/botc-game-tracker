@@ -1,23 +1,10 @@
 import { effect, Injectable, signal } from '@angular/core';
 import {
   enrichCharacterInfo,
-  getCharacterById,
   getCharactersFromBaseScript,
 } from '../../characters/utils/characters';
 import { Script, scriptName } from '../../constants';
-import { Character, Player } from '../../typings';
-
-interface GameInformation {
-  name?: string;
-  script?: Script;
-  characters: Character[];
-  players: Player[];
-  gossip?: string;
-  version: number;
-  states: {
-    playersPositionsWereCalculated: boolean;
-  };
-}
+import { Character, GameInformation, Player } from '../../typings';
 
 @Injectable({
   providedIn: 'root',
@@ -110,60 +97,10 @@ export class GameStateService {
     this.info.set(this.loadFromLocalStorage());
   }
 
-  createShareLink() {
-    return `${window.location.origin}?share=${btoa(this.mapGameStateToShareString())}`;
-  }
-
-  getGameStateFromShareLink(linkInBase64: string) {
-    return this.mapShareStringToGameState(atob(linkInBase64));
-  }
-
   makePlayer(): Player {
     return {
       characters: [],
       positionInGrimoire: { x: 0, y: 0 },
-    };
-  }
-
-  private mapGameStateToShareString() {
-    const players = this.info()
-      .players.map(({ name, characters }) => {
-        const nameString = name ? name : '';
-        const charactersString = characters.length
-          ? characters.map(id => id).join(':')
-          : '';
-        return `${nameString}:${charactersString}`;
-      })
-      .join(',');
-    const characters = this.info()
-      .characters.map(({ id }) => id)
-      .join(',');
-    return `${this.info().script};${this.info().name};${characters};${players}`;
-  }
-
-  private mapShareStringToGameState(shareString: string): GameInformation {
-    const [script, name, charactersString, playersString] =
-      shareString.split(';');
-    const characters = enrichCharacterInfo(
-      charactersString.split(',').map(character => ({ id: character }))
-    );
-    const players = playersString.split(',').map(player => {
-      const [name, ...charactersIds] = player.split(':');
-      const characters = charactersIds
-        .map(id => getCharacterById(id))
-        .filter(id => id !== undefined);
-      return { name, characters, positionInGrimoire: { x: 0, y: 0 } } as Player;
-    });
-
-    return {
-      name,
-      script: script as Script,
-      players,
-      characters,
-      version: this.version,
-      states: {
-        playersPositionsWereCalculated: false,
-      },
     };
   }
 
