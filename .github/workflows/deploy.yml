@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies & build
         run: |
-          npm ci
+          npm ci --force
           npm run build
 
       - name: Add SSH key
