@@ -116,7 +116,4 @@ export const maxNumberOfPlayersInBaseSetup = +Object.keys(
 ).at(-1)!;
 export const maxNumberOfTravellers = 5;
 
-export const tokenSizeRatio = 0.13;
-export const tokenSize = window.innerHeight * tokenSizeRatio;
-
 export const smallestTokenSize = 62;

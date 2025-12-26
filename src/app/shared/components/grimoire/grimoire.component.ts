@@ -3,6 +3,7 @@ import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   inject,
   input,
@@ -10,14 +11,20 @@ import {
 } from '@angular/core';
 import { Player } from 'src/app/typings';
 import { LongPressDirective } from '../../directives/long-press.directive';
-import { PlayerComponent } from '../player/player.component';
+import { calculatePlayerTokenSize } from '../../layout/players-circle';
+import { PlayerTokenComponent } from '../player-token/player-token.component';
 
 @Component({
   selector: 'app-grimoire',
   templateUrl: './grimoire.component.html',
   styleUrl: './grimoire.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PlayerComponent, NgOptimizedImage, LongPressDirective, CdkDrag],
+  imports: [
+    PlayerTokenComponent,
+    NgOptimizedImage,
+    LongPressDirective,
+    CdkDrag,
+  ],
 })
 export class GrimoireComponent {
   setupMode = input.required<boolean>();
@@ -27,6 +34,8 @@ export class GrimoireComponent {
   playerTokenMoved = output<{ index: number; position: Point }>();
 
   grimoireElement = inject<ElementRef<HTMLElement>>(ElementRef);
+
+  tokenSize = computed(() => calculatePlayerTokenSize(this.players().length));
 
   isDragging: boolean = false;
 

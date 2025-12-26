@@ -8,7 +8,6 @@ import {
   viewChild,
   afterNextRender,
 } from '@angular/core';
-import { tokenSize } from '../../../constants';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
@@ -60,7 +59,6 @@ export class PlayersViewComponent {
           ...info,
           players: positionPlayersInCircle(
             info.players,
-            tokenSize,
             this.grimoireElement().nativeElement.getBoundingClientRect()
           ),
           states: {

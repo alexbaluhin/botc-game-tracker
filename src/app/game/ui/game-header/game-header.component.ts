@@ -4,7 +4,6 @@ import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { tokenSize } from '../../../constants';
 import { CharactersCountPerTypeHintComponent } from '../../../shared/components/characters-count-per-type-hint/characters-count-per-type-hint.component';
 import {
   ConfirmationDialogComponent,
@@ -74,7 +73,6 @@ export class GameHeaderComponent {
       ...info,
       players: positionPlayersInCircle(
         info.players,
-        tokenSize,
         grimoireElement.getBoundingClientRect()
       ),
     }));

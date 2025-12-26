@@ -9,9 +9,10 @@
   <ng-content select="[in-grimoire-center]"></ng-content>
 </div>
 @for (player of players(); track player; let i = $index) {
-  <app-player
+  <app-player-token
     class="player"
     [player]="player"
+    [size]="tokenSize()"
     (click)="playerTokenClicked(i)"
     appLongPress
     (longPress)="playerLongPressed.emit(i)"
@@ -21,5 +22,5 @@
     [cdkDragFreeDragPosition]="player.positionInGrimoire"
     [cdkDragDisabled]="setupMode()"
     (cdkDragStarted)="isDragging = true"
-    (cdkDragEnded)="draggingEnd($event, i, player)"></app-player>
+    (cdkDragEnded)="draggingEnd($event, i, player)"></app-player-token>
 }

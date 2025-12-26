@@ -13,7 +13,6 @@ import {
   charactersCountBasedOnPlayersCount,
   maxNumberOfPlayersInBaseSetup,
   maxNumberOfTravellers,
-  tokenSize,
 } from '../../../constants';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
@@ -86,7 +85,6 @@ export class PlayersCountSelectionComponent {
   private distributeTokensInCircle(players: Player[]) {
     return positionPlayersInCircle(
       players,
-      tokenSize,
       this.grimoireElement().nativeElement.getBoundingClientRect()
     );
   }
