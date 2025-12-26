@@ -4,14 +4,14 @@ import {
   getCharactersFromBaseScript,
 } from '../../characters/utils/characters';
 import { Script, scriptName } from '../../constants';
-import { Character, GameInformation, Player } from '../../typings';
+import { Character, GameInformation, Gossip, Player } from '../../typings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameStateService {
   /* Increase the version number if old game state is incompatible with the new one */
-  version = 2;
+  version = 2.1;
 
   public info = signal<GameInformation>(this.loadFromLocalStorage());
 
@@ -92,6 +92,27 @@ export class GameStateService {
     }));
   }
 
+  updateGossip(gossipToSave: Gossip) {
+    const savedGossipIndex = this.info().gossips.findIndex(
+      savedGossip =>
+        savedGossip.day === gossipToSave.day &&
+        savedGossip.playerName === gossipToSave.playerName
+    );
+    if (savedGossipIndex === -1) {
+      this.info.update(info => ({
+        ...info,
+        gossips: [...info.gossips, gossipToSave],
+      }));
+    } else {
+      this.info.update(info => ({
+        ...info,
+        gossips: info.gossips.map((savedGossip, index) =>
+          index === savedGossipIndex ? gossipToSave : savedGossip
+        ),
+      }));
+    }
+  }
+
   resetGameState() {
     this.clearLocalStorage();
     this.info.set(this.loadFromLocalStorage());
@@ -128,6 +149,7 @@ export class GameStateService {
     return {
       players: [],
       characters: [],
+      gossips: [],
       version: this.version,
       states: {
         playersPositionsWereCalculated: false,

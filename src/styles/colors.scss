@@ -1,6 +1,3 @@
-$text-color: rgba(195, 172, 135, 0.95);
-$text-color-bright: rgba(254, 211, 160, 1);
-
 $primary: rgba(33, 8, 71, 1);
 $primary-1: rgba(57, 23, 109, 1);
 $primary-2: rgba(89, 49, 149, 1);
@@ -8,6 +5,11 @@ $primary-2: rgba(89, 49, 149, 1);
 $secondary: rgba(187, 164, 133, 1);
 
 $medium-light: rgba(255, 255, 255, 0.75);
+$high-light: rgba(255, 255, 255, 0.95);
+$low-light: rgba(255, 255, 255, 0.55);
+
+$text-color: rgba(195, 172, 135, 0.95);
+$text-color-bright: rgba(254, 211, 160, 1);
 
 $seat-color-in-grimoire: rgba(187, 164, 133, 1);
 $seat-color-in-player-edit-mode: rgba(38, 9, 91, 1);
@@ -15,3 +17,5 @@ $seat-color-in-player-edit-mode: rgba(38, 9, 91, 1);
 $token-color: rgba(233, 222, 218, 1);
 $token-selected-color: rgba(255, 244, 240, 1);
 $token-border-color: rgba(195, 172, 135, 0.95);
+
+$chip-active-color: rgba(101, 41, 174, 1);

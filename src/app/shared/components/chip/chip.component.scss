@@ -1,0 +1,16 @@
+@use "colors" as color;
+
+:host {
+  display: inline-block;
+  border-radius: 24px;
+  padding: 7px 8px;
+  background: color.$primary-2;
+  color: color.$high-light;
+  cursor: pointer;
+  &.active {
+    outline: 1px solid color.$secondary;
+    outline-offset: 0;
+    color: color.$text-color-bright;
+    background: color.$chip-active-color;
+  }
+}

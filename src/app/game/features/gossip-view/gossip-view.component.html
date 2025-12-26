@@ -1,6 +1,59 @@
 <main>
-  <textarea class="gossip-input" [(ngModel)]="gossip"></textarea>
+  <section class="days">
+    @for (day of days; track day.value) {
+      <app-chip
+        [active]="selectedDay() === day.value"
+        (click)="selectDay(day.value)"
+        >{{ day.label }}</app-chip
+      >
+    }
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="players">
+    @for (player of playersWithNames(); track player.name) {
+      <app-chip
+        [active]="selectedPlayer() === player.name"
+        (click)="selectPlayer(player.name!)">
+        {{ player.name }}
+      </app-chip>
+    }
+  </section>
+
+  <textarea
+    class="gossip-input"
+    [(ngModel)]="gossip"
+    placeholder="Gossip here"></textarea>
+
+  <app-button
+    [disabled]="!gossip() || !selectedDay() || !selectedPlayer()"
+    (buttonClicked)="saveGossip()"
+    >Save gossip</app-button
+  >
+
+  <div class="saved-gossips">
+    @for (
+      savedGossip of savedGossips();
+      track savedGossip.day + savedGossip.playerName
+    ) {
+      <div
+        tabindex="0"
+        class="saved-gossip"
+        (click)="editGossip(savedGossip)"
+        (keydown)="editGossip(savedGossip)">
+        <app-chip class="saved-gossip-player-name">{{
+          savedGossip.playerName
+        }}</app-chip>
+        <app-chip class="saved-gossip-day">{{
+          savedGossip.day.label
+        }}</app-chip>
+        <div class="gossip caption">{{ savedGossip.gossip }}</div>
+      </div>
+    }
+  </div>
 </main>
+
 <app-action-bar>
   <app-game-nav></app-game-nav>
 </app-action-bar>

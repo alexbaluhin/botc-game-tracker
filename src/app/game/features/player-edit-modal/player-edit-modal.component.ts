@@ -89,5 +89,6 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
         isDead: !this.player().isDead,
       }
     );
+    this.dialogRef.close();
   }
 }
