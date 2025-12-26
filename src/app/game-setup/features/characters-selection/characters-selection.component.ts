@@ -64,7 +64,8 @@ export class CharactersSelectionComponent implements OnInit {
             characters: [character],
             maxCounts:
               characterType === CharacterType.TRAVELLER ||
-              characterType === CharacterType.FABLED
+              characterType === CharacterType.FABLED ||
+              characterType === CharacterType.LORIC
                 ? undefined
                 : ([
                     this.baseMaxCharactersCounts[characterType],

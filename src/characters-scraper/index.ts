@@ -40,6 +40,7 @@ const wikiEditionToEdition: { [key: string]: CharacterEdition } = {
   '': CharacterEdition.EXPERIMENTAL,
   fabled: CharacterEdition.FABLED,
   traveller: CharacterEdition.TRAVELLERS,
+  loric: CharacterEdition.LORIC,
 };
 
 const wikiCharacterTypeToType: { [key: string]: CharacterType } = {
@@ -49,6 +50,7 @@ const wikiCharacterTypeToType: { [key: string]: CharacterType } = {
   demon: CharacterType.DEMON,
   traveller: CharacterType.TRAVELLER,
   fabled: CharacterType.FABLED,
+  loric: CharacterType.LORIC,
 };
 
 const baseUrl = 'https://wiki.bloodontheclocktower.com';
