@@ -25,7 +25,7 @@ export class GameShareService {
     const players = this.gameStateService
       .info()
       .players.map(({ name, characters }) => {
-        const nameString = name ? name : '';
+        const nameString = name ? encodeURI(name) : '';
         const charactersString = characters.length
           ? characters.map(character => character.id).join(':')
           : '';
@@ -50,7 +50,11 @@ export class GameShareService {
       const characters = charactersIds
         .map(id => getCharacterById(id))
         .filter(id => id !== undefined);
-      return { name, characters, positionInGrimoire: { x: 0, y: 0 } } as Player;
+      return {
+        name: decodeURI(name),
+        characters,
+        positionInGrimoire: { x: 0, y: 0 },
+      } as Player;
     });
 
     return {
