@@ -17,7 +17,7 @@ type ButtonType = 'primary' | 'secondary';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  type = input<ButtonType>();
+  type = input<ButtonType>('primary');
   link = input<string>();
   disabled = input<boolean>();
   buttonClicked = output();

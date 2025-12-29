@@ -1,9 +1,16 @@
 @if (link() && !disabled()) {
-  <a [routerLink]="link()">
+  <a
+    [class.title]="!smallText()"
+    [class.subtitle]="smallText()"
+    [routerLink]="link()">
     <ng-container [ngTemplateOutlet]="content" />
   </a>
 } @else {
-  <button [disabled]="disabled()" (click)="buttonClicked.emit()">
+  <button
+    [class.title]="!smallText()"
+    [class.subtitle]="smallText()"
+    [disabled]="disabled()"
+    (click)="buttonClicked.emit()">
     <ng-container [ngTemplateOutlet]="content" />
   </button>
 }

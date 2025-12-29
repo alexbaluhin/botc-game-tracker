@@ -1,18 +1,24 @@
 <app-game-modal>
   <main class="container">
     <input
-      class="player-name-input"
+      class="subtitle player-name-input"
       placeholder="Name"
       [(ngModel)]="playerName"
       (keyup.enter)="input.blur()"
       #input />
-    <app-flat-button class="button" (buttonClicked)="editCharacter()"
-      >Character</app-flat-button
+    <app-button
+      class="button"
+      type="secondary"
+      (buttonClicked)="editCharacter()"
+      >Character</app-button
     >
-    <!--    <app-flat-button class="button" [disabled]="true"-->
-    <!--      >Add reminder</app-flat-button-->
+    <!--    <app-button class="button" type="secondary" [disabled]="true"-->
+    <!--      >Add reminder</app-button-->
     <!--    >-->
-    <app-flat-button class="button" (buttonClicked)="togglePlayerShroud()">
+    <app-button
+      class="button"
+      type="secondary"
+      (buttonClicked)="togglePlayerShroud()">
       <div class="button-content">
         @if (player().isDead) {
           <span>Alive</span>
@@ -25,6 +31,6 @@
           <span>Died</span>
         }
       </div>
-    </app-flat-button>
+    </app-button>
   </main>
 </app-game-modal>
