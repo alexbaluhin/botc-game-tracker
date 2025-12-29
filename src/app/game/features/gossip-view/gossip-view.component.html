@@ -22,7 +22,7 @@
   </section>
 
   <textarea
-    class="gossip-input"
+    class="caption gossip-input"
     [(ngModel)]="gossip"
     placeholder="Gossip here"></textarea>
 
@@ -48,7 +48,7 @@
         <app-chip class="saved-gossip-day">{{
           savedGossip.day.label
         }}</app-chip>
-        <div class="gossip caption">{{ savedGossip.gossip }}</div>
+        <div class="caption gossip">{{ savedGossip.gossip }}</div>
       </div>
     }
   </div>

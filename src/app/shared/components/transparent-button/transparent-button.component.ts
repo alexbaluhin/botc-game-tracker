@@ -17,5 +17,6 @@ import { RouterLink } from '@angular/router';
 export class TransparentButtonComponent {
   link = input<string>();
   disabled = input<boolean>();
+  smallText = input<boolean>(false);
   buttonClicked = output();
 }

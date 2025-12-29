@@ -1,6 +1,6 @@
 <main>
   <div class="scripts-container">
-    <h1>Choose the script</h1>
+    <h1 class="title">Choose the script</h1>
     <nav>
       <app-transparent-button (click)="onScriptChoose(scripts.TROUBLE_BREWING)">
         <img
@@ -24,7 +24,9 @@
           height="100"
           alt="Sects and Violets logo" />
       </app-transparent-button>
-      <app-transparent-button (buttonClicked)="fileInput.click()"
+      <app-transparent-button
+        [smallText]="true"
+        (buttonClicked)="fileInput.click()"
         >Upload json</app-transparent-button
       >
     </nav>

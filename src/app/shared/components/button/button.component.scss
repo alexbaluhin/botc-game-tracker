@@ -10,12 +10,11 @@ button {
   display: block;
   background: linear-gradient(180deg, #501794 0%, #430B85 100%);
   width: 100%;
-  padding: 17.5px;
+  padding: 16.5px;
   border: none;
   border-radius: 8px;
   z-index: 0;
   text-decoration: none;
-  font-weight: 700;
   color: color.$text-color-bright;
   cursor: pointer;
   &:before {
@@ -35,8 +34,9 @@ button {
     z-index: -1;
   }
   &.secondary {
-    background: none;
+    background: transparent;
     padding: 0;
+    color: color.$secondary;
     &:before {
       background: none;
     }

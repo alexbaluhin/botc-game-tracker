@@ -12,7 +12,7 @@ import {
 import { toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { FlatButtonComponent } from '../../../shared/components/flat-button/flat-button.component';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { CharacterEditModalComponent } from '../character-edit-modal/character-edit-modal.component';
@@ -23,12 +23,7 @@ export type PlayerEditModalData = {
 
 @Component({
   selector: 'app-player-edit-modal',
-  imports: [
-    FormsModule,
-    GameModalComponent,
-    FlatButtonComponent,
-    NgOptimizedImage,
-  ],
+  imports: [FormsModule, GameModalComponent, NgOptimizedImage, ButtonComponent],
   templateUrl: './player-edit-modal.component.html',
   styleUrl: './player-edit-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
