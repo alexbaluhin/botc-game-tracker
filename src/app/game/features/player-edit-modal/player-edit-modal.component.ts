@@ -5,6 +5,7 @@ import {
   Component,
   computed,
   inject,
+  Injector,
   model,
   OnDestroy,
   OnInit,
@@ -15,6 +16,7 @@ import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { AddReminderModalComponent } from '../add-reminder-modal/add-reminder-modal.component';
 import { CharacterEditModalComponent } from '../character-edit-modal/character-edit-modal.component';
 
 export type PlayerEditModalData = {
@@ -34,6 +36,7 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
     inject<DialogRef<never, PlayerEditModalComponent>>(DialogRef);
   private dialogData: PlayerEditModalData = inject(DIALOG_DATA);
   gameStateService = inject(GameStateService);
+  private injector = inject(Injector);
 
   player = computed(() =>
     this.gameStateService.getPlayerByIndex(
@@ -73,6 +76,17 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
           autoFocus: false,
         }
       )
+      .closed.subscribe(() => this.dialogRef.close());
+  }
+
+  addReminder() {
+    this.dialog
+      .open<AddReminderModalComponent, never>(AddReminderModalComponent, {
+        width: '74%',
+        maxWidth: '291px',
+        autoFocus: false,
+        injector: this.injector,
+      })
       .closed.subscribe(() => this.dialogRef.close());
   }
 

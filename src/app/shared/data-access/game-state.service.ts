@@ -4,14 +4,20 @@ import {
   getCharactersFromBaseScript,
 } from '../../characters/utils/characters';
 import { Script, scriptName } from '../../constants';
-import { Character, GameInformation, Gossip, Player } from '../../typings';
+import {
+  Character,
+  GameInformation,
+  Gossip,
+  Player,
+  Reminder,
+} from '../../typings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameStateService {
   /* Increase the version number if old game state is incompatible with the new one */
-  version = 1;
+  version = 2;
 
   public info = signal<GameInformation>(this.loadFromLocalStorage());
 
@@ -92,6 +98,40 @@ export class GameStateService {
     }));
   }
 
+  addReminder(reminder: Reminder) {
+    this.info.update(info => ({
+      ...info,
+      reminders: [...info.reminders, reminder],
+    }));
+  }
+
+  getReminderByIndex(index: number) {
+    return this.info().reminders[index];
+  }
+
+  updateReminderByIndex(
+    updatedReminderIndex: number,
+    updatedReminder: Reminder
+  ) {
+    this.info.update(info => ({
+      ...info,
+      reminders: info.reminders.map((reminder, i) =>
+        updatedReminderIndex === i ? updatedReminder : reminder
+      ),
+    }));
+  }
+
+  removeReminder(reminderToRemove: Reminder) {
+    this.info.update(info => ({
+      ...info,
+      reminders: info.reminders.filter(
+        reminder =>
+          `${reminder.relatedCharacter.id}${reminder.text}` !==
+          `${reminderToRemove.relatedCharacter.id}${reminderToRemove.text}`
+      ),
+    }));
+  }
+
   updateGossip(gossipToSave: Gossip) {
     const savedGossipIndex = this.info().gossips.findIndex(
       savedGossip =>
@@ -149,6 +189,7 @@ export class GameStateService {
     return {
       players: [],
       characters: [],
+      reminders: [],
       gossips: [],
       version: this.version,
       states: {

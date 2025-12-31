@@ -9,10 +9,11 @@ import {
   input,
   output,
 } from '@angular/core';
-import { Player } from 'src/app/typings';
+import { Player, Reminder } from 'src/app/typings';
 import { calculatePlayerTokenSize } from '../../layout/players-circle';
 import { GrimoireStarCenterComponent } from '../grimoire-star-center/grimoire-star-center.component';
 import { PlayerTokenComponent } from '../player-token/player-token.component';
+import { ReminderTokenComponent } from '../reminder-token/reminder-token.component';
 
 @Component({
   selector: 'app-grimoire',
@@ -24,17 +25,26 @@ import { PlayerTokenComponent } from '../player-token/player-token.component';
     NgOptimizedImage,
     CdkDrag,
     GrimoireStarCenterComponent,
+    ReminderTokenComponent,
   ],
 })
 export class GrimoireComponent {
   setupMode = input.required<boolean>();
   players = input.required<Player[]>();
+  reminders = input.required<Reminder[]>();
+
   playerClicked = output<number>();
   playerTokenMoved = output<{ index: number; position: Point }>();
 
+  reminderClicked = output<number>();
+  reminderTokenMoved = output<{ index: number; position: Point }>();
+
   grimoireElement = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  tokenSize = computed(() => calculatePlayerTokenSize(this.players().length));
+  playerTokenSize = computed(() =>
+    calculatePlayerTokenSize(this.players().length)
+  );
+  reminderTokenSize = computed(() => 40); // TODO: calculate its
 
   isDragging: boolean = false;
 
@@ -46,7 +56,13 @@ export class GrimoireComponent {
     }
   }
 
-  draggingEnd(event: CdkDragEnd, index: number, player: Player) {
+  reminderTokenClicked(index: number) {
+    if (!this.isDragging) {
+      this.reminderClicked.emit(index);
+    }
+  }
+
+  playerTokenDraggingEnd(event: CdkDragEnd, index: number, player: Player) {
     this.playerTokenMoved.emit({
       index,
       position: {
@@ -54,7 +70,25 @@ export class GrimoireComponent {
         y: player.positionInGrimoire.y + event.distance.y,
       },
     });
+    this.draggingEnd();
+  }
 
+  reminderTokenDraggingEnd(
+    event: CdkDragEnd,
+    index: number,
+    reminder: Reminder
+  ) {
+    this.reminderTokenMoved.emit({
+      index,
+      position: {
+        x: reminder.positionInGrimoire.x + event.distance.x,
+        y: reminder.positionInGrimoire.y + event.distance.y,
+      },
+    });
+    this.draggingEnd();
+  }
+
+  private draggingEnd() {
     setTimeout(() => (this.isDragging = false));
   }
 }
