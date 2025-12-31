@@ -3,8 +3,11 @@
   <app-grimoire
     [setupMode]="false"
     [players]="gameStateService.info().players"
+    [reminders]="gameStateService.info().reminders"
     (playerClicked)="editPlayer($event)"
-    (playerTokenMoved)="updatePlayerTokenPosition($event)"></app-grimoire>
+    (playerTokenMoved)="updatePlayerTokenPosition($event)"
+    (reminderClicked)="removeReminder($event)"
+    (reminderTokenMoved)="updateReminderTokenPosition($event)"></app-grimoire>
 </main>
 <app-action-bar>
   <app-game-nav></app-game-nav>

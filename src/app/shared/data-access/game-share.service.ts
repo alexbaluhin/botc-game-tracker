@@ -62,6 +62,7 @@ export class GameShareService {
       script: script as Script,
       players,
       characters,
+      reminders: [],
       gossips: [],
       version: this.gameStateService.version,
       states: {

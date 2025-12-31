@@ -1,0 +1,16 @@
+<app-game-modal>
+  <main class="container">
+    <div class="subtitle action-title">Choose reminder</div>
+    <section class="reminders">
+      @for (
+        reminder of reminders();
+        track reminder.relatedCharacter.id + reminder.text
+      ) {
+        <app-reminder-token
+          [reminder]="reminder"
+          [size]="48"
+          (click)="selectReminder(reminder)"></app-reminder-token>
+      }
+    </section>
+  </main>
+</app-game-modal>

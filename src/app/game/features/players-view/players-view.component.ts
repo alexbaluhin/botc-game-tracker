@@ -7,6 +7,7 @@ import {
   inject,
   viewChild,
   afterNextRender,
+  Injector,
 } from '@angular/core';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
@@ -19,6 +20,10 @@ import {
   PlayerEditModalComponent,
   PlayerEditModalData,
 } from '../player-edit-modal/player-edit-modal.component';
+import {
+  RemoveReminderDialogData,
+  RemoveReminderModalComponent,
+} from '../remove-reminder-modal/remove-reminder-modal.component';
 
 @Component({
   selector: 'app-players-view',
@@ -36,6 +41,7 @@ export class PlayersViewComponent {
   gameStateService = inject(GameStateService);
   grimoireService = inject(GrimoireService);
   private dialog = inject(Dialog);
+  private injector = inject(Injector);
 
   grimoireElement = viewChild.required<GrimoireComponent, ElementRef>(
     GrimoireComponent,
@@ -79,6 +85,7 @@ export class PlayersViewComponent {
           playerPositionInCircle: index,
         },
         autoFocus: false,
+        injector: this.injector,
       }
     );
   }
@@ -86,6 +93,29 @@ export class PlayersViewComponent {
   updatePlayerTokenPosition(event: { index: number; position: Point }) {
     this.gameStateService.updatePlayerByIndex(event.index, {
       ...this.gameStateService.getPlayerByIndex(event.index),
+      positionInGrimoire: event.position,
+    });
+  }
+
+  removeReminder(index: number) {
+    this.dialog
+      .open<RemoveReminderModalComponent, RemoveReminderDialogData>(
+        RemoveReminderModalComponent,
+        {
+          width: '74%',
+          maxWidth: '291px',
+          data: {
+            reminder: this.gameStateService.getReminderByIndex(index),
+          },
+          autoFocus: false,
+        }
+      )
+      .closed.subscribe(() => this.dialog.closeAll());
+  }
+
+  updateReminderTokenPosition(event: { index: number; position: Point }) {
+    this.gameStateService.updateReminderByIndex(event.index, {
+      ...this.gameStateService.getReminderByIndex(event.index),
       positionInGrimoire: event.position,
     });
   }

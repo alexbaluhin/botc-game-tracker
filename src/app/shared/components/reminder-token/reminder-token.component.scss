@@ -1,0 +1,26 @@
+@use "variables" as var;
+@use "colors" as color;
+
+:host {
+  position: relative;
+  display: inline-block;
+}
+
+.token {
+  position: relative;
+  display: block;
+  font-family: Dumbledor, 'sans-serif';
+  width: var(--token-size);
+  height: var(--token-size);
+  border-radius: 50%;
+  background: color.$token-color;
+  box-sizing: border-box;
+  z-index: 2;
+  cursor: pointer;
+  img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

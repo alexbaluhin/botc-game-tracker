@@ -120,3 +120,4 @@ export const maxNumberOfPlayersInBaseSetup = +Object.keys(
 export const maxNumberOfTravellers = 5;
 
 export const smallestTokenSize = 62;
+export const smallestReminderTokenSize = 40;

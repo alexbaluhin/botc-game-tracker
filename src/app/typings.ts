@@ -6,6 +6,7 @@ export interface GameInformation {
   script?: Script;
   characters: Character[];
   players: Player[];
+  reminders: Reminder[];
   gossips: Gossip[];
   version: number;
   states: {
@@ -24,6 +25,12 @@ export type Player = {
   characters: Character[];
   isCurrentViewer?: boolean;
   isDead?: boolean;
+  positionInGrimoire: Point;
+};
+
+export type Reminder = {
+  relatedCharacter: Character;
+  text: string;
   positionInGrimoire: Point;
 };
 

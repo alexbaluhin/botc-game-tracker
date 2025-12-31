@@ -1,0 +1,28 @@
+@use "colors" as color;
+
+:host {
+  border-radius: 24px;
+}
+
+.container {
+  .reminders {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  & > * {
+    display: block;
+    &:first-child {
+      margin-top: 24px;
+    }
+    margin-bottom: 24px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.action-title {
+  color: color.$medium-light;
+  text-align: center;
+}

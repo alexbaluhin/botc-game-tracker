@@ -15,14 +15,32 @@
 </div>
 @for (player of players(); track player; let i = $index) {
   <app-player-token
-    class="player"
+    class="token"
     [player]="player"
-    [size]="tokenSize()"
+    [size]="playerTokenSize()"
     (click)="playerTokenClicked(i)"
     cdkDrag
     [cdkDragBoundary]="grimoireElement"
     [cdkDragFreeDragPosition]="player.positionInGrimoire"
     [cdkDragDisabled]="setupMode()"
     (cdkDragStarted)="isDragging = true"
-    (cdkDragEnded)="draggingEnd($event, i, player)"></app-player-token>
+    (cdkDragEnded)="
+      playerTokenDraggingEnd($event, i, player)
+    "></app-player-token>
+}
+
+@for (reminder of reminders(); track reminder; let i = $index) {
+  <app-reminder-token
+    class="token"
+    [reminder]="reminder"
+    [size]="reminderTokenSize()"
+    (click)="reminderTokenClicked(i)"
+    cdkDrag
+    [cdkDragBoundary]="grimoireElement"
+    [cdkDragFreeDragPosition]="reminder.positionInGrimoire"
+    [cdkDragDisabled]="setupMode()"
+    (cdkDragStarted)="isDragging = true"
+    (cdkDragEnded)="
+      reminderTokenDraggingEnd($event, i, reminder)
+    "></app-reminder-token>
 }
