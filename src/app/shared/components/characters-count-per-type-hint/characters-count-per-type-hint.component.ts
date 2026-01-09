@@ -22,12 +22,22 @@ import {
 export class CharactersCountPerTypeHintComponent {
   players = input.required<Player[]>();
   charactersCounts = computed(() => {
-    const numberOfPlayers = this.players().length;
-    if (numberOfPlayers > maxNumberOfPlayersInBaseSetup) {
-      return charactersCountBasedOnPlayersCount[maxNumberOfPlayersInBaseSetup];
-    } else {
-      return charactersCountBasedOnPlayersCount[this.players().length];
-    }
+    const travellersCount = this.players().filter(
+      player =>
+        player.characters.length === 1 &&
+        player.characters[0].type === CharacterType.TRAVELLER
+    ).length;
+    const playersCountMinusTravellers = this.players().length - travellersCount;
+    const basePlayersCount = Math.min(
+      playersCountMinusTravellers,
+      maxNumberOfPlayersInBaseSetup
+    );
+    return {
+      ...charactersCountBasedOnPlayersCount[basePlayersCount],
+      [CharacterType.TRAVELLER]:
+        travellersCount +
+        Math.max(0, playersCountMinusTravellers - basePlayersCount),
+    };
   });
   characterTypes = CharacterType;
 }
