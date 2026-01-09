@@ -51,7 +51,6 @@ export interface Character {
   otherNightsOrder: number | null;
   otherNightsAbilityDesc: string | null;
   jinxes: CharacterJinx[];
-  specialSetupChanges: boolean;
 }
 
 export interface CustomScriptJsonMetaItem {
