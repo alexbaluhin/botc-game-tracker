@@ -1,8 +1,162 @@
 <main>
-  @for (character of gameStateService.info().characters; track character.id) {
-    <app-character-card [character]="character"></app-character-card>
-  }
+  <div class="container">
+    <section class="view-selection">
+      <app-chip [active]="view === 'script'" (click)="view = 'script'"
+        >Script</app-chip
+      >
+      <app-chip
+        [active]="view === 'first-night-order'"
+        (click)="view = 'first-night-order'"
+        >1st night order</app-chip
+      >
+      <app-chip
+        [active]="view === 'other-nights-order'"
+        (click)="view = 'other-nights-order'"
+        >Other nights order</app-chip
+      >
+    </section>
+
+    <div class="divider"></div>
+
+    @switch (view) {
+      @case ('script') {
+        <cdk-accordion [multi]="true">
+          @for (
+            characterType of charactersGroupedByType();
+            track characterType.key;
+            let first = $first;
+            let last = $last
+          ) {
+            <cdk-accordion-item
+              #accordionItem="cdkAccordionItem"
+              [expanded]="first">
+              <button
+                class="expand-list-button"
+                (click)="accordionItem.toggle()"
+                tabindex="0"
+                [attr.id]="'accordion-header-' + characterType.key"
+                [attr.aria-expanded]="accordionItem.expanded"
+                [attr.aria-controls]="'accordion-body-' + characterType.key">
+                <span class="subtitle">{{
+                  characterTypeNames[characterType.key]
+                }}</span>
+                <img
+                  [class.expanded]="accordionItem.expanded"
+                  [ngSrc]="'./assets/common/chevron-down.svg'"
+                  width="24"
+                  height="24"
+                  [alt]="
+                    accordionItem.expanded
+                      ? 'Chevron expanded icon'
+                      : 'Chevron icon'
+                  " />
+              </button>
+            </cdk-accordion-item>
+            @if (accordionItem.expanded) {
+              @for (character of characterType.value; track character.id) {
+                <app-character-card
+                  class="character"
+                  [character]="character"></app-character-card>
+              }
+            }
+            @if (!last) {
+              <div class="divider"></div>
+            }
+          }
+        </cdk-accordion>
+      }
+      @case ('first-night-order') {
+        @for (position of firstNightOrder(); track position) {
+          <ng-container
+            *ngTemplateOutlet="
+              position.element;
+              context: { $implicit: position.character, isFirstNight: true }
+            "></ng-container>
+        }
+      }
+      @case ('other-nights-order') {
+        @for (position of otherNightsOrder(); track position) {
+          <ng-container
+            *ngTemplateOutlet="
+              position.element;
+              context: { $implicit: position.character, isFirstNight: false }
+            "></ng-container>
+        }
+      }
+    }
+  </div>
 </main>
 <app-action-bar>
   <app-game-nav></app-game-nav>
 </app-action-bar>
+
+<ng-template
+  let-character
+  let-isFirstNight="isFirstNight"
+  #nightOrderCharacterCard>
+  <app-card
+    class="night-card"
+    [imageSrc]="'./assets/characters-icons/' + character.id + '.png'"
+    [imageAlt]="character.name + ' icon'">
+    <ng-container header>{{ character.name }}</ng-container>
+    <ng-container description>{{
+      isFirstNight
+        ? character.firstNightAbilityDesc
+        : character.otherNightsAbilityDesc
+    }}</ng-container>
+  </app-card>
+</ng-template>
+
+<ng-template #duskCard>
+  <app-card
+    class="night-card"
+    imageSrc="./assets/common/dusk.webp"
+    imageAlt="Dusk icon"
+    [imageSize]="48">
+    <ng-container header>Dusk</ng-container>
+    <ng-container description>Start the Night Phase.</ng-container>
+  </app-card>
+</ng-template>
+
+<ng-template #dawnCard>
+  <app-card
+    class="night-card"
+    imageSrc="./assets/common/dawn.webp"
+    imageAlt="Dawn icon"
+    [imageSize]="48">
+    <ng-container header>Dawn</ng-container>
+    <ng-container description
+      >Wait for a few seconds. End the Night Phase.</ng-container
+    >
+  </app-card>
+</ng-template>
+
+<ng-template #minionInfoCard>
+  <app-card
+    class="night-card"
+    imageSrc="./assets/common/minion-info.webp"
+    imageAlt="Minion info icon"
+    [imageSize]="48">
+    <ng-container header>Minion Info</ng-container>
+    <ng-container description
+      >If there are 7 or more players, wake all Minions: Show the THIS IS THE
+      DEMON token. Point to the Demon. Show the THESE ARE YOUR MINIONS token.
+      Point to the other Minions.</ng-container
+    >
+  </app-card>
+</ng-template>
+
+<ng-template #demonInfoCard>
+  <app-card
+    class="night-card"
+    imageSrc="./assets/common/demon-info.webp"
+    imageAlt="Demon info icon"
+    [imageSize]="48">
+    <ng-container header>Demon Info</ng-container>
+    <ng-container description
+      >If there are 7 or more players, wake the Demon: Show the THESE ARE YOUR
+      MINIONS token. Point to all Minions. Show the THESE CHARACTERS ARE NOT IN
+      PLAY token. Show 3 not-in-play good character tokens.</ng-container
+    >
+  </app-card>
+</ng-template>

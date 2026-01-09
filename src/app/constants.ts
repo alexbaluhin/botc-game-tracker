@@ -28,6 +28,16 @@ export const characterTypeName = {
   [CharacterType.LORIC]: 'Loric',
 };
 
+export const characterTypesInOrganicOrder = [
+  CharacterType.TOWNSFOLK,
+  CharacterType.OUTSIDER,
+  CharacterType.MINION,
+  CharacterType.DEMON,
+  CharacterType.TRAVELLER,
+  CharacterType.FABLED,
+  CharacterType.LORIC,
+];
+
 export enum Script {
   TROUBLE_BREWING = 'TROUBLE_BREWING',
   SECTS_AND_VIOLETS = 'SECTS_AND_VIOLETS',

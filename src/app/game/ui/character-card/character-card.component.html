@@ -1,9 +1,6 @@
-<img
-  [ngSrc]="'./assets/characters-icons/' + character().id + '.png'"
-  width="72"
-  height="72"
-  [alt]="character().name + ' icon'" />
-<div class="info">
-  <span class="body-bold">{{ character().name }}</span>
-  <p class="body description">{{ character().abilityDesc }}</p>
-</div>
+<app-card
+  [imageSrc]="'./assets/characters-icons/' + character().id + '.png'"
+  [imageAlt]="character().name + ' icon'">
+  <ng-container header>{{ character().name }}</ng-container>
+  <ng-container description>{{ character().abilityDesc }}</ng-container>
+</app-card>

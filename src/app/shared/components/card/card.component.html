@@ -1,0 +1,15 @@
+<span class="image">
+  <img
+    [ngSrc]="imageSrc()"
+    [width]="imageSize()"
+    [height]="imageSize()"
+    [alt]="imageAlt()" />
+</span>
+<div class="info">
+  <span class="body-bold">
+    <ng-content select="[header]"></ng-content>
+  </span>
+  <p class="body description">
+    <ng-content select="[description]"></ng-content>
+  </p>
+</div>
