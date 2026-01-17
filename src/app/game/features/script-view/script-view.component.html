@@ -20,50 +20,10 @@
 
     @switch (view) {
       @case ('script') {
-        <cdk-accordion [multi]="true">
-          @for (
-            characterType of charactersGroupedByType();
-            track characterType.key;
-            let first = $first;
-            let last = $last
-          ) {
-            <cdk-accordion-item
-              #accordionItem="cdkAccordionItem"
-              [expanded]="first">
-              <button
-                class="expand-list-button"
-                (click)="accordionItem.toggle()"
-                tabindex="0"
-                [attr.id]="'accordion-header-' + characterType.key"
-                [attr.aria-expanded]="accordionItem.expanded"
-                [attr.aria-controls]="'accordion-body-' + characterType.key">
-                <span class="subtitle">{{
-                  characterTypeNames[characterType.key]
-                }}</span>
-                <img
-                  [class.expanded]="accordionItem.expanded"
-                  [ngSrc]="'./assets/common/chevron-down.svg'"
-                  width="24"
-                  height="24"
-                  [alt]="
-                    accordionItem.expanded
-                      ? 'Chevron expanded icon'
-                      : 'Chevron icon'
-                  " />
-              </button>
-            </cdk-accordion-item>
-            @if (accordionItem.expanded) {
-              @for (character of characterType.value; track character.id) {
-                <app-character-card
-                  class="character"
-                  [character]="character"></app-character-card>
-              }
-            }
-            @if (!last) {
-              <div class="divider"></div>
-            }
-          }
-        </cdk-accordion>
+        <app-characters-expandable-list
+          [characters]="
+            this.gameStateService.info().characters
+          "></app-characters-expandable-list>
       }
       @case ('first-night-order') {
         @for (position of firstNightOrder(); track position) {

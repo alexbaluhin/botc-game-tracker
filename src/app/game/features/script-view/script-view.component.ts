@@ -1,9 +1,4 @@
-import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
-import {
-  KeyValuePipe,
-  NgOptimizedImage,
-  NgTemplateOutlet,
-} from '@angular/common';
+import { KeyValuePipe, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -12,17 +7,12 @@ import {
   TemplateRef,
   viewChild,
 } from '@angular/core';
-import {
-  CharacterType,
-  characterTypeName,
-  characterTypesInOrganicOrder,
-} from '../../../constants';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { CardComponent } from '../../../shared/components/card/card.component';
+import { CharactersExpandableListComponent } from '../../../shared/components/characters-expandable-list/characters-expandable-list.component';
 import { ChipComponent } from '../../../shared/components/chip/chip.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { Character } from '../../../typings';
-import { CharacterCardComponent } from '../../ui/character-card/character-card.component';
 import { GameNavComponent } from '../../ui/game-nav/game-nav.component';
 
 type NightOrderPosition<T> = {
@@ -35,13 +25,10 @@ type NightOrderPosition<T> = {
   imports: [
     ActionBarComponent,
     GameNavComponent,
-    CharacterCardComponent,
-    CdkAccordion,
-    CdkAccordionItem,
-    NgOptimizedImage,
     ChipComponent,
     CardComponent,
     NgTemplateOutlet,
+    CharactersExpandableListComponent,
   ],
   providers: [KeyValuePipe],
   templateUrl: './script-view.component.html',
@@ -49,36 +36,7 @@ type NightOrderPosition<T> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScriptViewComponent {
-  private gameStateService = inject(GameStateService);
-  private keyValuePipe = inject(KeyValuePipe);
-
-  charactersGroupedByType = computed(() => {
-    const characterTypes = this.gameStateService.info().characters.reduce(
-      (acc, character) => {
-        if (!acc[character.type]) {
-          return {
-            ...acc,
-            [character.type]: [character],
-          };
-        }
-        return {
-          ...acc,
-          [character.type]: [...acc[character.type], character],
-        };
-      },
-      {} as { [key in CharacterType]: Character[] }
-    );
-    return this.keyValuePipe.transform<CharacterType, Character[]>(
-      characterTypes,
-      (a, b) =>
-        characterTypesInOrganicOrder.indexOf(a.key) >
-        characterTypesInOrganicOrder.indexOf(b.key)
-          ? 1
-          : -1
-    );
-  });
-
-  characterTypeNames = characterTypeName;
+  gameStateService = inject(GameStateService);
 
   view: 'script' | 'first-night-order' | 'other-nights-order' = 'script';
 

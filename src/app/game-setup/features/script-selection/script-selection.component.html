@@ -1,36 +1,34 @@
 <main>
-  <div class="scripts-container">
-    <h1 class="title">Choose the script</h1>
-    <nav>
-      <app-transparent-button (click)="onScriptChoose(scripts.TROUBLE_BREWING)">
+  <app-game-logo></app-game-logo>
+  <h1 class="subtitle">Choose the script</h1>
+  <nav>
+    <app-transparent-button
+      class="upload-json-button"
+      (buttonClicked)="fileInput.click()">
+      <div class="upload-json-text-container">
         <img
-          [ngSrc]="'./assets/common/trouble-brewing.png'"
-          width="100"
-          height="100"
-          alt="Trouble Brewing logo" />
+          ngSrc="./assets/common/share.svg"
+          alt="Share icon"
+          width="24"
+          height="24" />
+        <span>Upload json</span>
+      </div>
+    </app-transparent-button>
+    @for (script of scripts; track script) {
+      <app-transparent-button (click)="onScriptChoose(script)">
+        @if (script.logo) {
+          <img
+            class="script-logo"
+            [ngSrc]="script.logo"
+            [alt]="script.name + ' logo'"
+            width="58"
+            height="69"
+            appTransparentButtonImg />
+        }
+        {{ script.name }}
       </app-transparent-button>
-      <app-transparent-button (click)="onScriptChoose(scripts.BAD_MOON_RISING)">
-        <img
-          [ngSrc]="'./assets/common/bad-moon-rising.png'"
-          width="100"
-          height="100"
-          alt="Bad Moon Rising logo" />
-      </app-transparent-button>
-      <app-transparent-button
-        (click)="onScriptChoose(scripts.SECTS_AND_VIOLETS)">
-        <img
-          [ngSrc]="'./assets/common/sects-and-violets.png'"
-          width="100"
-          height="100"
-          alt="Sects and Violets logo" />
-      </app-transparent-button>
-      <app-transparent-button
-        [smallText]="true"
-        (buttonClicked)="fileInput.click()"
-        >Upload json</app-transparent-button
-      >
-    </nav>
-  </div>
+    }
+  </nav>
 </main>
 
 <input

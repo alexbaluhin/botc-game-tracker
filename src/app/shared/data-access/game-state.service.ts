@@ -1,10 +1,5 @@
 import { effect, Injectable, signal } from '@angular/core';
 import {
-  enrichCharacterInfo,
-  getCharactersFromBaseScript,
-} from '../../characters/utils/characters';
-import { Script, scriptName } from '../../constants';
-import {
   Character,
   GameInformation,
   Gossip,
@@ -37,31 +32,16 @@ export class GameStateService {
     );
   }
 
-  setScript(
-    script: Script,
-    name?: string,
-    charactersList?: Pick<Character, 'id'>[]
-  ) {
-    if (script === Script.CUSTOM) {
-      if (!charactersList) {
-        console.error('Please provide characters list for custom script');
-        return;
-      }
-
-      this.info.update(info => ({
-        ...info,
-        script,
-        name,
-        characters: enrichCharacterInfo(charactersList),
-      }));
+  setScript(name: string, characters: Character[]) {
+    if (!characters.length) {
+      console.error('Please provide characters list for custom script');
       return;
     }
 
     this.info.update(info => ({
       ...info,
-      script,
-      name: scriptName[script],
-      characters: getCharactersFromBaseScript(script),
+      name,
+      characters,
     }));
   }
 

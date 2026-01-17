@@ -2,8 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import {
   enrichCharacterInfo,
   getCharacterById,
-} from '../../characters/utils/characters';
-import { Script } from '../../constants';
+} from '../../core-data/utils/characters';
 import { GameInformation, Player } from '../../typings';
 import { GameStateService } from './game-state.service';
 
@@ -36,12 +35,11 @@ export class GameShareService {
       .info()
       .characters.map(({ id }) => id)
       .join(',');
-    return `${this.gameStateService.info().script};${this.gameStateService.info().name};${characters};${players}`;
+    return `${this.gameStateService.info().name};${characters};${players}`;
   }
 
   private mapShareStringToGameState(shareString: string): GameInformation {
-    const [script, name, charactersString, playersString] =
-      shareString.split(';');
+    const [name, charactersString, playersString] = shareString.split(';');
     const characters = enrichCharacterInfo(
       charactersString.split(',').map(character => ({ id: character }))
     );
@@ -59,7 +57,6 @@ export class GameShareService {
 
     return {
       name,
-      script: script as Script,
       players,
       characters,
       reminders: [],

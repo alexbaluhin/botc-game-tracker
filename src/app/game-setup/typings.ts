@@ -28,3 +28,9 @@ export type CharactersSetupChanges = {
     dataForSetupChange: DataForSetupChange
   ) => DataForSetupChange;
 };
+
+export type ScriptForSelection = {
+  name: string;
+  logo?: string;
+  characters: Character[];
+};

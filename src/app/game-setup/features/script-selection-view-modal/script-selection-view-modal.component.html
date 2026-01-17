@@ -1,0 +1,38 @@
+<app-action-bar position="top">
+  <a
+    class="go-back-button"
+    tabindex="0"
+    (click)="close(false)"
+    (keydown.space)="close(false)">
+    <img
+      [ngSrc]="'./assets/common/arrow-back.svg'"
+      width="24"
+      height="24"
+      alt="Arrow to go back" />
+  </a>
+
+  <h1 class="subtitle script-name">
+    {{ data.script.name }}
+  </h1>
+</app-action-bar>
+
+<main>
+  @if (data.script.logo) {
+    <div class="image-container">
+      <img
+        class="script-logo"
+        [ngSrc]="data.script.logo"
+        [alt]="data.script.name + ' logo'"
+        width="123"
+        height="148" />
+    </div>
+  }
+
+  <app-characters-expandable-list
+    class="characters-list"
+    [characters]="data.script.characters"></app-characters-expandable-list>
+</main>
+
+<app-action-bar>
+  <app-button (buttonClicked)="close(true)">Confirm</app-button>
+</app-action-bar>

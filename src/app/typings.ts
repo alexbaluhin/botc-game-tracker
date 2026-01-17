@@ -1,9 +1,8 @@
 import { Point } from '@angular/cdk/drag-drop';
-import { CharacterType, CharacterEdition, Script } from './constants';
+import { CharacterType } from './constants';
 
 export interface GameInformation {
   name?: string;
-  script?: Script;
   characters: Character[];
   players: Player[];
   reminders: Reminder[];
@@ -44,7 +43,6 @@ export interface Character {
   name: string;
   type: CharacterType;
   abilityDesc: string;
-  edition: CharacterEdition;
   reminderTokens: string[];
   firstNightOrder: number | null;
   firstNightAbilityDesc: string | null;
@@ -53,17 +51,15 @@ export interface Character {
   jinxes: CharacterJinx[];
 }
 
-export interface CustomScriptJsonMetaItem {
+export interface ScriptMetaInfo {
   id: '_meta';
   author: string;
   name: string;
+  logo: string;
 }
 
-export interface CustomScriptJsonItem {
+export interface ScriptCharacter {
   id: string;
 }
 
-export type CustomScriptJson = (
-  | CustomScriptJsonItem
-  | CustomScriptJsonMetaItem
-)[];
+export type Script = (ScriptCharacter | ScriptMetaInfo)[];
