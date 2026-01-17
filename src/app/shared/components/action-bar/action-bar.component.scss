@@ -8,7 +8,12 @@
   text-align: center;
   background: color.$primary;
   .container {
-    border-top: 1px solid color.$primary-2;
     padding: 8px 0 16px;
+    &.top {
+      border-bottom: 1px solid color.$primary-2;
+    }
+    &.bottom {
+      border-top: 1px solid color.$primary-2;
+    }
   }
 }
