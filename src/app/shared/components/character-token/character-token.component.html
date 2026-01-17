@@ -13,7 +13,7 @@
   ) {
     <div class="character" [style]="'--i: ' + index">
       <img
-        [ngSrc]="'./assets/characters-icons/' + character.id + '.png'"
+        [ngSrc]="'./assets/images/characters/' + character.id + '.png'"
         [width]="count === 1 ? largeImageSize() : smallImageSize()"
         [height]="count === 1 ? largeImageSize() : smallImageSize()"
         [alt]="character.name" />

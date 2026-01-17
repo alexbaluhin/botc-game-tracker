@@ -1,7 +1,7 @@
 @if (player().isCurrentViewer) {
   <div class="seat current-viewer" [class.with-shroud]="player().isDead">
     <img
-      [ngSrc]="'./assets/common/big-chair.svg'"
+      [ngSrc]="'./assets/icons/game/big-chair.svg'"
       width="40"
       height="40"
       alt="Big chair icon" />
@@ -20,7 +20,7 @@
   <div class="player-name">
     @if (player().isDead) {
       <img
-        [ngSrc]="'./assets/common/skull.svg'"
+        [ngSrc]="'./assets/icons/game/skull.svg'"
         width="24"
         height="24"
         alt="Skull icon" />
