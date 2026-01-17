@@ -1,13 +1,3 @@
-export enum CharacterEdition {
-  TROUBLE_BREWING = 'TROUBLE_BREWING',
-  SECTS_AND_VIOLETS = 'SECTS_AND_VIOLETS',
-  BAD_MOON_RISING = 'BAD_MOON_RISING',
-  TRAVELLERS = 'TRAVELLERS',
-  FABLED = 'FABLED',
-  LORIC = 'LORIC',
-  EXPERIMENTAL = 'EXPERIMENTAL',
-}
-
 export enum CharacterType {
   TOWNSFOLK = 'TOWNSFOLK',
   OUTSIDER = 'OUTSIDER',
@@ -37,19 +27,6 @@ export const characterTypesInOrganicOrder = [
   CharacterType.FABLED,
   CharacterType.LORIC,
 ];
-
-export enum Script {
-  TROUBLE_BREWING = 'TROUBLE_BREWING',
-  SECTS_AND_VIOLETS = 'SECTS_AND_VIOLETS',
-  BAD_MOON_RISING = 'BAD_MOON_RISING',
-  CUSTOM = 'CUSTOM',
-}
-
-export const scriptName = {
-  [Script.TROUBLE_BREWING]: 'Trouble Brewing',
-  [Script.SECTS_AND_VIOLETS]: 'Sects and Violets',
-  [Script.BAD_MOON_RISING]: 'Bad Moon Rising',
-};
 
 export const charactersCountBasedOnPlayersCount: {
   [count in number]: {

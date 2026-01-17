@@ -2,10 +2,17 @@ import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  contentChild,
+  Directive,
   input,
   output,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
+@Directive({
+  selector: '[appTransparentButtonImg]',
+})
+export class TransparentButtonImgDirective {}
 
 @Component({
   selector: 'app-transparent-button',
@@ -17,6 +24,6 @@ import { RouterLink } from '@angular/router';
 export class TransparentButtonComponent {
   link = input<string>();
   disabled = input<boolean>();
-  smallText = input<boolean>(false);
+  image = contentChild(TransparentButtonImgDirective);
   buttonClicked = output();
 }

@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { CharactersSelectionComponent } from './features/characters-selection/characters-selection.component';
-import { ModeSelectionComponent } from './features/mode-selection/mode-selection.component';
 import { PlayersCountSelectionComponent } from './features/players-count-selection/players-count-selection.component';
 import { ScriptSelectionComponent } from './features/script-selection/script-selection.component';
 
@@ -10,10 +9,6 @@ export const gameSetupRoutes: Routes = [
     children: [
       {
         path: '',
-        component: ModeSelectionComponent,
-      },
-      {
-        path: 'script-selection',
         component: ScriptSelectionComponent,
       },
       {

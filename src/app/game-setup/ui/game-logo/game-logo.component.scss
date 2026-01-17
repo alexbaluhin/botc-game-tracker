@@ -1,3 +1,54 @@
 :host {
   display: inline-block;
 }
+
+.logo {
+  --tube-dim:  rgba(182, 144, 239, 1);
+  --tube-bright: rgba(213, 186, 255, 1);
+  --glow-dim:  rgba(182, 144, 239, 1);
+  --glow-bright: rgba(213, 186, 255, 1);
+}
+
+.tube {
+  color: var(--tube-dim);
+  opacity: 0.6;
+  animation: tube-breathe 2.8s ease-in-out infinite;
+}
+
+.glow {
+  color: var(--glow-dim);
+  opacity: 0.18;
+  filter: url(#glowOff);
+  animation: glow-breathe 2.8s ease-in-out infinite;
+}
+
+/* Smooth brightness breathing */
+@keyframes tube-breathe {
+  0%, 100% {
+    opacity: 0.55;
+    color: var(--tube-dim);
+  }
+  50% {
+    opacity: 0.98;
+    color: var(--tube-bright);
+  }
+}
+
+/* Glow breathes more dramatically */
+@keyframes glow-breathe {
+  0%, 100% {
+    opacity: 0.16;
+    color: var(--glow-dim);
+    filter: url(#glowOff);
+  }
+  50% {
+    opacity: 0.58;
+    color: var(--glow-bright);
+    filter: url(#glowOn);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tube, .glow { animation: none; }
+}

@@ -1,0 +1,561 @@
+[
+  [
+    {
+      "id": "_meta",
+      "name": "Trouble Brewing",
+      "author": "The Pandemonium Institute",
+      "logo": "./assets/scripts-icons/trouble-brewing.png"
+    },
+    {
+      "id": "washerwoman"
+    },
+    {
+      "id": "librarian"
+    },
+    {
+      "id": "investigator"
+    },
+    {
+      "id": "chef"
+    },
+    {
+      "id": "empath"
+    },
+    {
+      "id": "fortuneteller"
+    },
+    {
+      "id": "undertaker"
+    },
+    {
+      "id": "monk"
+    },
+    {
+      "id": "ravenkeeper"
+    },
+    {
+      "id": "virgin"
+    },
+    {
+      "id": "slayer"
+    },
+    {
+      "id": "soldier"
+    },
+    {
+      "id": "mayor"
+    },
+    {
+      "id": "butler"
+    },
+    {
+      "id": "drunk"
+    },
+    {
+      "id": "recluse"
+    },
+    {
+      "id": "saint"
+    },
+    {
+      "id": "poisoner"
+    },
+    {
+      "id": "spy"
+    },
+    {
+      "id": "scarletwoman"
+    },
+    {
+      "id": "baron"
+    },
+    {
+      "id": "imp"
+    }
+  ],
+  [
+    {
+      "id": "_meta",
+      "name": "Bad Moon Rising",
+      "author": "The Pandemonium Institute",
+      "logo": "./assets/scripts-icons/bad-moon-rising.png"
+    },
+    {
+      "id": "grandmother"
+    },
+    {
+      "id": "sailor"
+    },
+    {
+      "id": "chambermaid"
+    },
+    {
+      "id": "exorcist"
+    },
+    {
+      "id": "innkeeper"
+    },
+    {
+      "id": "gambler"
+    },
+    {
+      "id": "gossip"
+    },
+    {
+      "id": "courtier"
+    },
+    {
+      "id": "professor"
+    },
+    {
+      "id": "minstrel"
+    },
+    {
+      "id": "tealady"
+    },
+    {
+      "id": "pacifist"
+    },
+    {
+      "id": "fool"
+    },
+    {
+      "id": "tinker"
+    },
+    {
+      "id": "moonchild"
+    },
+    {
+      "id": "goon"
+    },
+    {
+      "id": "lunatic"
+    },
+    {
+      "id": "godfather"
+    },
+    {
+      "id": "devilsadvocate"
+    },
+    {
+      "id": "assassin"
+    },
+    {
+      "id": "mastermind"
+    },
+    {
+      "id": "zombuul"
+    },
+    {
+      "id": "pukka"
+    },
+    {
+      "id": "shabaloth"
+    },
+    {
+      "id": "po"
+    }
+  ],
+  [
+    {
+      "id": "_meta",
+      "name": "Sects & Violets",
+      "author": "The Pandemonium Institute",
+      "logo": "./assets/scripts-icons/sects-and-violets.png"
+    },
+    {
+      "id": "clockmaker"
+    },
+    {
+      "id": "dreamer"
+    },
+    {
+      "id": "snakecharmer"
+    },
+    {
+      "id": "mathematician"
+    },
+    {
+      "id": "flowergirl"
+    },
+    {
+      "id": "towncrier"
+    },
+    {
+      "id": "oracle"
+    },
+    {
+      "id": "savant"
+    },
+    {
+      "id": "seamstress"
+    },
+    {
+      "id": "philosopher"
+    },
+    {
+      "id": "artist"
+    },
+    {
+      "id": "juggler"
+    },
+    {
+      "id": "sage"
+    },
+    {
+      "id": "mutant"
+    },
+    {
+      "id": "sweetheart"
+    },
+    {
+      "id": "barber"
+    },
+    {
+      "id": "klutz"
+    },
+    {
+      "id": "eviltwin"
+    },
+    {
+      "id": "witch"
+    },
+    {
+      "id": "cerenovus"
+    },
+    {
+      "id": "pithag"
+    },
+    {
+      "id": "fanggu"
+    },
+    {
+      "id": "vigormortis"
+    },
+    {
+      "id": "nodashii"
+    },
+    {
+      "id": "vortox"
+    }
+  ],
+  [
+    {
+      "id": "_meta",
+      "name": "Revenge of The Martian Vampires",
+      "logo": "./assets/scripts-icons/revenge-of-the-martian-vampires.png"
+    },
+    {
+      "id": "librarian"
+    },
+    {
+      "id": "pixie"
+    },
+    {
+      "id": "empath"
+    },
+    {
+      "id": "general"
+    },
+    {
+      "id": "snakecharmer"
+    },
+    {
+      "id": "balloonist"
+    },
+    {
+      "id": "innkeeper"
+    },
+    {
+      "id": "exorcist"
+    },
+    {
+      "id": "savant"
+    },
+    {
+      "id": "courtier"
+    },
+    {
+      "id": "fisherman"
+    },
+    {
+      "id": "mayor"
+    },
+    {
+      "id": "cannibal"
+    },
+    {
+      "id": "drunk"
+    },
+    {
+      "id": "saint"
+    },
+    {
+      "id": "mutant"
+    },
+    {
+      "id": "heretic"
+    },
+    {
+      "id": "politician"
+    },
+    {
+      "id": "eviltwin"
+    },
+    {
+      "id": "poisoner"
+    },
+    {
+      "id": "mastermind"
+    },
+    {
+      "id": "scarletwoman"
+    },
+    {
+      "id": "imp"
+    },
+    {
+      "id": "pukka"
+    },
+    {
+      "id": "fanggu"
+    }
+  ],
+  [
+    {
+      "id": "_meta",
+      "name": "Anonymous Dishonesty",
+      "author": "Theo, Fran, Emerald, Kohav"
+    },
+    {
+      "id": "investigator"
+    },
+    {
+      "id": "grandmother"
+    },
+    {
+      "id": "shugenja"
+    },
+    {
+      "id": "pixie"
+    },
+    {
+      "id": "highpriestess"
+    },
+    {
+      "id": "general"
+    },
+    {
+      "id": "flowergirl"
+    },
+    {
+      "id": "undertaker"
+    },
+    {
+      "id": "savant"
+    },
+    {
+      "id": "alsaahir"
+    },
+    {
+      "id": "farmer"
+    },
+    {
+      "id": "atheist"
+    },
+    {
+      "id": "banshee"
+    },
+    {
+      "id": "ogre"
+    },
+    {
+      "id": "drunk"
+    },
+    {
+      "id": "sweetheart"
+    },
+    {
+      "id": "hatter"
+    },
+    {
+      "id": "barber"
+    },
+    {
+      "id": "godfather"
+    },
+    {
+      "id": "harpy"
+    },
+    {
+      "id": "cerenovus"
+    },
+    {
+      "id": "scarletwoman"
+    },
+    {
+      "id": "marionette"
+    },
+    {
+      "id": "ojo"
+    }
+  ],
+  [
+    {
+      "id": "_meta",
+      "name": "Harold Holt's Revenge",
+      "author": "Theo"
+    },
+    {
+      "id": "librarian"
+    },
+    {
+      "id": "investigator"
+    },
+    {
+      "id": "shugenja"
+    },
+    {
+      "id": "balloonist"
+    },
+    {
+      "id": "dreamer"
+    },
+    {
+      "id": "snakecharmer"
+    },
+    {
+      "id": "towncrier"
+    },
+    {
+      "id": "slayer"
+    },
+    {
+      "id": "savant"
+    },
+    {
+      "id": "amnesiac"
+    },
+    {
+      "id": "seamstress"
+    },
+    {
+      "id": "courtier"
+    },
+    {
+      "id": "magician"
+    },
+    {
+      "id": "mutant"
+    },
+    {
+      "id": "damsel"
+    },
+    {
+      "id": "lunatic"
+    },
+    {
+      "id": "politician"
+    },
+    {
+      "id": "cerenovus"
+    },
+    {
+      "id": "pithag"
+    },
+    {
+      "id": "baron"
+    },
+    {
+      "id": "goblin"
+    },
+    {
+      "id": "marionette"
+    },
+    {
+      "id": "leviathan"
+    }
+  ],
+  [
+    {
+      "id": "_meta",
+      "name": "Monkey Do Math",
+      "author": "Jams, Josh, Kerry, & Zak"
+    },
+    {
+      "id": "sailor"
+    },
+    {
+      "id": "villageidiot"
+    },
+    {
+      "id": "mathematician"
+    },
+    {
+      "id": "innkeeper"
+    },
+    {
+      "id": "acrobat"
+    },
+    {
+      "id": "lycanthrope"
+    },
+    {
+      "id": "exorcist"
+    },
+    {
+      "id": "gossip"
+    },
+    {
+      "id": "courtier"
+    },
+    {
+      "id": "professor"
+    },
+    {
+      "id": "alchemist"
+    },
+    {
+      "id": "tealady"
+    },
+    {
+      "id": "mayor"
+    },
+    {
+      "id": "goon"
+    },
+    {
+      "id": "tinker"
+    },
+    {
+      "id": "zealot"
+    },
+    {
+      "id": "moonchild"
+    },
+    {
+      "id": "godfather"
+    },
+    {
+      "id": "poisoner"
+    },
+    {
+      "id": "devilsadvocate"
+    },
+    {
+      "id": "assassin"
+    },
+    {
+      "id": "organgrinder"
+    },
+    {
+      "id": "pukka"
+    },
+    {
+      "id": "shabaloth"
+    },
+    {
+      "id": "zombuul"
+    }
+  ]
+]

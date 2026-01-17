@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-action-bar',
@@ -7,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./action-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActionBarComponent {}
+export class ActionBarComponent {
+  position = input<'top' | 'bottom'>('bottom');
+}

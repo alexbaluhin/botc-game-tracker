@@ -26,27 +26,6 @@ main {
   margin: 12px 0;
 }
 
-.character {
-  display: block;
-}
-
-.character,
 .night-card {
   margin-top: 12px;
-}
-
-.expand-list-button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 1px 0;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  color: color.$secondary;
-}
-
-img.expanded {
-  transform: rotate(180deg);
 }
