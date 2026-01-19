@@ -1,10 +1,10 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
+import { GameNavLinkComponent } from '../game-nav-link/game-nav-link.component';
 
 @Component({
   selector: 'app-game-nav',
-  imports: [IconButtonComponent, NgOptimizedImage],
+  imports: [GameNavLinkComponent, NgOptimizedImage],
   templateUrl: './game-nav.component.html',
   styleUrl: './game-nav.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

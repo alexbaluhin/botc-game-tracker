@@ -4,7 +4,7 @@
       "id": "_meta",
       "name": "Trouble Brewing",
       "author": "The Pandemonium Institute",
-      "logo": "./assets/scripts-icons/trouble-brewing.png"
+      "logo": "./assets/images/scripts/trouble-brewing.png"
     },
     {
       "id": "washerwoman"
@@ -78,7 +78,7 @@
       "id": "_meta",
       "name": "Bad Moon Rising",
       "author": "The Pandemonium Institute",
-      "logo": "./assets/scripts-icons/bad-moon-rising.png"
+      "logo": "./assets/images/scripts/bad-moon-rising.png"
     },
     {
       "id": "grandmother"
@@ -161,7 +161,7 @@
       "id": "_meta",
       "name": "Sects & Violets",
       "author": "The Pandemonium Institute",
-      "logo": "./assets/scripts-icons/sects-and-violets.png"
+      "logo": "./assets/images/scripts/sects-and-violets.png"
     },
     {
       "id": "clockmaker"
@@ -243,7 +243,7 @@
     {
       "id": "_meta",
       "name": "Revenge of The Martian Vampires",
-      "logo": "./assets/scripts-icons/revenge-of-the-martian-vampires.png"
+      "logo": "./assets/images/scripts/revenge-of-the-martian-vampires.png"
     },
     {
       "id": "librarian"

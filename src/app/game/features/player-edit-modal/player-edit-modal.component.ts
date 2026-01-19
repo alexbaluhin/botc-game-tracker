@@ -1,5 +1,4 @@
 import { Dialog, DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { NgOptimizedImage } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,8 +12,8 @@ import {
 import { toObservable } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
-import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
+import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { AddReminderModalComponent } from '../add-reminder-modal/add-reminder-modal.component';
 import { CharacterEditModalComponent } from '../character-edit-modal/character-edit-modal.component';
@@ -25,7 +24,7 @@ export type PlayerEditModalData = {
 
 @Component({
   selector: 'app-player-edit-modal',
-  imports: [FormsModule, GameModalComponent, NgOptimizedImage, ButtonComponent],
+  imports: [FormsModule, GameModalComponent, IconButtonComponent],
   templateUrl: './player-edit-modal.component.html',
   styleUrl: './player-edit-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

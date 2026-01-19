@@ -56,7 +56,7 @@
   #nightOrderCharacterCard>
   <app-card
     class="night-card"
-    [imageSrc]="'./assets/characters-icons/' + character.id + '.png'"
+    [imageSrc]="'./assets/images/characters/' + character.id + '.png'"
     [imageAlt]="character.name + ' icon'">
     <ng-container header>{{ character.name }}</ng-container>
     <ng-container description>{{
@@ -70,7 +70,7 @@
 <ng-template #duskCard>
   <app-card
     class="night-card"
-    imageSrc="./assets/common/dusk.webp"
+    imageSrc="./assets/images/night-order/dusk.webp"
     imageAlt="Dusk icon"
     [imageSize]="48">
     <ng-container header>Dusk</ng-container>
@@ -81,7 +81,7 @@
 <ng-template #dawnCard>
   <app-card
     class="night-card"
-    imageSrc="./assets/common/dawn.webp"
+    imageSrc="./assets/images/night-order/dawn.webp"
     imageAlt="Dawn icon"
     [imageSize]="48">
     <ng-container header>Dawn</ng-container>
@@ -94,7 +94,7 @@
 <ng-template #minionInfoCard>
   <app-card
     class="night-card"
-    imageSrc="./assets/common/minion-info.webp"
+    imageSrc="./assets/images/night-order/minion-info.webp"
     imageAlt="Minion info icon"
     [imageSize]="48">
     <ng-container header>Minion Info</ng-container>
@@ -109,7 +109,7 @@
 <ng-template #demonInfoCard>
   <app-card
     class="night-card"
-    imageSrc="./assets/common/demon-info.webp"
+    imageSrc="./assets/images/night-order/demon-info.webp"
     imageAlt="Demon info icon"
     [imageSize]="48">
     <ng-container header>Demon Info</ng-container>

@@ -30,4 +30,11 @@ header {
   &:last-child {
     margin-bottom: 0;
   }
+  & > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  img {
+    margin-right: 4px;
+  }
 }

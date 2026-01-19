@@ -1,0 +1,36 @@
+@use "colors" as color;
+
+:host {
+  display: inline-block;
+}
+
+a,
+button {
+  display: block;
+  background: transparent;
+  padding: 9px 8px;
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  text-decoration: none;
+  &.active {
+    background: color.$primary-1;
+  }
+}
+
+[disabled] {
+  opacity: .4;
+}
+
+.icon,
+.label {
+  display: block;
+}
+
+.icon ::ng-deep img {
+  display: inline-block;
+}
+
+.label {
+  color: rgba(255, 255, 255, 0.95);
+}
