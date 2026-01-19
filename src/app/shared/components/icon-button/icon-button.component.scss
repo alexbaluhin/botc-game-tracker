@@ -6,31 +6,28 @@
 
 a,
 button {
-  display: block;
-  background: transparent;
-  padding: 9px 8px;
+  background: color.$primary-2;
+  padding: 8px 0;
   width: 100%;
   border: none;
-  border-radius: 16px;
+  border-radius: 4px;
   text-decoration: none;
-  &.active {
-    background: color.$primary-1;
-  }
+  text-align: center;
+  color: color.$medium-light;
+  cursor: pointer;
 }
 
 [disabled] {
   opacity: .4;
+  cursor: default;
 }
 
 .icon,
 .label {
-  display: block;
-}
-
-.icon ::ng-deep img {
   display: inline-block;
+  vertical-align: middle;
 }
 
-.label {
-  color: rgba(255, 255, 255, 0.95);
+.icon {
+  margin-right: 4px;
 }

@@ -16,13 +16,28 @@
 <ng-template #contextMenu>
   <div class="context-menu" cdkMenu>
     <button class="context-menu-item" cdkMenuItem (click)="share()">
-      {{ shareText }}
+      <img
+        ngSrc="./assets/icons/utility/share.svg"
+        alt="Share icon"
+        width="24"
+        height="24" />
+      <span>{{ shareText }}</span>
     </button>
     <button class="context-menu-item" cdkMenuItem (click)="tidyUp()">
-      Tidy up
+      <img
+        ngSrc="./assets/icons/utility/tidy-up.svg"
+        alt="Tidy up icon"
+        width="24"
+        height="24" />
+      <span>Tidy up</span>
     </button>
     <button class="context-menu-item" cdkMenuItem (click)="resetGame()">
-      Reset
+      <img
+        ngSrc="./assets/icons/utility/refresh.svg"
+        alt="Reset icon"
+        width="24"
+        height="24" />
+      <span>New set up</span>
     </button>
   </div>
 </ng-template>

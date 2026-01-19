@@ -6,31 +6,30 @@
       [(ngModel)]="playerName"
       (keyup.enter)="input.blur()"
       #input />
-    <app-button
+    <app-icon-button
       class="button"
-      type="secondary"
-      (buttonClicked)="editCharacter()"
-      >Character</app-button
-    >
-    <app-button class="button" type="secondary" (buttonClicked)="addReminder()"
-      >Add reminder</app-button
-    >
-    <app-button
+      iconSrc="./assets/icons/game/bluffs-icon.svg"
+      iconAlt="Character icon"
+      (buttonClicked)="editCharacter()">
+      Character
+    </app-icon-button>
+    <app-icon-button
       class="button"
-      type="secondary"
+      iconSrc="./assets/icons/game/add-reminder.svg"
+      iconAlt="Add reminder icon"
+      (buttonClicked)="addReminder()"
+      >Add reminder</app-icon-button
+    >
+    <app-icon-button
+      class="button"
+      [iconSrc]="
+        player().isDead
+          ? './assets/icons/game/wand.svg'
+          : './assets/icons/game/candle-outline.svg'
+      "
+      [iconAlt]="player().isDead ? 'Wand icon' : 'Candle icon'"
       (buttonClicked)="togglePlayerShroud()">
-      <div class="button-content">
-        @if (player().isDead) {
-          <span>Alive</span>
-        } @else {
-          <img
-            [ngSrc]="'./assets/icons/game/skull.svg'"
-            width="24"
-            height="24"
-            alt="Skull icon" />
-          <span>Died</span>
-        }
-      </div>
-    </app-button>
+      {{ player().isDead ? 'Alive' : 'Died' }}
+    </app-icon-button>
   </main>
 </app-game-modal>

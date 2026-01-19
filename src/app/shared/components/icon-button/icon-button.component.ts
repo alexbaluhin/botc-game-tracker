@@ -1,15 +1,15 @@
-import { NgTemplateOutlet } from '@angular/common';
+import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   input,
   output,
 } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-icon-button',
-  imports: [RouterLink, NgTemplateOutlet, RouterLinkActive],
+  imports: [RouterLink, NgTemplateOutlet, NgOptimizedImage],
   templateUrl: './icon-button.component.html',
   styleUrl: './icon-button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,5 +17,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class IconButtonComponent {
   link = input<string>();
   disabled = input<boolean>();
+  iconSrc = input<string>();
+  iconAlt = input<string>();
   buttonClicked = output();
 }
