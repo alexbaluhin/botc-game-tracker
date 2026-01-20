@@ -48,7 +48,10 @@ export class GameStateService {
   setPlayersCount(count: number) {
     this.info.update(info => ({
       ...info,
-      players: new Array(count).fill(this.makePlayer()),
+      players: new Array(count).fill(this.makePlayer()).map((player, i) => ({
+        name: `Player ${i + 1}`,
+        ...player,
+      })),
     }));
   }
 

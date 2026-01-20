@@ -1,0 +1,18 @@
+<div class="ghost-vote-indicator">
+  <app-animated-candle [isLit]="!isGhostVoteUsed()"></app-animated-candle>
+</div>
+
+<div class="ghost-vote-toggle">
+  <button
+    class="caption toggle-button"
+    [class.active]="!isGhostVoteUsed()"
+    (click)="isGhostVoteUsed() && toggleGhostVote.emit(false)">
+    Ghost vote
+  </button>
+  <button
+    class="caption toggle-button"
+    [class.active]="isGhostVoteUsed()"
+    (click)="!isGhostVoteUsed() && toggleGhostVote.emit(true)">
+    Used
+  </button>
+</div>

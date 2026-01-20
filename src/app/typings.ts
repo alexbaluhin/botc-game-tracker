@@ -24,6 +24,7 @@ export type Player = {
   characters: Character[];
   isCurrentViewer?: boolean;
   isDead?: boolean;
+  isDeadVoteUsed?: boolean;
   positionInGrimoire: Point;
 };
 

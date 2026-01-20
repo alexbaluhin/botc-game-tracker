@@ -19,11 +19,9 @@
 @if (player().name) {
   <div class="player-name">
     @if (player().isDead) {
-      <img
-        [ngSrc]="'./assets/icons/game/skull.svg'"
-        width="24"
-        height="24"
-        alt="Skull icon" />
+      <app-animated-candle
+        [isLit]="!player().isDeadVoteUsed"
+        [size]="24"></app-animated-candle>
     }
     <span class="caption">{{ player().name }}</span>
   </div>
