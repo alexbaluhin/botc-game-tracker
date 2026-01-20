@@ -5,8 +5,11 @@
 }
 
 .container {
-  & > * {
+  input,
+  .button {
     display: block;
+  }
+  & > * {
     &:first-child {
       margin-top: 12px;
     }

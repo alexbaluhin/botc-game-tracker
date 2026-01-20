@@ -6,6 +6,11 @@
       [(ngModel)]="playerName"
       (keyup.enter)="input.blur()"
       #input />
+    @if (player().isDead) {
+      <app-ghost-vote-toggle
+        [isGhostVoteUsed]="player().isDeadVoteUsed ?? false"
+        (toggleGhostVote)="toggleGhostVote($event)"></app-ghost-vote-toggle>
+    }
     <app-icon-button
       class="button"
       iconSrc="./assets/icons/game/bluffs-icon.svg"

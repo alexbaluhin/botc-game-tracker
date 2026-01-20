@@ -1,0 +1,9 @@
+.candle {
+  .flame-part {
+    opacity: 1;
+    transition: opacity ease-in-out 600ms;
+  }
+  &.extinguished .flame-part {
+    opacity: 0;
+  }
+}

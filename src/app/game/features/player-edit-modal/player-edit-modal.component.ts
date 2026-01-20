@@ -15,6 +15,7 @@ import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
 import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { GhostVoteToggleComponent } from '../../ui/ghost-vote-toggle/ghost-vote-toggle.component';
 import { AddReminderModalComponent } from '../add-reminder-modal/add-reminder-modal.component';
 import { CharacterEditModalComponent } from '../character-edit-modal/character-edit-modal.component';
 
@@ -24,7 +25,12 @@ export type PlayerEditModalData = {
 
 @Component({
   selector: 'app-player-edit-modal',
-  imports: [FormsModule, GameModalComponent, IconButtonComponent],
+  imports: [
+    FormsModule,
+    GameModalComponent,
+    IconButtonComponent,
+    GhostVoteToggleComponent,
+  ],
   templateUrl: './player-edit-modal.component.html',
   styleUrl: './player-edit-modal.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -95,8 +101,19 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
       {
         ...this.player(),
         isDead: !this.player().isDead,
+        ...(!this.player().isDead ? { isDeadVoteUsed: false } : {}),
       }
     );
     this.dialogRef.close();
+  }
+
+  toggleGhostVote(isUsed: boolean) {
+    this.gameStateService.updatePlayerByIndex(
+      this.dialogData.playerPositionInCircle,
+      {
+        ...this.player(),
+        isDeadVoteUsed: isUsed,
+      }
+    );
   }
 }
