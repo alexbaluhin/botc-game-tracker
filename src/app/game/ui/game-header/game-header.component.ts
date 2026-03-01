@@ -10,8 +10,7 @@ import {
   ConfirmationDialogData,
 } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { GameShareService } from '../../../shared/data-access/game-share.service';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
-import { positionPlayersInCircle } from '../../../shared/layout/players-circle';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { GrimoireService } from '../../data-access/grimoire.service';
 
 @Component({
@@ -28,7 +27,7 @@ import { GrimoireService } from '../../data-access/grimoire.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameHeaderComponent {
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
   gameShareService = inject(GameShareService);
   grimoireService = inject(GrimoireService);
   private dialog = inject(Dialog);
@@ -50,7 +49,7 @@ export class GameHeaderComponent {
       )
       .closed.subscribe(result => {
         if (result) {
-          this.gameStateService.resetGameState();
+          this.gameStore.resetGameState();
           this.router.navigate(['/']);
         }
       });
@@ -71,12 +70,8 @@ export class GameHeaderComponent {
       return;
     }
 
-    this.gameStateService.info.update(info => ({
-      ...info,
-      players: positionPlayersInCircle(
-        info.players,
-        grimoireElement.getBoundingClientRect()
-      ),
-    }));
+    this.gameStore.calculatePlayersPositionsInCircle(
+      grimoireElement.getBoundingClientRect()
+    );
   }
 }

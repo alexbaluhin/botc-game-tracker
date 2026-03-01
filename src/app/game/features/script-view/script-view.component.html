@@ -22,7 +22,7 @@
       @case ('script') {
         <app-characters-expandable-list
           [characters]="
-            this.gameStateService.info().characters
+            this.gameStore.characters()
           "></app-characters-expandable-list>
       }
       @case ('first-night-order') {

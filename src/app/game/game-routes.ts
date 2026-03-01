@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { RedirectCommand, Router, Routes } from '@angular/router';
-import { GameStateService } from '../shared/data-access/game-state.service';
+import { GameStore } from '../shared/data-access/game-state-store';
 import { GrimoireService } from './data-access/grimoire.service';
 import { GossipViewComponent } from './features/gossip-view/gossip-view.component';
 import { PlayersViewComponent } from './features/players-view/players-view.component';
@@ -13,8 +13,8 @@ export const gameRoutes: Routes = [
     canActivate: [
       () => {
         const router = inject(Router);
-        const gameStateService = inject(GameStateService);
-        return gameStateService.gameWasSetUp
+        const gameStore = inject(GameStore);
+        return gameStore.gameWasSetUp()
           ? true
           : new RedirectCommand(router.parseUrl('/'));
       },

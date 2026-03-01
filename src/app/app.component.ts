@@ -14,7 +14,7 @@ import {
   ConfirmationDialogData,
 } from './shared/components/confirmation-dialog/confirmation-dialog.component';
 import { GameShareService } from './shared/data-access/game-share.service';
-import { GameStateService } from './shared/data-access/game-state.service';
+import { GameStore, version } from './shared/data-access/game-state-store';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   );
   router = inject(Router);
   dialog = inject(Dialog);
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
   gameShareService = inject(GameShareService);
 
   constructor() {
@@ -60,11 +60,11 @@ export class AppComponent implements OnInit {
              * TODO: move code from PlayersViewComponent to router provider later
              */
             this.dialog.closeAll();
-            this.gameStateService.resetGameState();
+            this.gameStore.resetGameState();
             this.router
               .navigateByUrl('/', { skipLocationChange: true })
               .then(() => {
-                this.gameStateService.info.set(gameStateFromLink);
+                this.gameStore.setGameStateFromSharedLink(gameStateFromLink);
                 this.router.navigate(['/game'], {
                   queryParams: {
                     share: null,
@@ -88,10 +88,7 @@ export class AppComponent implements OnInit {
   }
 
   private checkGameStateVersion() {
-    if (
-      (this.gameStateService.info().version ?? 0) <
-      this.gameStateService.version
-    ) {
+    if ((this.gameStore.version() ?? 0) < version) {
       this.dialog
         .open<boolean, ConfirmationDialogData>(ConfirmationDialogComponent, {
           data: {
@@ -103,7 +100,7 @@ export class AppComponent implements OnInit {
         })
         .closed.pipe(filter(reset => reset === true))
         .subscribe(() => {
-          this.gameStateService.resetGameState();
+          this.gameStore.resetGameState();
           this.router.navigate(['/']);
         });
     }

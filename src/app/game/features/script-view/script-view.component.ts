@@ -11,7 +11,7 @@ import { ActionBarComponent } from '../../../shared/components/action-bar/action
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { CharactersExpandableListComponent } from '../../../shared/components/characters-expandable-list/characters-expandable-list.component';
 import { ChipComponent } from '../../../shared/components/chip/chip.component';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { Character } from '../../../typings';
 import { GameNavComponent } from '../../ui/game-nav/game-nav.component';
 
@@ -36,7 +36,7 @@ type NightOrderPosition<T> = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScriptViewComponent {
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
 
   view: 'script' | 'first-night-order' | 'other-nights-order' = 'script';
 
@@ -72,7 +72,7 @@ export class ScriptViewComponent {
     nightOrderField: 'firstNightOrder' | 'otherNightsOrder',
     additionalCards: TemplateRef<unknown>[]
   ) {
-    const sortedCharacters = [...this.gameStateService.info().characters]
+    const sortedCharacters = [...this.gameStore.characters()]
       .filter(
         (
           character

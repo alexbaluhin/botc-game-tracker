@@ -3,14 +3,14 @@ import {
   enrichCharacterInfo,
   getCharacterById,
 } from '../../core-data/utils/characters';
-import { GameInformation, Player } from '../../typings';
-import { GameStateService } from './game-state.service';
+import { Player } from '../../typings';
+import { GameState, GameStore, version } from './game-state-store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GameShareService {
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
 
   createShareLink() {
     return `${window.location.origin}?share=${btoa(this.mapGameStateToShareString())}`;
@@ -21,9 +21,9 @@ export class GameShareService {
   }
 
   private mapGameStateToShareString() {
-    const players = this.gameStateService
-      .info()
-      .players.map(({ name, characters }) => {
+    const players = this.gameStore
+      .players()
+      .map(({ name, characters }) => {
         const nameString = name ? encodeURI(name) : '';
         const charactersString = characters.length
           ? characters.map(character => character.id).join(':')
@@ -31,14 +31,14 @@ export class GameShareService {
         return `${nameString}:${charactersString}`;
       })
       .join(',');
-    const characters = this.gameStateService
-      .info()
-      .characters.map(({ id }) => id)
+    const characters = this.gameStore
+      .characters()
+      .map(({ id }) => id)
       .join(',');
-    return `${this.gameStateService.info().name};${characters};${players}`;
+    return `${this.gameStore.name()};${characters};${players}`;
   }
 
-  private mapShareStringToGameState(shareString: string): GameInformation {
+  private mapShareStringToGameState(shareString: string): GameState {
     const [name, charactersString, playersString] = shareString.split(';');
     const characters = enrichCharacterInfo(
       charactersString.split(',').map(character => ({ id: character }))
@@ -61,7 +61,7 @@ export class GameShareService {
       characters,
       reminders: [],
       gossips: [],
-      version: this.gameStateService.version,
+      version: version,
       states: {
         playersPositionsWereCalculated: false,
       },

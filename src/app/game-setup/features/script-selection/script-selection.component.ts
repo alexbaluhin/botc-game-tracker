@@ -8,8 +8,8 @@ import {
   TransparentButtonComponent,
   TransparentButtonImgDirective,
 } from '../../../shared/components/transparent-button/transparent-button.component';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { Script, ScriptCharacter, ScriptMetaInfo } from '../../../typings';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
 import { ScriptForSelection } from '../../typings';
 import { GameLogoComponent } from '../../ui/game-logo/game-logo.component';
 import {
@@ -31,7 +31,7 @@ import {
 })
 export class ScriptSelectionComponent {
   private router = inject(Router);
-  private gameStateService = inject(GameStateService);
+  private gameStore = inject(GameStore);
   private dialog = inject(Dialog);
 
   scripts: ScriptForSelection[] = scripts.map(script =>
@@ -80,7 +80,7 @@ export class ScriptSelectionComponent {
       })
       .closed.subscribe(result => {
         if (result) {
-          this.gameStateService.setScript(script.name, script.characters);
+          this.gameStore.setScript(script.name, script.characters);
           this.router.navigate(['game-setup/players-count-selection']);
         }
       });

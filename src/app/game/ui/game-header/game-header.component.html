@@ -1,8 +1,6 @@
 <header>
   <app-characters-count-per-type-hint
-    [players]="
-      gameStateService.info().players
-    "></app-characters-count-per-type-hint>
+    [players]="gameStore.players()"></app-characters-count-per-type-hint>
 
   <button [cdkMenuTriggerFor]="contextMenu" class="context-button">
     <img

@@ -1,0 +1,201 @@
+import { effect } from '@angular/core';
+import {
+  getState,
+  patchState,
+  signalStore,
+  withComputed,
+  withHooks,
+  withMethods,
+  withProps,
+  withState,
+} from '@ngrx/signals';
+import { Character, Gossip, Player, Reminder } from '../../typings';
+import { positionPlayersInCircle } from '../layout/players-circle';
+
+export const version = 2; // Increase the version number if old game state is incompatible with the new one
+
+export type GameState = {
+  name: string;
+  characters: Character[];
+  players: Player[];
+  reminders: Reminder[];
+  gossips: Gossip[];
+  version: number;
+  states: {
+    playersPositionsWereCalculated: boolean;
+  };
+};
+
+export const defaultInitialState: GameState = {
+  name: '',
+  players: [],
+  characters: [],
+  reminders: [],
+  gossips: [],
+  version,
+  states: {
+    playersPositionsWereCalculated: false,
+  },
+};
+
+const loadInitialState = (): GameState => {
+  try {
+    const gameSetupState = window.localStorage.getItem('game-setup');
+    if (!gameSetupState) {
+      return defaultInitialState;
+    }
+    return JSON.parse(gameSetupState);
+  } catch {
+    return defaultInitialState;
+  }
+};
+
+const saveToLocalStorage = (state: GameState) => {
+  window.localStorage.setItem('game-setup', JSON.stringify(state));
+};
+
+export const GameStore = signalStore(
+  { providedIn: 'root' },
+  withState(loadInitialState()),
+  withProps(() => ({
+    makePlayer(): Player {
+      return {
+        characters: [],
+        positionInGrimoire: { x: 0, y: 0 },
+      };
+    },
+  })),
+  withComputed(store => ({
+    gameWasSetUp: () => {
+      return (
+        store.name !== undefined &&
+        store.characters.length > 0 &&
+        store.players.length > 0
+      );
+    },
+    arePlayersPositionsCalculated: () =>
+      store.states.playersPositionsWereCalculated,
+  })),
+  withHooks(store => ({
+    onInit() {
+      effect(() => {
+        saveToLocalStorage(getState(store));
+      });
+    },
+  })),
+  withMethods(store => ({
+    setScript(name: string, characters: Character[]) {
+      if (!characters.length) {
+        console.error('Please provide characters list for custom script');
+        return;
+      }
+      patchState(store, state => ({
+        ...state,
+        name,
+        characters,
+      }));
+    },
+    setPlayersCount(count: number) {
+      patchState(store, state => ({
+        ...state,
+        players: new Array(count).fill(store.makePlayer()).map((player, i) => ({
+          name: `Player ${i + 1}`,
+          ...player,
+        })),
+      }));
+    },
+    getPlayerByIndex(index: number) {
+      return store.players()[index];
+    },
+    getReminderByIndex(index: number) {
+      return store.reminders()[index];
+    },
+  })),
+  withMethods(store => ({
+    updatePlayerByIndex(updatedPlayerIndex: number, updatedPlayer: Player) {
+      if (
+        !store.getPlayerByIndex(updatedPlayerIndex).isCurrentViewer &&
+        updatedPlayer.isCurrentViewer
+      ) {
+        patchState(store, state => ({
+          ...state,
+          players: state.players.map(player => ({
+            ...player,
+            isCurrentViewer: false,
+          })),
+        }));
+      }
+      patchState(store, state => ({
+        ...state,
+        players: state.players.map((player, i) =>
+          updatedPlayerIndex === i ? updatedPlayer : player
+        ),
+      }));
+    },
+    addReminder(reminder: Reminder) {
+      patchState(store, state => ({
+        ...state,
+        reminders: [...state.reminders, reminder],
+      }));
+    },
+    updateReminderByIndex(
+      updatedReminderIndex: number,
+      updatedReminder: Reminder
+    ) {
+      patchState(store, state => ({
+        ...state,
+        reminders: state.reminders.map((reminder, i) =>
+          updatedReminderIndex === i ? updatedReminder : reminder
+        ),
+      }));
+    },
+    removeReminder(reminderToRemove: Reminder) {
+      patchState(store, state => ({
+        ...state,
+        reminders: state.reminders.filter(
+          reminder =>
+            `${reminder.relatedCharacter.id}${reminder.text}` !==
+            `${reminderToRemove.relatedCharacter.id}${reminderToRemove.text}`
+        ),
+      }));
+    },
+    updateGossip(gossipToSave: Gossip) {
+      const savedGossipIndex = store
+        .gossips()
+        .findIndex(
+          savedGossip =>
+            savedGossip.day === gossipToSave.day &&
+            savedGossip.playerName === gossipToSave.playerName
+        );
+      if (savedGossipIndex === -1) {
+        patchState(store, state => ({
+          ...state,
+          gossips: [...state.gossips, gossipToSave],
+        }));
+      } else {
+        patchState(store, state => ({
+          ...state,
+          gossips: state.gossips.map((savedGossip, index) =>
+            index === savedGossipIndex ? gossipToSave : savedGossip
+          ),
+        }));
+      }
+    },
+    resetGameState() {
+      window.localStorage.removeItem('game-setup');
+      patchState(store, () => defaultInitialState);
+    },
+    calculatePlayersPositionsInCircle(containerDimensions: DOMRect) {
+      patchState(store, state => ({
+        ...state,
+        players: positionPlayersInCircle(state.players, containerDimensions),
+        states: {
+          playersPositionsWereCalculated: true,
+        },
+      }));
+    },
+    setGameStateFromSharedLink(gameStateFromLink: GameState) {
+      patchState(store, () => gameStateFromLink);
+    },
+  }))
+);

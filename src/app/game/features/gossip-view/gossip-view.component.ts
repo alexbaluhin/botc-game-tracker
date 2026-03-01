@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { ChipComponent } from '../../../shared/components/chip/chip.component';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { Gossip } from '../../../typings';
 import { GameNavComponent } from '../../ui/game-nav/game-nav.component';
 
@@ -36,7 +36,7 @@ export type SavedGossip = Omit<Gossip, 'day'> & {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GossipViewComponent {
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
 
   days: Day[] = [
     {
@@ -73,12 +73,12 @@ export class GossipViewComponent {
     },
   ];
   playersWithNames = computed(() =>
-    this.gameStateService.info().players.filter(player => !!player.name)
+    this.gameStore.players().filter(player => !!player.name)
   );
   savedGossips = computed<SavedGossip[]>(() =>
-    this.gameStateService
-      .info()
-      .gossips.map(gossip => ({
+    this.gameStore
+      .gossips()
+      .map(gossip => ({
         ...gossip,
         day: this.days.find(day => day.value === gossip.day)!,
       }))
@@ -100,7 +100,7 @@ export class GossipViewComponent {
   }
 
   saveGossip() {
-    this.gameStateService.updateGossip({
+    this.gameStore.updateGossip({
       day: this.selectedDay()!,
       playerName: this.selectedPlayer()!,
       gossip: this.gossip()!,
