@@ -2,8 +2,8 @@
   <app-game-header></app-game-header>
   <app-grimoire
     [setupMode]="false"
-    [players]="gameStateService.info().players"
-    [reminders]="gameStateService.info().reminders"
+    [players]="gameStore.players()"
+    [reminders]="gameStore.reminders()"
     (playerClicked)="editPlayer($event)"
     (playerTokenMoved)="updatePlayerTokenPosition($event)"
     (reminderClicked)="removeReminder($event)"

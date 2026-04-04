@@ -11,8 +11,7 @@ import {
 } from '@angular/core';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
-import { positionPlayersInCircle } from '../../../shared/layout/players-circle';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { GrimoireService } from '../../data-access/grimoire.service';
 import { GameHeaderComponent } from '../../ui/game-header/game-header.component';
 import { GameNavComponent } from '../../ui/game-nav/game-nav.component';
@@ -38,7 +37,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayersViewComponent {
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
   grimoireService = inject(GrimoireService);
   private dialog = inject(Dialog);
   private injector = inject(Injector);
@@ -56,22 +55,11 @@ export class PlayersViewComponent {
         this.grimoireElement().nativeElement
       );
 
-      if (this.gameStateService.info().states.playersPositionsWereCalculated) {
+      if (this.gameStore.arePlayersPositionsCalculated()) {
         return;
       }
 
-      this.gameStateService.info.update(info => {
-        return {
-          ...info,
-          players: positionPlayersInCircle(
-            info.players,
-            this.grimoireElement().nativeElement.getBoundingClientRect()
-          ),
-          states: {
-            playersPositionsWereCalculated: true,
-          },
-        };
-      });
+      this.gameStore.calculatePlayersPositionsInCircle();
     });
   }
 
@@ -91,8 +79,8 @@ export class PlayersViewComponent {
   }
 
   updatePlayerTokenPosition(event: { index: number; position: Point }) {
-    this.gameStateService.updatePlayerByIndex(event.index, {
-      ...this.gameStateService.getPlayerByIndex(event.index),
+    this.gameStore.updatePlayerByIndex(event.index, {
+      ...this.gameStore.getPlayerByIndex(event.index),
       positionInGrimoire: event.position,
     });
   }
@@ -105,7 +93,7 @@ export class PlayersViewComponent {
           width: '74%',
           maxWidth: '291px',
           data: {
-            reminder: this.gameStateService.getReminderByIndex(index),
+            reminder: this.gameStore.getReminderByIndex(index),
           },
           autoFocus: false,
         }
@@ -114,8 +102,8 @@ export class PlayersViewComponent {
   }
 
   updateReminderTokenPosition(event: { index: number; position: Point }) {
-    this.gameStateService.updateReminderByIndex(event.index, {
-      ...this.gameStateService.getReminderByIndex(event.index),
+    this.gameStore.updateReminderByIndex(event.index, {
+      ...this.gameStore.getReminderByIndex(event.index),
       positionInGrimoire: event.position,
     });
   }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class GrimoireService {
   private grimoireDOMElement: HTMLElement | undefined;
 
@@ -10,5 +12,9 @@ export class GrimoireService {
 
   getGrimoireElement() {
     return this.grimoireDOMElement;
+  }
+
+  resetGrimoireElement() {
+    this.grimoireDOMElement = undefined;
   }
 }

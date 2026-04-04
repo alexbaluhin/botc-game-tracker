@@ -13,7 +13,7 @@ import { CharacterType } from '../../../constants';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CharacterTokenComponent } from '../../../shared/components/character-token/character-token.component';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { Character } from '../../../typings';
 import { PlayerEditModalData } from '../player-edit-modal/player-edit-modal.component';
 
@@ -33,9 +33,9 @@ import { PlayerEditModalData } from '../player-edit-modal/player-edit-modal.comp
 export class CharacterEditModalComponent implements OnInit {
   dialog = inject<DialogRef<never, CharacterEditModalComponent>>(DialogRef);
   private dialogData: PlayerEditModalData = inject(DIALOG_DATA);
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
 
-  player = this.gameStateService.getPlayerByIndex(
+  player = this.gameStore.getPlayerByIndex(
     this.dialogData.playerPositionInCircle
   );
 
@@ -44,9 +44,9 @@ export class CharacterEditModalComponent implements OnInit {
 
   charactersGroupedByType = computed(() =>
     Object.values(
-      this.gameStateService
-        .info()
-        .characters.filter(({ type }) =>
+      this.gameStore
+        .characters()
+        .filter(({ type }) =>
           [
             CharacterType.TOWNSFOLK,
             CharacterType.OUTSIDER,
@@ -109,14 +109,11 @@ export class CharacterEditModalComponent implements OnInit {
   }
 
   savePlayerInfo() {
-    this.gameStateService.updatePlayerByIndex(
-      this.dialogData.playerPositionInCircle,
-      {
-        ...this.player,
-        isCurrentViewer: this.isMySeat,
-        characters: Object.values(this.selectedCharacters()),
-      }
-    );
+    this.gameStore.updatePlayerByIndex(this.dialogData.playerPositionInCircle, {
+      ...this.player,
+      isCurrentViewer: this.isMySeat,
+      characters: Object.values(this.selectedCharacters()),
+    });
     this.dialog.close();
   }
 }

@@ -36,5 +36,12 @@
       (buttonClicked)="togglePlayerShroud()">
       {{ player().isDead ? 'Alive' : 'Died' }}
     </app-icon-button>
+    <app-icon-button
+      class="button"
+      iconSrc="./assets/icons/utility/remove-token.svg"
+      iconAlt="Remove player icon"
+      (buttonClicked)="removePlayer()">
+      Remove player
+    </app-icon-button>
   </main>
 </app-game-modal>

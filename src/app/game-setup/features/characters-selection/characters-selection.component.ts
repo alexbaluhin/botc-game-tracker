@@ -14,7 +14,7 @@ import {
 } from '../../../constants';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { CharacterTokenComponent } from '../../../shared/components/character-token/character-token.component';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { charactersSetupChanges } from '../../setup-changes';
 import {
   CharacterForSelection,
@@ -37,20 +37,18 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
 })
 export class CharactersSelectionComponent implements OnInit {
   router = inject(Router);
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
 
   baseMaxCharactersCounts =
-    charactersCountBasedOnPlayersCount[
-      this.gameStateService.info().players.length
-    ];
+    charactersCountBasedOnPlayersCount[this.gameStore.players().length];
   baseCharactersCategories: CharactersCategory[] = [];
   charactersCategories: WritableSignal<CharactersCategory[]> = signal([]);
   selectedCharactersToChangeSetup: Set<string> = new Set();
 
   ngOnInit() {
-    this.baseCharactersCategories = this.gameStateService
-      .info()
-      .characters.reduce((acc, character) => {
+    this.baseCharactersCategories = this.gameStore
+      .characters()
+      .reduce((acc, character) => {
         const characterType = character.type;
         const charactersForSelection = acc.find(
           charactersForSelection =>

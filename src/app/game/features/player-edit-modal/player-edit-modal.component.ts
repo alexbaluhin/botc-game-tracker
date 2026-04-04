@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { debounceTime, Subject, takeUntil } from 'rxjs';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { IconButtonComponent } from '../../../shared/components/icon-button/icon-button.component';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { GhostVoteToggleComponent } from '../../ui/ghost-vote-toggle/ghost-vote-toggle.component';
 import { AddReminderModalComponent } from '../add-reminder-modal/add-reminder-modal.component';
 import { CharacterEditModalComponent } from '../character-edit-modal/character-edit-modal.component';
@@ -40,13 +40,11 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
   private dialogRef =
     inject<DialogRef<never, PlayerEditModalComponent>>(DialogRef);
   private dialogData: PlayerEditModalData = inject(DIALOG_DATA);
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
   private injector = inject(Injector);
 
   player = computed(() =>
-    this.gameStateService.getPlayerByIndex(
-      this.dialogData.playerPositionInCircle
-    )
+    this.gameStore.getPlayerByIndex(this.dialogData.playerPositionInCircle)
   );
   playerName = model<string>(this.player().name ?? '');
   playerNameUpdates = toObservable(this.playerName).pipe(debounceTime(300));
@@ -55,7 +53,7 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.playerNameUpdates.pipe(takeUntil(this.unsubscribe)).subscribe(name => {
-      this.gameStateService.updatePlayerByIndex(
+      this.gameStore.updatePlayerByIndex(
         this.dialogData.playerPositionInCircle,
         {
           ...this.player(),
@@ -96,24 +94,23 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
   }
 
   togglePlayerShroud() {
-    this.gameStateService.updatePlayerByIndex(
-      this.dialogData.playerPositionInCircle,
-      {
-        ...this.player(),
-        isDead: !this.player().isDead,
-        ...(!this.player().isDead ? { isDeadVoteUsed: false } : {}),
-      }
-    );
+    this.gameStore.updatePlayerByIndex(this.dialogData.playerPositionInCircle, {
+      ...this.player(),
+      isDead: !this.player().isDead,
+      ...(!this.player().isDead ? { isDeadVoteUsed: false } : {}),
+    });
     this.dialogRef.close();
   }
 
   toggleGhostVote(isUsed: boolean) {
-    this.gameStateService.updatePlayerByIndex(
-      this.dialogData.playerPositionInCircle,
-      {
-        ...this.player(),
-        isDeadVoteUsed: isUsed,
-      }
-    );
+    this.gameStore.updatePlayerByIndex(this.dialogData.playerPositionInCircle, {
+      ...this.player(),
+      isDeadVoteUsed: isUsed,
+    });
+  }
+
+  removePlayer() {
+    this.gameStore.removePlayer(this.dialogData.playerPositionInCircle);
+    this.dialogRef.close();
   }
 }

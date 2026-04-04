@@ -8,7 +8,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { ReminderTokenComponent } from '../../../shared/components/reminder-token/reminder-token.component';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { Reminder } from '../../../typings';
 import { GrimoireService } from '../../data-access/grimoire.service';
 
@@ -20,7 +20,7 @@ import { GrimoireService } from '../../data-access/grimoire.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddReminderModalComponent {
-  private gameStateService = inject(GameStateService);
+  private gameStore = inject(GameStore);
   private dialogRef =
     inject<DialogRef<never, AddReminderModalComponent>>(DialogRef);
   private grimoireService = inject(GrimoireService);
@@ -31,7 +31,7 @@ export class AddReminderModalComponent {
       .getBoundingClientRect();
     const centerX = domRect.width / 2 - 20;
     const centerY = domRect.height / 2 - 20;
-    return this.gameStateService.info().characters.reduce(
+    return this.gameStore.characters().reduce(
       (reminders, character) => [
         ...reminders,
         ...character.reminderTokens.map(reminderToken => ({
@@ -45,7 +45,7 @@ export class AddReminderModalComponent {
   });
 
   selectReminder(reminder: Reminder) {
-    this.gameStateService.addReminder(reminder);
+    this.gameStore.addReminder(reminder);
     this.dialogRef.close();
   }
 }

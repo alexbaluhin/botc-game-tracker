@@ -18,7 +18,7 @@ import { ActionBarComponent } from '../../../shared/components/action-bar/action
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CharactersCountPerTypeHintComponent } from '../../../shared/components/characters-count-per-type-hint/characters-count-per-type-hint.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
-import { GameStateService } from '../../../shared/data-access/game-state.service';
+import { GameStore } from '../../../shared/data-access/game-state-store';
 import { positionPlayersInCircle } from '../../../shared/layout/players-circle';
 import { Player } from '../../../typings';
 import { CounterComponent } from '../../ui/counter/counter.component';
@@ -41,13 +41,11 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
 })
 export class PlayersCountSelectionComponent {
   router = inject(Router);
-  gameStateService = inject(GameStateService);
+  gameStore = inject(GameStore);
   minCount = +Object.keys(charactersCountBasedOnPlayersCount).at(0)!;
   maxCount = maxNumberOfPlayersInBaseSetup + maxNumberOfTravellers;
 
-  players = signal<Player[]>(
-    new Array(12).fill(this.gameStateService.makePlayer())
-  );
+  players = signal<Player[]>(new Array(12).fill(this.gameStore.makePlayer()));
 
   grimoireElement = viewChild.required<GrimoireComponent, ElementRef>(
     GrimoireComponent,
@@ -65,10 +63,7 @@ export class PlayersCountSelectionComponent {
   onPlayersCountChange(newCount: number) {
     if (this.players().length < newCount) {
       this.players.update(players =>
-        this.distributeTokensInCircle([
-          ...players,
-          this.gameStateService.makePlayer(),
-        ])
+        this.distributeTokensInCircle([...players, this.gameStore.makePlayer()])
       );
     } else {
       this.players.update(players =>
@@ -78,7 +73,7 @@ export class PlayersCountSelectionComponent {
   }
 
   acceptPlayersCount() {
-    this.gameStateService.setPlayersCount(this.players().length);
+    this.gameStore.setPlayersCount(this.players().length);
     this.router.navigate(['/game']);
   }
 
