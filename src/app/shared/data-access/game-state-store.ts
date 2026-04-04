@@ -68,13 +68,13 @@ export const GameStore = signalStore(
   withComputed(store => ({
     gameWasSetUp: () => {
       return (
-        store.name !== undefined &&
-        store.characters.length > 0 &&
-        store.players.length > 0
+        store.name() !== undefined &&
+        store.characters().length > 0 &&
+        store.players().length > 0
       );
     },
     arePlayersPositionsCalculated: () =>
-      store.states.playersPositionsWereCalculated,
+      store.states().playersPositionsWereCalculated,
   })),
   withHooks(store => ({
     onInit() {
