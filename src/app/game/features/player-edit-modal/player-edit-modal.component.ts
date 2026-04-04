@@ -108,4 +108,9 @@ export class PlayerEditModalComponent implements OnInit, OnDestroy {
       isDeadVoteUsed: isUsed,
     });
   }
+
+  removePlayer() {
+    this.gameStore.removePlayer(this.dialogData.playerPositionInCircle);
+    this.dialogRef.close();
+  }
 }

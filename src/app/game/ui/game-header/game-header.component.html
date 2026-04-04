@@ -21,6 +21,14 @@
         height="24" />
       <span>{{ shareText }}</span>
     </button>
+    <button class="context-menu-item" cdkMenuItem (click)="addPlayer()">
+      <img
+        ngSrc="./assets/icons/utility/add-token.svg"
+        alt="Add player icon"
+        width="24"
+        height="24" />
+      <span>Add player</span>
+    </button>
     <button class="context-menu-item" cdkMenuItem (click)="tidyUp()">
       <img
         ngSrc="./assets/icons/utility/tidy-up.svg"

@@ -11,7 +11,6 @@ import {
 } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { GameShareService } from '../../../shared/data-access/game-share.service';
 import { GameStore } from '../../../shared/data-access/game-state-store';
-import { GrimoireService } from '../../data-access/grimoire.service';
 
 @Component({
   selector: 'app-game-header',
@@ -29,7 +28,6 @@ import { GrimoireService } from '../../data-access/grimoire.service';
 export class GameHeaderComponent {
   gameStore = inject(GameStore);
   gameShareService = inject(GameShareService);
-  grimoireService = inject(GrimoireService);
   private dialog = inject(Dialog);
   private router = inject(Router);
   private clipboard = inject(Clipboard);
@@ -65,13 +63,10 @@ export class GameHeaderComponent {
   }
 
   tidyUp() {
-    const grimoireElement = this.grimoireService.getGrimoireElement();
-    if (!grimoireElement) {
-      return;
-    }
+    this.gameStore.calculatePlayersPositionsInCircle();
+  }
 
-    this.gameStore.calculatePlayersPositionsInCircle(
-      grimoireElement.getBoundingClientRect()
-    );
+  addPlayer() {
+    this.gameStore.addPlayer();
   }
 }

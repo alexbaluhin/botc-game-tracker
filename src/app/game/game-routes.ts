@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { RedirectCommand, Router, Routes } from '@angular/router';
 import { GameStore } from '../shared/data-access/game-state-store';
-import { GrimoireService } from './data-access/grimoire.service';
 import { GossipViewComponent } from './features/gossip-view/gossip-view.component';
 import { PlayersViewComponent } from './features/players-view/players-view.component';
 import { ScriptViewComponent } from './features/script-view/script-view.component';
@@ -9,7 +8,6 @@ import { ScriptViewComponent } from './features/script-view/script-view.componen
 export const gameRoutes: Routes = [
   {
     path: 'game',
-    providers: [GrimoireService],
     canActivate: [
       () => {
         const router = inject(Router);

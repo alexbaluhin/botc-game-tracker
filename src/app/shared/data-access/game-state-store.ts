@@ -1,4 +1,4 @@
-import { effect } from '@angular/core';
+import { effect, inject } from '@angular/core';
 import {
   getState,
   patchState,
@@ -9,6 +9,7 @@ import {
   withProps,
   withState,
 } from '@ngrx/signals';
+import { GrimoireService } from '../../game/data-access/grimoire.service';
 import { Character, Gossip, Player, Reminder } from '../../typings';
 import { positionPlayersInCircle } from '../layout/players-circle';
 
@@ -58,8 +59,9 @@ export const GameStore = signalStore(
   { providedIn: 'root' },
   withState(loadInitialState()),
   withProps(() => ({
-    makePlayer(): Player {
+    makePlayer(name?: string): Player {
       return {
+        name,
         characters: [],
         positionInGrimoire: { x: 0, y: 0 },
       };
@@ -98,10 +100,9 @@ export const GameStore = signalStore(
     setPlayersCount(count: number) {
       patchState(store, state => ({
         ...state,
-        players: new Array(count).fill(store.makePlayer()).map((player, i) => ({
-          name: `Player ${i + 1}`,
-          ...player,
-        })),
+        players: new Array(count)
+          .fill(null)
+          .map((_, i) => store.makePlayer(`Player ${i + 1}`)),
       }));
     },
     getPlayerByIndex(index: number) {
@@ -111,7 +112,17 @@ export const GameStore = signalStore(
       return store.reminders()[index];
     },
   })),
-  withMethods(store => ({
+  withMethods((store, grimoireService = inject(GrimoireService)) => ({
+    addPlayer() {
+      patchState(store, state => ({
+        ...state,
+        players: [
+          ...state.players,
+          store.makePlayer(`Player ${state.players.length + 1}`),
+        ],
+      }));
+      this.calculatePlayersPositionsInCircle();
+    },
     updatePlayerByIndex(updatedPlayerIndex: number, updatedPlayer: Player) {
       if (
         !store.getPlayerByIndex(updatedPlayerIndex).isCurrentViewer &&
@@ -131,6 +142,13 @@ export const GameStore = signalStore(
           updatedPlayerIndex === i ? updatedPlayer : player
         ),
       }));
+    },
+    removePlayer(removePlayerIndex: number) {
+      patchState(store, state => ({
+        ...state,
+        players: state.players.filter((_, i) => i !== removePlayerIndex),
+      }));
+      this.calculatePlayersPositionsInCircle();
     },
     addReminder(reminder: Reminder) {
       patchState(store, state => ({
@@ -183,12 +201,20 @@ export const GameStore = signalStore(
     },
     resetGameState() {
       window.localStorage.removeItem('game-setup');
+      grimoireService.resetGrimoireElement();
       patchState(store, () => defaultInitialState);
     },
-    calculatePlayersPositionsInCircle(containerDimensions: DOMRect) {
+    calculatePlayersPositionsInCircle() {
+      const grimoireElement = grimoireService.getGrimoireElement();
+      if (!grimoireElement) {
+        return;
+      }
       patchState(store, state => ({
         ...state,
-        players: positionPlayersInCircle(state.players, containerDimensions),
+        players: positionPlayersInCircle(
+          state.players,
+          grimoireElement.getBoundingClientRect()
+        ),
         states: {
           playersPositionsWereCalculated: true,
         },

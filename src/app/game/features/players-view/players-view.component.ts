@@ -59,9 +59,7 @@ export class PlayersViewComponent {
         return;
       }
 
-      this.gameStore.calculatePlayersPositionsInCircle(
-        this.grimoireElement().nativeElement.getBoundingClientRect()
-      );
+      this.gameStore.calculatePlayersPositionsInCircle();
     });
   }
 
