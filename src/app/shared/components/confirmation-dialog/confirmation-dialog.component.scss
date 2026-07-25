@@ -9,9 +9,12 @@
 }
 
 footer {
-  margin-top: 16px;
+  margin-top: 24px;
 }
 
-.button + .button {
-  margin-left: 16px;
+.button {
+  width: 100%;
+  &:not(:last-child) {
+    margin-bottom: 28px;
+  }
 }

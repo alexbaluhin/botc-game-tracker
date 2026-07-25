@@ -1,11 +1,8 @@
-<div>{{ dialogData.message }}</div>
+<div class="subtitle">{{ dialogData.message }}</div>
 <footer>
-  <app-button
-    type="secondary"
-    class="button"
-    (buttonClicked)="dialogRef.close(true)"
-    >{{ dialogData.agreeButtonText ?? 'Yes' }}</app-button
-  >
+  <app-button class="button" (buttonClicked)="dialogRef.close(true)">{{
+    dialogData.agreeButtonText ?? 'Yes'
+  }}</app-button>
   <app-button
     type="secondary"
     class="button"
