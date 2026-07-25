@@ -30,7 +30,8 @@
       @for (character of characterType.value; track character.id) {
         <app-character-card
           class="character"
-          [character]="character"></app-character-card>
+          [character]="character"
+          (click)="selectedCharacter.emit(character)"></app-character-card>
       }
     }
     @if (!last) {

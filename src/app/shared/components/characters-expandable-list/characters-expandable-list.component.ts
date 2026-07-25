@@ -6,6 +6,7 @@ import {
   computed,
   inject,
   input,
+  output,
 } from '@angular/core';
 import {
   CharacterType,
@@ -55,6 +56,7 @@ export class CharactersExpandableListComponent {
           : -1
     );
   });
+  selectedCharacter = output<Character>();
 
   private keyValuePipe = inject(KeyValuePipe);
   characterTypeNames = characterTypeName;

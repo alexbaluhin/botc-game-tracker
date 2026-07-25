@@ -1,0 +1,21 @@
+<main>
+  <div class="container">
+    <h1 class="subtitle">What are you bluffing?</h1>
+
+    @for (bluff of bluffs(); track index; let index = $index) {
+      @if (!bluff) {
+        <app-empty-card
+          text="Select Character"
+          (click)="selectCharacter(index)" />
+      } @else {
+        <app-character-card
+          [character]="bluff"
+          (click)="changeBluff(bluff, index)"></app-character-card>
+      }
+    }
+  </div>
+</main>
+
+<app-action-bar>
+  <app-game-nav></app-game-nav>
+</app-action-bar>
