@@ -1,0 +1,17 @@
+<app-game-modal>
+  <main class="container">
+    <div class="subtitle action-title">Change character</div>
+    <div class="character-token-container">
+      <app-character-token [size]="90" [characters]="[dialogData.bluff]" />
+    </div>
+    <app-button class="button" (buttonClicked)="changeSelection()">
+      Change selection
+    </app-button>
+    <app-button
+      type="secondary"
+      class="button"
+      (buttonClicked)="dialogRef.close(null)"
+      >Clear</app-button
+    >
+  </main>
+</app-game-modal>

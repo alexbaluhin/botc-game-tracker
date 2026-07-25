@@ -13,7 +13,7 @@ import { GrimoireService } from '../../game/data-access/grimoire.service';
 import { Character, Gossip, Player, Reminder } from '../../typings';
 import { positionPlayersInCircle } from '../layout/players-circle';
 
-export const version = 2; // Increase the version number if old game state is incompatible with the new one
+export const version = 3; // Increase the version number if old game state is incompatible with the new one
 
 export type GameState = {
   name: string;
@@ -21,6 +21,7 @@ export type GameState = {
   players: Player[];
   reminders: Reminder[];
   gossips: Gossip[];
+  bluffs: (Character | null)[];
   version: number;
   states: {
     playersPositionsWereCalculated: boolean;
@@ -33,6 +34,7 @@ export const defaultInitialState: GameState = {
   characters: [],
   reminders: [],
   gossips: [],
+  bluffs: new Array(3).fill(null),
   version,
   states: {
     playersPositionsWereCalculated: false,
@@ -85,7 +87,7 @@ export const GameStore = signalStore(
       });
     },
   })),
-  withMethods(store => ({
+  withMethods((store, grimoireService = inject(GrimoireService)) => ({
     setScript(name: string, characters: Character[]) {
       if (!characters.length) {
         console.error('Please provide characters list for custom script');
@@ -111,8 +113,6 @@ export const GameStore = signalStore(
     getReminderByIndex(index: number) {
       return store.reminders()[index];
     },
-  })),
-  withMethods((store, grimoireService = inject(GrimoireService)) => ({
     addPlayer() {
       patchState(store, state => ({
         ...state,
@@ -125,7 +125,7 @@ export const GameStore = signalStore(
     },
     updatePlayerByIndex(updatedPlayerIndex: number, updatedPlayer: Player) {
       if (
-        !store.getPlayerByIndex(updatedPlayerIndex).isCurrentViewer &&
+        !store.players()[updatedPlayerIndex].isCurrentViewer &&
         updatedPlayer.isCurrentViewer
       ) {
         patchState(store, state => ({
@@ -198,6 +198,17 @@ export const GameStore = signalStore(
           ),
         }));
       }
+    },
+    setBluff(character: Character | null, atPosition: number) {
+      patchState(store, state => ({
+        ...state,
+        bluffs: state.bluffs.map((bluff, index) => {
+          if (index === atPosition) {
+            return character;
+          }
+          return bluff;
+        }),
+      }));
     },
     resetGameState() {
       window.localStorage.removeItem('game-setup');

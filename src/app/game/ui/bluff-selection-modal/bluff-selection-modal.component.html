@@ -1,0 +1,21 @@
+<app-action-bar position="top">
+  <a
+    class="close-button"
+    tabindex="0"
+    (click)="dialog.close()"
+    (keydown.space)="dialog.close()">
+    <img
+      [ngSrc]="'./assets/icons/utility/close.svg'"
+      width="24"
+      height="24"
+      alt="Close modal window" />
+  </a>
+</app-action-bar>
+
+<main>
+  <div class="container">
+    <app-characters-expandable-list
+      [characters]="gameStore.characters()"
+      (selectedCharacter)="dialog.close($event)" />
+  </div>
+</main>

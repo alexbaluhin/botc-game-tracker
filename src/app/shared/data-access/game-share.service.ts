@@ -61,6 +61,7 @@ export class GameShareService {
       characters,
       reminders: [],
       gossips: [],
+      bluffs: new Array(3).fill(null),
       version: version,
       states: {
         playersPositionsWereCalculated: false,
