@@ -1,10 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { smallestReminderTokenSize } from '../../../constants';
 import { Reminder } from '../../../typings';
 
@@ -13,7 +8,6 @@ import { Reminder } from '../../../typings';
   imports: [NgOptimizedImage],
   templateUrl: './reminder-token.component.html',
   styleUrl: './reminder-token.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[style.--token-size]': 'tokenSizeStyle()',
   },

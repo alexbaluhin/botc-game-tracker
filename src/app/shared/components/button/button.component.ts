@@ -1,10 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 type ButtonType = 'primary' | 'secondary';
@@ -14,7 +9,6 @@ type ButtonType = 'primary' | 'secondary';
   imports: [RouterLink, NgTemplateOutlet],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
   type = input<ButtonType>('primary');

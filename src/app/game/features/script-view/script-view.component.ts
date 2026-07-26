@@ -1,6 +1,5 @@
 import { KeyValuePipe, NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   inject,
@@ -33,7 +32,6 @@ type NightOrderPosition<T> = {
   providers: [KeyValuePipe],
   templateUrl: './script-view.component.html',
   styleUrl: './script-view.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScriptViewComponent {
   gameStore = inject(GameStore);

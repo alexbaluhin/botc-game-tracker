@@ -1,6 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CharactersExpandableListComponent } from '../../../shared/components/characters-expandable-list/characters-expandable-list.component';
@@ -20,7 +20,6 @@ export type ScriptSelectionViewModalData = {
   ],
   templateUrl: './script-selection-view-modal.component.html',
   styleUrl: './script-selection-view-modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScriptSelectionViewModalComponent {
   private dialogRef =

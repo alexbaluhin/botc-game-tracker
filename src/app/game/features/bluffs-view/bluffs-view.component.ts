@@ -1,10 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { EmptyCardComponent } from '../../../shared/components/empty-card/empty-card.component';
@@ -29,7 +24,6 @@ import {
   ],
   templateUrl: './bluffs-view.component.html',
   styleUrl: './bluffs-view.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BluffsViewComponent {
   gameStore = inject(GameStore);

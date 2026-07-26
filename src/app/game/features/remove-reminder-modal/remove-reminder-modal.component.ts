@@ -1,5 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
@@ -14,7 +14,6 @@ export type RemoveReminderDialogData = {
   imports: [GameModalComponent, ButtonComponent],
   templateUrl: './remove-reminder-modal.component.html',
   styleUrl: './remove-reminder-modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RemoveReminderModalComponent {
   private dialogRef =

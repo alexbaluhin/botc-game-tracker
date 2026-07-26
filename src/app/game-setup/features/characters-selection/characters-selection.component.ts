@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   inject,
   OnInit,
@@ -33,7 +32,6 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
   ],
   templateUrl: './characters-selection.component.html',
   styleUrls: ['./characters-selection.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharactersSelectionComponent implements OnInit {
   router = inject(Router);

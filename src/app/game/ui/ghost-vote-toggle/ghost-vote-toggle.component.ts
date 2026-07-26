@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { AnimatedCandleComponent } from '../../../shared/components/animated-candle/animated-candle.component';
 
 @Component({
@@ -11,7 +6,6 @@ import { AnimatedCandleComponent } from '../../../shared/components/animated-can
   imports: [AnimatedCandleComponent],
   templateUrl: './ghost-vote-toggle.component.html',
   styleUrl: './ghost-vote-toggle.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GhostVoteToggleComponent {
   isGhostVoteUsed = input<boolean>(false);

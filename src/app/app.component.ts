@@ -1,11 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
@@ -21,7 +15,6 @@ import { GameStore, version } from './shared/data-access/game-state-store';
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   shareLink = toSignal(

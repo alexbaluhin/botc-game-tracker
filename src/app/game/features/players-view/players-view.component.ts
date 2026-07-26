@@ -1,7 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Point } from '@angular/cdk/drag-drop';
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -34,7 +33,6 @@ import {
   ],
   templateUrl: './players-view.component.html',
   styleUrl: './players-view.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayersViewComponent {
   gameStore = inject(GameStore);
