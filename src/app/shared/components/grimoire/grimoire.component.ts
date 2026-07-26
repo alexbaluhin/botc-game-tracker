@@ -8,7 +8,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { Player, Reminder } from 'src/app/typings';
+import { Player, Reminder } from '../../../typings';
 import { calculatePlayerTokenSize } from '../../layout/players-circle';
 import { GrimoireStarCenterComponent } from '../grimoire-star-center/grimoire-star-center.component';
 import { PlayerTokenComponent } from '../player-token/player-token.component';
