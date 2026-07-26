@@ -212,8 +212,7 @@ export const GameStore = signalStore(
     },
     resetGameState() {
       window.localStorage.removeItem('game-setup');
-      grimoireService.resetGrimoireElement();
-      patchState(store, () => defaultInitialState);
+      window.location.reload();
     },
     calculatePlayersPositionsInCircle() {
       const grimoireElement = grimoireService.getGrimoireElement();
