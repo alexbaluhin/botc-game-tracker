@@ -1,10 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { smallestTokenSize } from '../../../constants';
 import { Character } from '../../../typings';
 
@@ -13,7 +8,6 @@ import { Character } from '../../../typings';
   imports: [NgOptimizedImage],
   templateUrl: './character-token.component.html',
   styleUrls: ['./character-token.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[style.--token-size]': 'tokenSizeStyle()',
   },

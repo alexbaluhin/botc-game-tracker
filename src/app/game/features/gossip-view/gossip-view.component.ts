@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  model,
-} from '@angular/core';
+import { Component, computed, inject, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
@@ -33,7 +27,6 @@ export type SavedGossip = Omit<Gossip, 'day'> & {
   ],
   templateUrl: './gossip-view.component.html',
   styleUrl: './gossip-view.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GossipViewComponent {
   gameStore = inject(GameStore);

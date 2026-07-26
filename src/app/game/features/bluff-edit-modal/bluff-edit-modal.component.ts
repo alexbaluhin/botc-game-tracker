@@ -1,5 +1,5 @@
 import { Dialog, DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CharacterTokenComponent } from '../../../shared/components/character-token/character-token.component';
@@ -21,7 +21,6 @@ export type BluffEditDialogData = {
   ],
   templateUrl: './bluff-edit-modal.component.html',
   styleUrl: './bluff-edit-modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BluffEditModalComponent {
   dialogRef =

@@ -1,6 +1,5 @@
 import {
   afterNextRender,
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -37,7 +36,6 @@ import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-
   ],
   templateUrl: './players-count-selection.component.html',
   styleUrls: ['./players-count-selection.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayersCountSelectionComponent {
   router = inject(Router);

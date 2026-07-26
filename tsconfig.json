@@ -2,7 +2,6 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -19,16 +18,12 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "resolveJsonModule": true,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "resolveJsonModule": true
   },
   "ts-node": {
     "esm": true,
     "compilerOptions": {
-      "module": "NodeNext",
+      "module": "NodeNext"
     }
   },
   "angularCompilerOptions": {

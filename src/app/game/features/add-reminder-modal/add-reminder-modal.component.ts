@@ -1,10 +1,5 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { ReminderTokenComponent } from '../../../shared/components/reminder-token/reminder-token.component';
@@ -17,7 +12,6 @@ import { GrimoireService } from '../../data-access/grimoire.service';
   imports: [GameModalComponent, FormsModule, ReminderTokenComponent],
   templateUrl: './add-reminder-modal.component.html',
   styleUrl: './add-reminder-modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddReminderModalComponent {
   private gameStore = inject(GameStore);

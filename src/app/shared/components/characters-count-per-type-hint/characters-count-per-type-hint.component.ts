@@ -1,11 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-} from '@angular/core';
-import { Player } from 'src/app/typings';
+import { Component, computed, input } from '@angular/core';
+import { Player } from '../../../typings';
 import {
   charactersCountBasedOnPlayersCount,
   CharacterType,
@@ -17,7 +12,6 @@ import {
   imports: [NgOptimizedImage],
   templateUrl: './characters-count-per-type-hint.component.html',
   styleUrl: './characters-count-per-type-hint.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharactersCountPerTypeHintComponent {
   players = input.required<Player[]>();

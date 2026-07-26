@@ -1,13 +1,6 @@
 import { CdkAccordion, CdkAccordionItem } from '@angular/cdk/accordion';
 import { KeyValuePipe, NgOptimizedImage } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  input,
-  output,
-} from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
 import {
   CharacterType,
   characterTypeName,
@@ -27,7 +20,6 @@ import { Character } from '../../../typings';
   providers: [KeyValuePipe],
   templateUrl: './characters-expandable-list.component.html',
   styleUrl: './characters-expandable-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharactersExpandableListComponent {
   characters = input.required<Character[]>();

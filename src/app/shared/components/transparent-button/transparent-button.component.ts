@@ -1,6 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   contentChild,
   Directive,
@@ -19,7 +18,6 @@ export class TransparentButtonImgDirective {}
   imports: [RouterLink, NgTemplateOutlet],
   templateUrl: './transparent-button.component.html',
   styleUrl: './transparent-button.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransparentButtonComponent {
   link = input<string>();

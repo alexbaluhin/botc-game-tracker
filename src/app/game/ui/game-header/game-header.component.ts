@@ -2,7 +2,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { Dialog } from '@angular/cdk/dialog';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CharactersCountPerTypeHintComponent } from '../../../shared/components/characters-count-per-type-hint/characters-count-per-type-hint.component';
 import {
@@ -23,7 +23,6 @@ import { GameStore } from '../../../shared/data-access/game-state-store';
   ],
   templateUrl: './game-header.component.html',
   styleUrl: './game-header.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameHeaderComponent {
   gameStore = inject(GameStore);

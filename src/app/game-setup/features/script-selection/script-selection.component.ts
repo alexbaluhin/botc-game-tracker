@@ -1,6 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { scripts } from '../../../core-data';
 import { enrichCharacterInfo } from '../../../core-data/utils/characters';
@@ -27,7 +27,6 @@ import {
   ],
   templateUrl: './script-selection.component.html',
   styleUrls: ['./script-selection.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScriptSelectionComponent {
   private router = inject(Router);

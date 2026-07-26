@@ -1,6 +1,5 @@
 import { Dialog, DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   inject,
@@ -33,7 +32,6 @@ export type PlayerEditModalData = {
   ],
   templateUrl: './player-edit-modal.component.html',
   styleUrl: './player-edit-modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayerEditModalComponent implements OnInit, OnDestroy {
   private dialog = inject(Dialog);

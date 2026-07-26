@@ -1,6 +1,6 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { CharactersExpandableListComponent } from '../../../shared/components/characters-expandable-list/characters-expandable-list.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
@@ -15,7 +15,6 @@ import { Character } from '../../../typings';
   ],
   templateUrl: './bluff-selection-modal.component.html',
   styleUrl: './bluff-selection-modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BluffSelectionModalComponent {
   dialog =

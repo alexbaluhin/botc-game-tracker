@@ -1,10 +1,5 @@
 import { NgOptimizedImage, NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -12,7 +7,6 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink, NgTemplateOutlet, NgOptimizedImage],
   templateUrl: './icon-button.component.html',
   styleUrl: './icon-button.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconButtonComponent {
   link = input<string>();

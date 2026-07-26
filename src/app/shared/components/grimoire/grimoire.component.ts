@@ -1,7 +1,6 @@
 import { CdkDrag, CdkDragEnd, Point } from '@angular/cdk/drag-drop';
 import { NgOptimizedImage } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   ElementRef,
@@ -9,7 +8,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { Player, Reminder } from 'src/app/typings';
+import { Player, Reminder } from '../../../typings';
 import { calculatePlayerTokenSize } from '../../layout/players-circle';
 import { GrimoireStarCenterComponent } from '../grimoire-star-center/grimoire-star-center.component';
 import { PlayerTokenComponent } from '../player-token/player-token.component';
@@ -19,7 +18,6 @@ import { ReminderTokenComponent } from '../reminder-token/reminder-token.compone
   selector: 'app-grimoire',
   templateUrl: './grimoire.component.html',
   styleUrl: './grimoire.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     PlayerTokenComponent,
     NgOptimizedImage,

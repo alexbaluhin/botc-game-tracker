@@ -1,13 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { NgOptimizedImage } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CharacterType } from '../../../constants';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
@@ -28,7 +21,6 @@ import { PlayerEditModalData } from '../player-edit-modal/player-edit-modal.comp
   ],
   templateUrl: './character-edit-modal.component.html',
   styleUrl: './character-edit-modal.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CharacterEditModalComponent implements OnInit {
   dialog = inject<DialogRef<never, CharacterEditModalComponent>>(DialogRef);

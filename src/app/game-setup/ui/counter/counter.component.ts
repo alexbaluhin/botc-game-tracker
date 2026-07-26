@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  inject,
-} from '@angular/core';
+import { Component, input, inject } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
@@ -11,7 +6,6 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
   standalone: true,
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CounterComponent implements ControlValueAccessor {
   private ngControl = inject(NgControl, { self: true });

@@ -1,10 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  output,
-} from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -12,7 +7,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   imports: [RouterLink, NgTemplateOutlet, RouterLinkActive],
   templateUrl: './game-nav-link.component.html',
   styleUrl: './game-nav-link.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameNavLinkComponent {
   link = input.required<string>();
