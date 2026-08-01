@@ -58,8 +58,8 @@ export class ScriptSelectionComponent {
         const customScript = JSON.parse(fileReader.result) as Script;
         const { name, characters } = this.mapScriptToSelection(customScript);
         this.openSelectedScriptView({ name, characters });
-      } catch {
-        console.error('Cannot parse custom script');
+      } catch (error) {
+        console.error('Cannot parse custom script', error);
       }
     };
   }
@@ -87,18 +87,29 @@ export class ScriptSelectionComponent {
 
   private mapScriptToSelection(script: Script): ScriptForSelection {
     const scriptMetaInfo = script.find(
-      (item): item is ScriptMetaInfo => item.id === '_meta'
+      (item): item is ScriptMetaInfo =>
+        typeof item !== 'string' && item.id === '_meta'
     );
     return {
       name: scriptMetaInfo?.name ?? 'Unknown Script',
       logo: scriptMetaInfo?.logo,
       characters: enrichCharacterInfo(
         script
-          .filter((item): item is ScriptCharacter => item.id !== '_meta')
-          .map(character => ({
-            ...character,
-            id: character.id.replace(/[_-]/g, ''),
-          }))
+          .filter(
+            (item): item is ScriptCharacter | string =>
+              typeof item === 'string' || item.id !== '_meta'
+          )
+          .map(character => {
+            if (typeof character === 'string') {
+              return {
+                id: character.replace(/[_-]/g, ''),
+              };
+            }
+            return {
+              ...character,
+              id: character.id.replace(/[_-]/g, ''),
+            };
+          })
       ),
     };
   }
