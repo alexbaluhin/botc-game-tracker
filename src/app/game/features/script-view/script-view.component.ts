@@ -86,12 +86,30 @@ export class ScriptViewComponent {
       otherNightsOrder: number;
     }>[] = [];
     let additionalCardsUsed = 0;
+
+    const firstCharacterNightOrder = sortedCharacters[0][nightOrderField];
+    const specialCardsBeforeFirstCharacter = Math.floor(
+      firstCharacterNightOrder / 1000
+    );
+    if (specialCardsBeforeFirstCharacter > 0) {
+      elementsToRender.push(
+        ...additionalCards
+          .slice(additionalCardsUsed, specialCardsBeforeFirstCharacter)
+          .map(card => ({
+            element: card,
+          }))
+      );
+      additionalCardsUsed += specialCardsBeforeFirstCharacter;
+    }
+
     for (let i = 0; i < sortedCharacters.length; i++) {
       const character = sortedCharacters[i];
 
       const orderDiff =
-        character[nightOrderField] -
-        (sortedCharacters[i - 1]?.[nightOrderField] ?? 0);
+        i === 0
+          ? 0
+          : character[nightOrderField] -
+            sortedCharacters[i - 1][nightOrderField];
 
       if (orderDiff < 1000) {
         elementsToRender.push({
