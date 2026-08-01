@@ -63,4 +63,4 @@ export interface ScriptCharacter {
   id: string;
 }
 
-export type Script = (ScriptCharacter | ScriptMetaInfo)[];
+export type Script = (ScriptCharacter | ScriptMetaInfo | string)[];
