@@ -19,7 +19,7 @@ import { CharactersCountPerTypeHintComponent } from '../../../shared/components/
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
 import { positionPlayersInCircle } from '../../../shared/layout/players-circle';
-import { Player } from '../../../typings';
+import { Player } from '../../../shared/types/common';
 import { CounterComponent } from '../../ui/counter/counter.component';
 import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-header.component';
 

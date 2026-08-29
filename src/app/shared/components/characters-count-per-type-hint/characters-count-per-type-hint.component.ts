@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
-import { Player } from '../../../typings';
+import { Player } from '../../types/common';
 import {
   charactersCountBasedOnPlayersCount,
   CharacterType,

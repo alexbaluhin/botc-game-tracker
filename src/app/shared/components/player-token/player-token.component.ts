@@ -1,7 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { smallestTokenSize } from '../../../constants';
-import { Player } from '../../../typings';
+import { Player } from '../../types/common';
 import { AnimatedCandleComponent } from '../animated-candle/animated-candle.component';
 import { CharacterTokenComponent } from '../character-token/character-token.component';
 

@@ -1,7 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { smallestTokenSize } from '../../../constants';
-import { Character } from '../../../typings';
+import { Character } from '../../types/common';
 
 @Component({
   selector: 'app-character-token',

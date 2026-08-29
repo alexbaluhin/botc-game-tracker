@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CharacterTokenComponent } from '../../../shared/components/character-token/character-token.component';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
-import { Character } from '../../../typings';
+import { Character } from '../../../shared/types/common';
 import { BluffSelectionModalComponent } from '../../ui/bluff-selection-modal/bluff-selection-modal.component';
 
 export type BluffEditDialogData = {

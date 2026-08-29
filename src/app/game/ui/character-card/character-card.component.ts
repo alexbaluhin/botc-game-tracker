@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { CardComponent } from '../../../shared/components/card/card.component';
-import { Character } from '../../../typings';
+import { Character } from '../../../shared/types/common';
 
 @Component({
   selector: 'app-character-card',

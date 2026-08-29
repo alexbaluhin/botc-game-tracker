@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
-import { Reminder } from '../../../typings';
+import { Reminder } from '../../../shared/types/common';
 
 export type RemoveReminderDialogData = {
   reminder: Reminder;

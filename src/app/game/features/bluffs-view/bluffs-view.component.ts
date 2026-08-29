@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { EmptyCardComponent } from '../../../shared/components/empty-card/empty-card.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
-import { Character } from '../../../typings';
+import { Character } from '../../../shared/types/common';
 import { BluffSelectionModalComponent } from '../../ui/bluff-selection-modal/bluff-selection-modal.component';
 import { CharacterCardComponent } from '../../ui/character-card/character-card.component';
 import { GameNavComponent } from '../../ui/game-nav/game-nav.component';
