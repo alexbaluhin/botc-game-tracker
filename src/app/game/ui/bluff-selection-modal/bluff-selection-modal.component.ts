@@ -4,7 +4,7 @@ import { Component, inject } from '@angular/core';
 import { ActionBarComponent } from '../../../shared/components/action-bar/action-bar.component';
 import { CharactersExpandableListComponent } from '../../../shared/components/characters-expandable-list/characters-expandable-list.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
-import { Character } from '../../../typings';
+import { Character } from '../../../shared/types/common';
 
 @Component({
   selector: 'app-bluff-selection-modal',

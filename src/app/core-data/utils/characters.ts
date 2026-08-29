@@ -1,5 +1,5 @@
 import { CharacterType } from '../../constants';
-import { Character } from '../../typings';
+import { Character } from '../../shared/types/common';
 import { characters } from '../index';
 
 export const getCharacterById = (id: string) =>

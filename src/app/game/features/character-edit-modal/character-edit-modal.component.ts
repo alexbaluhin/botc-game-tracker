@@ -7,7 +7,7 @@ import { ActionBarComponent } from '../../../shared/components/action-bar/action
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CharacterTokenComponent } from '../../../shared/components/character-token/character-token.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
-import { Character } from '../../../typings';
+import { Character } from '../../../shared/types/common';
 import { PlayerEditModalData } from '../player-edit-modal/player-edit-modal.component';
 
 @Component({

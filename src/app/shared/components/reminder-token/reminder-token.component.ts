@@ -1,7 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { smallestReminderTokenSize } from '../../../constants';
-import { Reminder } from '../../../typings';
+import { Reminder } from '../../types/common';
 
 @Component({
   selector: 'app-reminder-token',

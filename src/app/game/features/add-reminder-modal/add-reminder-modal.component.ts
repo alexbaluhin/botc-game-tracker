@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { GameModalComponent } from '../../../shared/components/game-modal/game-modal.component';
 import { ReminderTokenComponent } from '../../../shared/components/reminder-token/reminder-token.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
-import { Reminder } from '../../../typings';
+import { Reminder } from '../../../shared/types/common';
 import { GrimoireService } from '../../data-access/grimoire.service';
 
 @Component({

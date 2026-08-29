@@ -1,4 +1,4 @@
-import { Player } from '../../typings';
+import { Player } from '../types/common';
 
 export const positionPlayersInCircle = (
   players: Player[],

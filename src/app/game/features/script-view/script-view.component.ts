@@ -11,7 +11,7 @@ import { CardComponent } from '../../../shared/components/card/card.component';
 import { CharactersExpandableListComponent } from '../../../shared/components/characters-expandable-list/characters-expandable-list.component';
 import { ChipComponent } from '../../../shared/components/chip/chip.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
-import { Character } from '../../../typings';
+import { Character } from '../../../shared/types/common';
 import { GameNavComponent } from '../../ui/game-nav/game-nav.component';
 
 type NightOrderPosition<T> = {

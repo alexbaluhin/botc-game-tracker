@@ -1,5 +1,5 @@
 import { CharacterType } from '../constants';
-import { Character } from '../typings';
+import { Character } from '../shared/types/common';
 
 export interface CharacterForSelection extends Character {
   selected?: boolean;

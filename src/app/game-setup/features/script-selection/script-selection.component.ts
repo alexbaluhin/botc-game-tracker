@@ -9,7 +9,11 @@ import {
   TransparentButtonImgDirective,
 } from '../../../shared/components/transparent-button/transparent-button.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
-import { Script, ScriptCharacter, ScriptMetaInfo } from '../../../typings';
+import {
+  Script,
+  ScriptCharacter,
+  ScriptMetaInfo,
+} from '../../../shared/types/common';
 import { ScriptForSelection } from '../../typings';
 import { GameLogoComponent } from '../../ui/game-logo/game-logo.component';
 import {

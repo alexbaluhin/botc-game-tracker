@@ -3,7 +3,7 @@ import {
   enrichCharacterInfo,
   getCharacterById,
 } from '../../core-data/utils/characters';
-import { Player } from '../../typings';
+import { Player } from '../types/common';
 import { GameState, GameStore, version } from './game-state-store';
 
 @Injectable({
@@ -60,7 +60,7 @@ export class GameShareService {
       players,
       characters,
       reminders: [],
-      gossips: [],
+      notes: [],
       bluffs: new Array(3).fill(null),
       version: version,
       states: {

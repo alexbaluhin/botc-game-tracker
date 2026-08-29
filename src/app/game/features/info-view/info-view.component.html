@@ -1,0 +1,92 @@
+<main>
+
+  <section class="players">
+    @for (playerName of playersNames(); track playerName) {
+      <app-chip
+        [active]="selectedPlayers().includes(playerName)"
+        (click)="togglePlayerSelection(playerName)">
+        {{ playerName }}
+      </app-chip>
+    }
+  </section>
+
+  <div class="text-input-container" [class.with-content]="selectedPlayers().length > 0 || text() || isRecording()" (click)="focusOnInput()">
+    @if (isRecording()) {
+      <div class="recording-indicator">
+        <span>Recording...</span>
+      </div>
+      <button class="icon-button" (click)="stopRecording()">
+        <div class="stop-recording-icon"></div>
+      </button>
+    } @else {
+      <div class="players-chips-container">
+        @for (selectedPlayer of selectedPlayers(); track selectedPlayer) {
+          <app-chip>{{ selectedPlayer }}</app-chip>
+        }
+      </div>
+
+      <span
+        class="caption text-input"
+        contenteditable="true"
+        data-placeholder="Text here"
+        (input)="updateText($event.target)"
+        (keydown.backspace)="removeLastChipIfApplicable()"
+        #textInput>{{ textInputContent }}</span>
+
+      <div class="recording-button-container">
+        <button class="icon-button" (click)="recordAudio()">
+          <img
+            class="icon"
+            ngSrc="./assets/icons/utility/microphone.svg"
+            alt="Microphone icon"
+            width="24"
+            height="24" />
+        </button>
+      </div>
+    }
+  </div>
+
+  <app-button
+    class="save-note-button"
+    [disabled]="!text() || isRecording()"
+    (buttonClicked)="saveNote()"
+    >Add info</app-button
+  >
+
+  <div class="saved-notes">
+    @for (savedNote of savedNotes(); let index = $index; track savedNote.text) {
+      <div
+        tabindex="0"
+        class="saved-note">
+        <div class="action-row">
+          <button (click)="editNote(savedNote)">
+            <img
+              class="icon"
+              ngSrc="./assets/icons/utility/edit.svg"
+              alt="Edit icon"
+              width="24"
+              height="24" />
+          </button>
+          <button (click)="deleteNote(index)">
+            <img
+              class="icon"
+              ngSrc="./assets/icons/utility/delete.svg"
+              alt="Delete icon"
+              width="24"
+              height="24" />
+          </button>
+        </div>
+        <div class="note-row">
+          @for (player of savedNote.playerNames; track player) {
+            <app-chip class="saved-note-player">{{ player }}</app-chip>
+          }
+          <span class="caption note">{{ savedNote.text }}</span>
+        </div>
+      </div>
+    }
+  </div>
+</main>
+
+<app-action-bar>
+  <app-game-nav></app-game-nav>
+</app-action-bar>

@@ -1,22 +1,22 @@
 import { Point } from '@angular/cdk/drag-drop';
-import { CharacterType } from './constants';
+import { CharacterType } from '../../constants';
 
 export interface GameInformation {
   name?: string;
   characters: Character[];
   players: Player[];
   reminders: Reminder[];
-  gossips: Gossip[];
+  notes: Note[];
   version: number;
   states: {
     playersPositionsWereCalculated: boolean;
   };
 }
 
-export type Gossip = {
-  day: number;
-  playerName: string;
-  gossip: string;
+export type Note = {
+  day?: number;
+  playerNames: string[];
+  text: string;
 };
 
 export type Player = {

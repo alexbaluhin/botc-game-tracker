@@ -7,7 +7,7 @@ import {
   characterTypesInOrganicOrder,
 } from '../../../constants';
 import { CharacterCardComponent } from '../../../game/ui/character-card/character-card.component';
-import { Character } from '../../../typings';
+import { Character } from '../../types/common';
 
 @Component({
   selector: 'app-characters-expandable-list',
