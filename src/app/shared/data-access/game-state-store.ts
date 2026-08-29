@@ -10,17 +10,17 @@ import {
   withState,
 } from '@ngrx/signals';
 import { GrimoireService } from '../../game/data-access/grimoire.service';
-import { Character, Gossip, Player, Reminder } from '../../typings';
+import { Character, Note, Player, Reminder } from '../types/common';
 import { positionPlayersInCircle } from '../layout/players-circle';
 
-export const version = 3; // Increase the version number if old game state is incompatible with the new one
+export const version = 4; // Increase the version number if old game state is incompatible with the new one
 
 export type GameState = {
   name: string;
   characters: Character[];
   players: Player[];
   reminders: Reminder[];
-  gossips: Gossip[];
+  notes: Note[];
   bluffs: (Character | null)[];
   version: number;
   states: {
@@ -33,7 +33,7 @@ export const defaultInitialState: GameState = {
   players: [],
   characters: [],
   reminders: [],
-  gossips: [],
+  notes: [],
   bluffs: new Array(3).fill(null),
   version,
   states: {
@@ -177,27 +177,25 @@ export const GameStore = signalStore(
         ),
       }));
     },
-    updateGossip(gossipToSave: Gossip) {
-      const savedGossipIndex = store
-        .gossips()
-        .findIndex(
-          savedGossip =>
-            savedGossip.day === gossipToSave.day &&
-            savedGossip.playerName === gossipToSave.playerName
-        );
-      if (savedGossipIndex === -1) {
-        patchState(store, state => ({
-          ...state,
-          gossips: [...state.gossips, gossipToSave],
-        }));
-      } else {
-        patchState(store, state => ({
-          ...state,
-          gossips: state.gossips.map((savedGossip, index) =>
-            index === savedGossipIndex ? gossipToSave : savedGossip
-          ),
-        }));
-      }
+    addNote(note: Note) {
+      patchState(store, state => ({
+        ...state,
+        notes: [...state.notes, note],
+      }));
+    },
+    updateNote(noteToUpdate: Note, indexOfNoteToUpdate: number) {
+      patchState(store, state => ({
+        ...state,
+        notes: state.notes.map((note, index) =>
+          index === indexOfNoteToUpdate ? noteToUpdate : note
+        ),
+      }));
+    },
+    removeNote(indexOfNoteToRemove: number) {
+      patchState(store, state => ({
+        ...state,
+        notes: state.notes.filter((_, index) => index !== indexOfNoteToRemove),
+      }));
     },
     setBluff(character: Character | null, atPosition: number) {
       patchState(store, state => ({
