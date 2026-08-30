@@ -19,6 +19,7 @@ button {
   cursor: pointer;
   &.secondary {
     background: transparent;
+    border: none;
     padding: 0;
     color: color.$secondary;
     &:before {

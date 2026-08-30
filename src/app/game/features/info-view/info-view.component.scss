@@ -23,9 +23,6 @@ main {
 }
 
 .text-input-container {
-  display: flex;
-  align-items: center;
-  flex-flow: row wrap;
   position: relative;
   width: 100%;
   min-height: 64px;
@@ -40,7 +37,7 @@ main {
 }
 
 .players-chips-container {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-right: 8px;
@@ -51,7 +48,7 @@ main {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   color: color.$low-light;
-  padding: 8px 0;
+  line-height: 2;
   &:empty:focus {
     display: inline-block;
   }
@@ -61,10 +58,13 @@ main {
   }
 }
 
-.recording-button-container {
+.button-row {
   display: inline-flex;
-  flex: 1 0 60px;
-  justify-content: end;
+  align-items: center;
+  width: 100%;
+  & > * {
+    flex-grow: 1;
+  }
 }
 
 .icon-button {
@@ -78,22 +78,6 @@ main {
   border-radius: 50%;
   background: color.$primary-1;
   cursor: pointer;
-}
-
-.recording-indicator {
-  flex-grow: 1;
-  text-align: center;
-}
-
-.stop-recording-icon {
-  width: 18px;
-  height: 18px;
-  background: color.$secondary;
-  border-radius: 2px;
-}
-
-.save-note-button {
-  width: 100%;
 }
 
 .saved-notes {
