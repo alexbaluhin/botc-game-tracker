@@ -7,7 +7,6 @@ import {
   inject,
   model,
   signal,
-  untracked,
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -39,10 +38,6 @@ export class InfoViewComponent {
   private gameStore = inject(GameStore);
   private dialog = inject(Dialog);
 
-  private speechRecognition: SpeechRecognition | null = null;
-  isRecording = signal(false);
-  transcriptText: string | null = null;
-
   playersNames = computed(() =>
     this.gameStore
       .players()
@@ -54,7 +49,13 @@ export class InfoViewComponent {
   selectedPlayers = model<string[]>([]);
   text = model<string>();
   textInput = viewChild<ElementRef<HTMLSpanElement>>('textInput');
-  textInputContent = untracked(() => this.text());
+
+  inEditMode = signal(false);
+  noteBeingEditedIndex = signal<number | null>(null);
+
+  get textInputNativeElement() {
+    return this.textInput()?.nativeElement;
+  }
 
   togglePlayerSelection(player: string) {
     if (this.selectedPlayers().includes(player)) {
@@ -65,10 +66,22 @@ export class InfoViewComponent {
   }
 
   focusOnInput() {
-    if (this.isRecording()) {
+    if (
+      !this.textInputNativeElement ||
+      document.activeElement === this.textInputNativeElement
+    ) {
       return;
     }
-    this.textInput()?.nativeElement?.focus();
+
+    this.textInputNativeElement.focus();
+    requestAnimationFrame(() => {
+      const range = document.createRange();
+      const sel = window.getSelection();
+      range.selectNodeContents(this.textInputNativeElement!);
+      range.collapse(false); // false = collapse to end
+      sel?.removeAllRanges();
+      sel?.addRange(range);
+    });
   }
 
   updateText(el: EventTarget | null) {
@@ -85,6 +98,9 @@ export class InfoViewComponent {
   }
 
   removeLastChipIfApplicable() {
+    if (this.text()) {
+      return;
+    }
     const lastPlayer = this.selectedPlayers().at(-1);
     if (!this.text() && lastPlayer) {
       this.togglePlayerSelection(lastPlayer);
@@ -92,18 +108,36 @@ export class InfoViewComponent {
   }
 
   saveNote() {
-    this.gameStore.addNote({
-      playerNames: this.selectedPlayers(),
-      text: this.text()!,
-    });
+    if (this.inEditMode() && this.noteBeingEditedIndex() !== null) {
+      this.gameStore.updateNote(
+        {
+          playerNames: this.selectedPlayers(),
+          text: this.text()!,
+        },
+        this.noteBeingEditedIndex()!
+      );
+    } else {
+      this.gameStore.addNote({
+        playerNames: this.selectedPlayers(),
+        text: this.text()!,
+      });
+    }
 
-    this.selectedPlayers.set([]);
-    this.setInputText('');
+    this.finishEdit();
   }
 
-  editNote(savedNote: Note) {
+  editNote(savedNote: Note, index: number) {
     this.selectedPlayers.set(savedNote.playerNames);
     this.setInputText(savedNote.text);
+    this.inEditMode.set(true);
+    this.noteBeingEditedIndex.set(index);
+  }
+
+  finishEdit() {
+    this.selectedPlayers.set([]);
+    this.setInputText('');
+    this.inEditMode.set(false);
+    this.noteBeingEditedIndex.set(null);
   }
 
   deleteNote(indexOfNoteToRemove: number) {
@@ -122,58 +156,10 @@ export class InfoViewComponent {
       .closed.subscribe(() => this.dialog.closeAll());
   }
 
-  async recordAudio() {
-    this.speechRecognition = new SpeechRecognition();
-    this.speechRecognition.continuous = true;
-    this.speechRecognition.lang = 'ru-RU';
-    this.speechRecognition.interimResults = true;
-    this.speechRecognition.maxAlternatives = 1;
-    this.speechRecognition.processLocally = true;
-
-    this.speechRecognition.onresult = event => {
-      this.transcriptText = [...event.results]
-        .map(part => part[0].transcript)
-        .join(' ');
-    };
-
-    const speechRecognitionOptions: SpeechRecognitionOptions = {
-      langs: ['ru-RU'],
-      processLocally: true,
-    };
-
-    const availabilityStatus = await SpeechRecognition.available(
-      speechRecognitionOptions
-    );
-    if (availabilityStatus === 'unavailable') {
-      return;
-    }
-
-    if (availabilityStatus === 'available') {
-      this.speechRecognition.start();
-      this.isRecording.set(true);
-      return;
-    }
-
-    const installed = await SpeechRecognition.install(speechRecognitionOptions);
-    if (installed) {
-      this.speechRecognition.start();
-      this.isRecording.set(true);
-    }
-  }
-
-  stopRecording() {
-    this.speechRecognition?.stop();
-    this.speechRecognition = null;
-    const finalText = [this.text(), this.transcriptText!]
-      .filter(t => !!t)
-      .join(' ');
-    this.setInputText(finalText);
-    this.transcriptText = null;
-    this.isRecording.set(false);
-  }
-
   private setInputText(text: string) {
     this.text.set(text);
-    this.textInputContent = text;
+    if (this.textInputNativeElement) {
+      this.textInputNativeElement.textContent = text;
+    }
   }
 }
