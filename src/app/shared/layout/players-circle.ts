@@ -1,7 +1,7 @@
 import { Player } from '../types/common';
 
 const ELLIPSE_ASPECT_RATIO = 1.35;
-const EDGE_PADDING = 12;
+const EDGE_PADDING = 5;
 const PLAYER_TOKEN_HORIZONTAL_SPACE = 24;
 const ARC_LENGTH_SAMPLES = 720;
 const START_ANGLE = -Math.PI / 2;

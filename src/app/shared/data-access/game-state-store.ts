@@ -14,7 +14,7 @@ import { Character, Note, Player, Reminder } from '../types/common';
 import { positionPlayersInEllipse } from '../layout/players-circle';
 
 export const version = 4; // Increase the version number if old game state is incompatible with the new one
-const playerPositionLayoutVersion = 3;
+const playerPositionLayoutVersion = 4;
 
 export type GameState = {
   name: string;
