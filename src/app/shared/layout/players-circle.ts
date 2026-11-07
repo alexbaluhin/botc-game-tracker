@@ -2,6 +2,7 @@ import { Player } from '../types/common';
 
 const ELLIPSE_ASPECT_RATIO = 1.35;
 const EDGE_PADDING = 12;
+const PLAYER_TOKEN_HORIZONTAL_SPACE = 24;
 const ARC_LENGTH_SAMPLES = 720;
 const START_ANGLE = -Math.PI / 2;
 
@@ -16,7 +17,11 @@ export const positionPlayersInEllipse = (
   const centerX = containerDimensions.width / 2;
   const centerY = containerDimensions.height / 2;
   const tokenRadius = calculatePlayerTokenSize(players.length) / 2;
-  const horizontalRadius = Math.max(0, centerX - tokenRadius - EDGE_PADDING);
+  const playerTokenHalfWidth = tokenRadius + PLAYER_TOKEN_HORIZONTAL_SPACE / 2;
+  const horizontalRadius = Math.max(
+    0,
+    centerX - playerTokenHalfWidth - EDGE_PADDING
+  );
   const verticalRadius = Math.max(
     0,
     Math.min(
@@ -32,7 +37,8 @@ export const positionPlayersInEllipse = (
 
   return players.map((player: Player, i: number) => {
     const angle = angles[i];
-    const x = centerX + horizontalRadius * Math.cos(angle) - tokenRadius;
+    const x =
+      centerX + horizontalRadius * Math.cos(angle) - playerTokenHalfWidth;
     const y = centerY + verticalRadius * Math.sin(angle) - tokenRadius;
 
     return {
