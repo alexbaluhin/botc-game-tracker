@@ -26,7 +26,7 @@
   background: none;
   border: none;
   border-bottom: 2px solid color.$primary-2;
-  color: #ffffff;
+  color: color.$high-light;
   text-align: center;
   &:focus-visible {
     outline: none;

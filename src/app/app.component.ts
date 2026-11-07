@@ -1,5 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
@@ -17,6 +17,9 @@ import { GameStore, version } from './shared/data-access/game-state-store';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  private readonly themeStorageKey = 'botc-theme';
+  readonly isLightMode = signal(this.getInitialTheme() === 'light');
+
   shareLink = toSignal(
     inject(ActivatedRoute).queryParamMap.pipe(
       map(paramMap => paramMap.get('share')),
@@ -29,6 +32,12 @@ export class AppComponent implements OnInit {
   gameShareService = inject(GameShareService);
 
   constructor() {
+    effect(() => {
+      const theme = this.isLightMode() ? 'light' : 'dark';
+      document.documentElement.dataset['theme'] = theme;
+      window.localStorage.setItem(this.themeStorageKey, theme);
+    });
+
     effect(() => {
       const shareLink = this.shareLink();
       if (!shareLink) {
@@ -78,6 +87,21 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.checkGameStateVersion();
+  }
+
+  toggleTheme() {
+    this.isLightMode.update(isLight => !isLight);
+  }
+
+  private getInitialTheme(): 'light' | 'dark' {
+    const savedTheme = window.localStorage.getItem(this.themeStorageKey);
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      return savedTheme;
+    }
+
+    return window.matchMedia('(prefers-color-scheme: light)').matches
+      ? 'light'
+      : 'dark';
   }
 
   private checkGameStateVersion() {
