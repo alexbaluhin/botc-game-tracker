@@ -18,7 +18,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { CharactersCountPerTypeHintComponent } from '../../../shared/components/characters-count-per-type-hint/characters-count-per-type-hint.component';
 import { GrimoireComponent } from '../../../shared/components/grimoire/grimoire.component';
 import { GameStore } from '../../../shared/data-access/game-state-store';
-import { positionPlayersInCircle } from '../../../shared/layout/players-circle';
+import { positionPlayersInEllipse } from '../../../shared/layout/players-circle';
 import { Player } from '../../../shared/types/common';
 import { CounterComponent } from '../../ui/counter/counter.component';
 import { GameSetupHeaderComponent } from '../../ui/game-setup-header/game-setup-header.component';
@@ -54,18 +54,21 @@ export class PlayersCountSelectionComponent {
 
   constructor() {
     afterNextRender(() => {
-      this.players.update(players => this.distributeTokensInCircle(players));
+      this.players.update(players => this.distributeTokensInEllipse(players));
     });
   }
 
   onPlayersCountChange(newCount: number) {
     if (this.players().length < newCount) {
       this.players.update(players =>
-        this.distributeTokensInCircle([...players, this.gameStore.makePlayer()])
+        this.distributeTokensInEllipse([
+          ...players,
+          this.gameStore.makePlayer(),
+        ])
       );
     } else {
       this.players.update(players =>
-        this.distributeTokensInCircle(players.slice(0, -1))
+        this.distributeTokensInEllipse(players.slice(0, -1))
       );
     }
   }
@@ -75,8 +78,8 @@ export class PlayersCountSelectionComponent {
     this.router.navigate(['/game']);
   }
 
-  private distributeTokensInCircle(players: Player[]) {
-    return positionPlayersInCircle(
+  private distributeTokensInEllipse(players: Player[]) {
+    return positionPlayersInEllipse(
       players,
       this.grimoireElement().nativeElement.getBoundingClientRect()
     );

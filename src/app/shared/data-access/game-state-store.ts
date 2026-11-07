@@ -11,7 +11,7 @@ import {
 } from '@ngrx/signals';
 import { GrimoireService } from '../../game/data-access/grimoire.service';
 import { Character, Note, Player, Reminder } from '../types/common';
-import { positionPlayersInCircle } from '../layout/players-circle';
+import { positionPlayersInEllipse } from '../layout/players-circle';
 
 export const version = 4; // Increase the version number if old game state is incompatible with the new one
 
@@ -121,7 +121,7 @@ export const GameStore = signalStore(
           store.makePlayer(`Player ${state.players.length + 1}`),
         ],
       }));
-      this.calculatePlayersPositionsInCircle();
+      this.calculatePlayersPositionsInEllipse();
     },
     updatePlayerByIndex(updatedPlayerIndex: number, updatedPlayer: Player) {
       if (
@@ -148,7 +148,7 @@ export const GameStore = signalStore(
         ...state,
         players: state.players.filter((_, i) => i !== removePlayerIndex),
       }));
-      this.calculatePlayersPositionsInCircle();
+      this.calculatePlayersPositionsInEllipse();
     },
     addReminder(reminder: Reminder) {
       patchState(store, state => ({
@@ -212,14 +212,14 @@ export const GameStore = signalStore(
       window.localStorage.removeItem('game-setup');
       window.location.reload();
     },
-    calculatePlayersPositionsInCircle() {
+    calculatePlayersPositionsInEllipse() {
       const grimoireElement = grimoireService.getGrimoireElement();
       if (!grimoireElement) {
         return;
       }
       patchState(store, state => ({
         ...state,
-        players: positionPlayersInCircle(
+        players: positionPlayersInEllipse(
           state.players,
           grimoireElement.getBoundingClientRect()
         ),

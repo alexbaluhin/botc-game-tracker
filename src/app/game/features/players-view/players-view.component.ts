@@ -57,7 +57,7 @@ export class PlayersViewComponent {
         return;
       }
 
-      this.gameStore.calculatePlayersPositionsInCircle();
+      this.gameStore.calculatePlayersPositionsInEllipse();
     });
   }
 

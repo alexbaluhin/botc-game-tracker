@@ -59,7 +59,7 @@ export class GameHeaderComponent {
   }
 
   tidyUp() {
-    this.gameStore.calculatePlayersPositionsInCircle();
+    this.gameStore.calculatePlayersPositionsInEllipse();
   }
 
   addPlayer() {

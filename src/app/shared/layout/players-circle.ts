@@ -1,38 +1,91 @@
 import { Player } from '../types/common';
 
-export const positionPlayersInCircle = (
+const ELLIPSE_ASPECT_RATIO = 1.35;
+const EDGE_PADDING = 12;
+const ARC_LENGTH_SAMPLES = 720;
+const START_ANGLE = -Math.PI / 2;
+
+export const positionPlayersInEllipse = (
   players: Player[],
   containerDimensions: DOMRect
 ): Player[] => {
-  const parentContainerX = containerDimensions.width / 2;
-  const parentContainerY = containerDimensions.height / 2;
-  const centerOfToken = calculatePlayerTokenSize(players.length) / 2;
+  if (players.length === 0) {
+    return [];
+  }
+
+  const centerX = containerDimensions.width / 2;
+  const centerY = containerDimensions.height / 2;
+  const tokenRadius = calculatePlayerTokenSize(players.length) / 2;
+  const horizontalRadius = Math.max(0, centerX - tokenRadius - EDGE_PADDING);
+  const verticalRadius = Math.max(
+    0,
+    Math.min(
+      centerY - tokenRadius - EDGE_PADDING,
+      horizontalRadius * ELLIPSE_ASPECT_RATIO
+    )
+  );
+  const angles = calculateEvenlySpacedAngles(
+    players.length,
+    horizontalRadius,
+    verticalRadius
+  );
 
   return players.map((player: Player, i: number) => {
-    const t = ((2 * Math.PI) / players.length) * (i + players.length * 0.75);
-    const cosT = Math.cos(t);
-    const sinT = Math.sin(t);
-    const horizontalRadius = 150;
-    const verticalRadius = 200;
-    const superEllipseRadius = 2;
-
-    const x =
-      horizontalRadius *
-        Math.sign(cosT) *
-        Math.pow(Math.abs(cosT), 2 / superEllipseRadius) +
-      parentContainerX -
-      centerOfToken;
-    const y =
-      verticalRadius *
-        Math.sign(sinT) *
-        Math.pow(Math.abs(sinT), 2 / superEllipseRadius) +
-      parentContainerY -
-      centerOfToken;
+    const angle = angles[i];
+    const x = centerX + horizontalRadius * Math.cos(angle) - tokenRadius;
+    const y = centerY + verticalRadius * Math.sin(angle) - tokenRadius;
 
     return {
       ...player,
       positionInGrimoire: { x: Math.round(x), y: Math.round(y) },
     };
+  });
+};
+
+const calculateEvenlySpacedAngles = (
+  playersCount: number,
+  horizontalRadius: number,
+  verticalRadius: number
+): number[] => {
+  const cumulativeLengths = [0];
+  let previousX = horizontalRadius * Math.cos(START_ANGLE);
+  let previousY = verticalRadius * Math.sin(START_ANGLE);
+
+  for (let sample = 1; sample <= ARC_LENGTH_SAMPLES; sample++) {
+    const angle = START_ANGLE + (sample / ARC_LENGTH_SAMPLES) * Math.PI * 2;
+    const x = horizontalRadius * Math.cos(angle);
+    const y = verticalRadius * Math.sin(angle);
+    cumulativeLengths.push(
+      cumulativeLengths[sample - 1] + Math.hypot(x - previousX, y - previousY)
+    );
+    previousX = x;
+    previousY = y;
+  }
+
+  const circumference = cumulativeLengths.at(-1) ?? 0;
+  if (circumference === 0) {
+    return new Array(playersCount)
+      .fill(null)
+      .map((_, index) => START_ANGLE + (index / playersCount) * Math.PI * 2);
+  }
+
+  return new Array(playersCount).fill(null).map((_, index) => {
+    const targetLength = (index / playersCount) * circumference;
+    const upperSample = cumulativeLengths.findIndex(
+      length => length >= targetLength
+    );
+    const lowerSample = Math.max(0, upperSample - 1);
+    const segmentLength =
+      cumulativeLengths[upperSample] - cumulativeLengths[lowerSample];
+    const progress =
+      segmentLength === 0
+        ? 0
+        : (targetLength - cumulativeLengths[lowerSample]) / segmentLength;
+    const interpolatedSample = lowerSample + progress;
+
+    return (
+      START_ANGLE + (interpolatedSample / ARC_LENGTH_SAMPLES) * Math.PI * 2
+    );
   });
 };
 
