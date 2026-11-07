@@ -14,6 +14,7 @@ import { Character, Note, Player, Reminder } from '../types/common';
 import { positionPlayersInEllipse } from '../layout/players-circle';
 
 export const version = 4; // Increase the version number if old game state is incompatible with the new one
+const playerPositionLayoutVersion = 2;
 
 export type GameState = {
   name: string;
@@ -25,6 +26,7 @@ export type GameState = {
   version: number;
   states: {
     playersPositionsWereCalculated: boolean;
+    playerPositionLayoutVersion?: number;
   };
 };
 
@@ -38,6 +40,7 @@ export const defaultInitialState: GameState = {
   version,
   states: {
     playersPositionsWereCalculated: false,
+    playerPositionLayoutVersion,
   },
 };
 
@@ -78,7 +81,9 @@ export const GameStore = signalStore(
       );
     },
     arePlayersPositionsCalculated: () =>
-      store.states().playersPositionsWereCalculated,
+      store.states().playersPositionsWereCalculated &&
+      store.states().playerPositionLayoutVersion ===
+        playerPositionLayoutVersion,
   })),
   withHooks(store => ({
     onInit() {
@@ -105,6 +110,10 @@ export const GameStore = signalStore(
         players: new Array(count)
           .fill(null)
           .map((_, i) => store.makePlayer(`Player ${i + 1}`)),
+        states: {
+          ...state.states,
+          playersPositionsWereCalculated: false,
+        },
       }));
     },
     getPlayerByIndex(index: number) {
@@ -224,7 +233,9 @@ export const GameStore = signalStore(
           grimoireElement.getBoundingClientRect()
         ),
         states: {
+          ...state.states,
           playersPositionsWereCalculated: true,
+          playerPositionLayoutVersion,
         },
       }));
     },
