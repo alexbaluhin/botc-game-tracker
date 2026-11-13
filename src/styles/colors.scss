@@ -1,25 +1,25 @@
-$primary: rgba(33, 8, 71, 1);
-$primary-1: rgba(57, 23, 109, 1);
-$primary-2: rgba(89, 49, 149, 1);
+$primary: var(--color-primary);
+$primary-1: var(--color-primary-1);
+$primary-2: var(--color-primary-2);
 
-$secondary: rgba(187, 164, 133, 1);
+$secondary: var(--color-secondary);
 
-$medium-light: rgba(255, 255, 255, 0.75);
-$high-light: rgba(255, 255, 255, 0.95);
-$low-light: rgba(255, 255, 255, 0.55);
+$medium-light: var(--color-medium-light);
+$high-light: var(--color-high-light);
+$low-light: var(--color-low-light);
 
-$text-color: rgba(195, 172, 135, 0.95);
-$text-color-bright: rgba(254, 211, 160, 1);
+$text-color: var(--color-text);
+$text-color-bright: var(--color-text-bright);
 
-$seat-color-in-grimoire: rgba(187, 164, 133, 1);
-$seat-color-in-player-edit-mode: rgba(38, 9, 91, 1);
+$seat-color-in-grimoire: var(--color-seat);
+$seat-color-in-player-edit-mode: var(--color-seat-edit);
 
-$token-color: rgba(233, 222, 218, 1);
-$token-selected-color: rgba(255, 244, 240, 1);
-$token-border-color: rgba(195, 172, 135, 0.95);
+$token-color: var(--color-token);
+$token-selected-color: var(--color-token-selected);
+$token-border-color: var(--color-token-border);
 
-$chip-active-color: rgba(101, 41, 174, 1);
+$chip-active-color: var(--color-chip-active);
 
-$character-card-text-color: rgba(61, 29, 13, 1);
+$character-card-text-color: var(--color-card-text);
 
-$script-logo-border-color: rgba(182, 144, 239, 1);
+$script-logo-border-color: var(--color-logo-border);

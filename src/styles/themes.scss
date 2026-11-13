@@ -1,0 +1,50 @@
+:root {
+  color-scheme: dark;
+  --color-primary: rgba(33, 8, 71, 1);
+  --color-primary-1: rgba(57, 23, 109, 1);
+  --color-primary-2: rgba(89, 49, 149, 1);
+  --color-secondary: rgba(187, 164, 133, 1);
+  --color-medium-light: rgba(255, 255, 255, 0.75);
+  --color-high-light: rgba(255, 255, 255, 0.95);
+  --color-low-light: rgba(255, 255, 255, 0.55);
+  --color-text: rgba(195, 172, 135, 0.95);
+  --color-text-bright: rgba(254, 211, 160, 1);
+  --color-seat: rgba(187, 164, 133, 1);
+  --color-seat-edit: rgba(38, 9, 91, 1);
+  --color-token: rgba(233, 222, 218, 1);
+  --color-token-selected: rgba(255, 244, 240, 1);
+  --color-token-border: rgba(195, 172, 135, 0.95);
+  --color-chip-active: rgba(101, 41, 174, 1);
+  --color-card-text: rgba(61, 29, 13, 1);
+  --color-logo-border: rgba(182, 144, 239, 1);
+  --app-background:
+    linear-gradient(rgba(25, 7, 51, 0.18), rgba(25, 7, 51, 0.18)),
+    url("../assets/images/other/background.jpg") repeat center center fixed;
+  --theme-toggle-shadow: 0 8px 24px rgba(12, 2, 28, 0.35);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-primary: rgba(245, 238, 232, 1);
+  --color-primary-1: rgba(255, 250, 246, 1);
+  --color-primary-2: rgba(226, 211, 201, 1);
+  --color-secondary: rgba(111, 78, 102, 1);
+  --color-medium-light: rgba(59, 43, 62, 0.78);
+  --color-high-light: rgba(38, 26, 41, 0.96);
+  --color-low-light: rgba(77, 59, 79, 0.64);
+  --color-text: rgba(66, 44, 65, 0.96);
+  --color-text-bright: rgba(91, 38, 85, 1);
+  --color-seat: rgba(196, 168, 145, 1);
+  --color-seat-edit: rgba(214, 190, 222, 1);
+  --color-token: rgba(255, 250, 246, 1);
+  --color-token-selected: rgba(255, 255, 255, 1);
+  --color-token-border: rgba(125, 91, 103, 0.9);
+  --color-chip-active: rgba(117, 78, 145, 1);
+  --color-card-text: rgba(61, 29, 13, 1);
+  --color-logo-border: rgba(119, 77, 148, 1);
+  --app-background:
+    radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.92), transparent 30%),
+    radial-gradient(circle at 85% 85%, rgba(218, 196, 218, 0.48), transparent 35%),
+    linear-gradient(145deg, #f8f1ea 0%, #efe4df 50%, #e8dce6 100%);
+  --theme-toggle-shadow: 0 8px 24px rgba(74, 48, 68, 0.18);
+}

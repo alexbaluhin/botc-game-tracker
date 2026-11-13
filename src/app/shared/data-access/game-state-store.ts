@@ -11,9 +11,10 @@ import {
 } from '@ngrx/signals';
 import { GrimoireService } from '../../game/data-access/grimoire.service';
 import { Character, Note, Player, Reminder } from '../types/common';
-import { positionPlayersInCircle } from '../layout/players-circle';
+import { positionPlayersInEllipse } from '../layout/players-circle';
 
 export const version = 4; // Increase the version number if old game state is incompatible with the new one
+const playerPositionLayoutVersion = 4;
 
 export type GameState = {
   name: string;
@@ -25,6 +26,7 @@ export type GameState = {
   version: number;
   states: {
     playersPositionsWereCalculated: boolean;
+    playerPositionLayoutVersion?: number;
   };
 };
 
@@ -38,6 +40,7 @@ export const defaultInitialState: GameState = {
   version,
   states: {
     playersPositionsWereCalculated: false,
+    playerPositionLayoutVersion,
   },
 };
 
@@ -78,7 +81,9 @@ export const GameStore = signalStore(
       );
     },
     arePlayersPositionsCalculated: () =>
-      store.states().playersPositionsWereCalculated,
+      store.states().playersPositionsWereCalculated &&
+      store.states().playerPositionLayoutVersion ===
+        playerPositionLayoutVersion,
   })),
   withHooks(store => ({
     onInit() {
@@ -105,6 +110,10 @@ export const GameStore = signalStore(
         players: new Array(count)
           .fill(null)
           .map((_, i) => store.makePlayer(`Player ${i + 1}`)),
+        states: {
+          ...state.states,
+          playersPositionsWereCalculated: false,
+        },
       }));
     },
     getPlayerByIndex(index: number) {
@@ -121,7 +130,7 @@ export const GameStore = signalStore(
           store.makePlayer(`Player ${state.players.length + 1}`),
         ],
       }));
-      this.calculatePlayersPositionsInCircle();
+      this.calculatePlayersPositionsInEllipse();
     },
     updatePlayerByIndex(updatedPlayerIndex: number, updatedPlayer: Player) {
       if (
@@ -148,7 +157,7 @@ export const GameStore = signalStore(
         ...state,
         players: state.players.filter((_, i) => i !== removePlayerIndex),
       }));
-      this.calculatePlayersPositionsInCircle();
+      this.calculatePlayersPositionsInEllipse();
     },
     addReminder(reminder: Reminder) {
       patchState(store, state => ({
@@ -212,19 +221,21 @@ export const GameStore = signalStore(
       window.localStorage.removeItem('game-setup');
       window.location.reload();
     },
-    calculatePlayersPositionsInCircle() {
+    calculatePlayersPositionsInEllipse() {
       const grimoireElement = grimoireService.getGrimoireElement();
       if (!grimoireElement) {
         return;
       }
       patchState(store, state => ({
         ...state,
-        players: positionPlayersInCircle(
+        players: positionPlayersInEllipse(
           state.players,
           grimoireElement.getBoundingClientRect()
         ),
         states: {
+          ...state.states,
           playersPositionsWereCalculated: true,
+          playerPositionLayoutVersion,
         },
       }));
     },

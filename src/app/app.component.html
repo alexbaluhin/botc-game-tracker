@@ -1,1 +1,14 @@
 <router-outlet />
+
+<button
+  class="theme-toggle"
+  type="button"
+  [attr.aria-label]="isLightMode() ? 'Switch to dark mode' : 'Switch to light mode'"
+  [attr.title]="isLightMode() ? 'Switch to dark mode' : 'Switch to light mode'"
+  [attr.aria-pressed]="isLightMode()"
+  (click)="toggleTheme()">
+  <span class="theme-toggle__icon" aria-hidden="true"></span>
+  <span class="theme-toggle__label">
+    {{ isLightMode() ? 'Dark' : 'Light' }}
+  </span>
+</button>
