@@ -23,6 +23,6 @@ body {
   user-select: none;           /* standard */
 }
 
-:root[data-theme="light"] img[src*="/icons/utility/"] {
+:root[data-theme="light"] img[src*="/icons/utility/"]:not([src*="arrow-back.svg"]) {
   filter: brightness(0) saturate(100%) opacity(0.78);
 }
