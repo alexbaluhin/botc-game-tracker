@@ -1,7 +1,42 @@
+@use "colors" as color;
+
 app-game-nav-link {
   min-width: 60px;
 }
 
 app-icon-button:not(:last-child) {
   margin-right: 19px;
+}
+
+.nav-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: color.$secondary;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+
+  &--players {
+    mask-image: url("/assets/icons/game/players-icon.svg");
+    -webkit-mask-image: url("/assets/icons/game/players-icon.svg");
+  }
+
+  &--info {
+    mask-image: url("/assets/icons/game/info-icon.svg");
+    -webkit-mask-image: url("/assets/icons/game/info-icon.svg");
+  }
+
+  &--bluffs {
+    mask-image: url("/assets/icons/game/bluffs-icon.svg");
+    -webkit-mask-image: url("/assets/icons/game/bluffs-icon.svg");
+  }
+
+  &--script {
+    mask-image: url("/assets/icons/game/script-icon.svg");
+    -webkit-mask-image: url("/assets/icons/game/script-icon.svg");
+  }
 }

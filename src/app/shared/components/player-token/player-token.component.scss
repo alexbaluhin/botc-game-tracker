@@ -21,7 +21,7 @@
     background: transparent;
     backdrop-filter: brightness(150%);
     -webkit-backdrop-filter: brightness(150%);
-    box-shadow: 0 4px 25px 0 rgba(19, 3, 43, 1);
+    box-shadow: 0 4px 25px 0 var(--color-shadow);
     border: 2px solid color.$token-border-color;
     &.with-shroud {
       filter: grayscale(100%);
